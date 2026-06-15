@@ -33,8 +33,11 @@ export default function ContactPage() {
               <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 12 }}>Location</p>
               <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: COLORS.espresso }}>{CONTACT.address}</p>
             </div>
-            <div style={{ backgroundColor: COLORS.placeholder, borderRadius: 16, height: 200, marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage }}>Map placeholder</span>
+            <div style={{ position: 'relative', backgroundColor: COLORS.placeholder, borderRadius: 16, height: 200, marginTop: 40, overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${COLORS.espresso} 0%, rgba(43,33,24,0.6) 40%, transparent 70%)`, zIndex: 1 }} />
+              <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>Map placeholder</span>
+              </div>
             </div>
           </div>
         </div>

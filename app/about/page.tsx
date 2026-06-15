@@ -22,28 +22,42 @@ export default function AboutPage() {
             <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: COLORS.sage, lineHeight: 1.7, marginBottom: 16 }}>NWS Custom Homes and Remodeling was founded in 2007 with a simple belief: every homeowner deserves a contractor who communicates, shows up on time, and does the job right the first time.</p>
             <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: COLORS.sage, lineHeight: 1.7 }}>Over 19 years later, that belief still drives every project. We&apos;ve completed 500+ projects across Fort Bend County — from custom home builds in Fulshear to kitchen remodels in Sugar Land, bathroom transformations in Katy, and whole-home renovations in Richmond.</p>
           </div>
-          <div style={{ backgroundColor: COLORS.placeholder, borderRadius: 24, height: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage }}>Photo placeholder</span>
+          <div style={{ position: 'relative', backgroundColor: COLORS.placeholder, borderRadius: 24, height: 400, overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${COLORS.espresso} 0%, rgba(43,33,24,0.7) 40%, transparent 70%)`, zIndex: 1 }} />
+            <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 100, height: 100, opacity: 0.2, zIndex: 0 }} viewBox="0 0 100 100" fill="none"><path d="M50 10L10 42V92H90V42L50 10Z" stroke={COLORS.sage} strokeWidth="1.5"/><rect x="38" y="60" width="24" height="32" stroke={COLORS.sage} strokeWidth="1.5"/></svg>
+            <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+              <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>Photo placeholder</span>
+            </div>
           </div>
         </div>
       </section>
-      <section style={{ backgroundColor: COLORS.espresso, padding: '80px 80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+      <section style={{ backgroundColor: COLORS.espresso, padding: '80px 80px', position: 'relative', overflow: 'hidden' }}>
+        <svg style={{ position: 'absolute', top: 40, right: 40, width: 200, height: 200, opacity: 0.06, pointerEvents: 'none' }} viewBox="0 0 200 200" fill="none">
+          <path d="M100 15L15 85V185H185V85L100 15Z" stroke="white" strokeWidth="1.5"/>
+          <rect x="80" y="115" width="40" height="70" stroke="white" strokeWidth="1"/>
+        </svg>
+        <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {[
             { title: 'Craftsmanship', body: 'Every cut, every joint, every finish is done by someone who takes pride in their work — and it shows.' },
             { title: 'Transparency', body: 'Fixed-price quotes before we begin. No surprise invoices. No change orders without your approval in writing.' },
             { title: 'On Time', body: 'We give you a timeline before we start and we stick to it. If something changes, you hear about it immediately.' },
           ].map(v => (
-            <div key={v.title} style={{ backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 24, padding: 40 }}>
+            <div key={v.title} style={{ backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 24, padding: 40, position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 0, left: 40, right: 40, height: 2, backgroundColor: COLORS.terracotta }} />
               <h3 style={{ fontFamily: FONTS.serif, fontSize: 24, color: COLORS.white, marginBottom: 16 }}>{v.title}</h3>
               <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: COLORS.sage, lineHeight: 1.7 }}>{v.body}</p>
             </div>
           ))}
         </div>
       </section>
-      <section style={{ backgroundColor: COLORS.plaster, padding: '80px 80px', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: FONTS.serif, fontSize: 'clamp(32px, 3vw, 48px)', color: COLORS.espresso, marginBottom: 48 }}>How We <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>Work</span></h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+      <section style={{ backgroundColor: COLORS.plaster, padding: '80px 80px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <svg style={{ position: 'absolute', bottom: 40, right: 40, width: 180, height: 180, opacity: 0.06, pointerEvents: 'none' }} viewBox="0 0 180 180" fill="none">
+          <line x1="20" y1="20" x2="160" y2="20" stroke={COLORS.sage} strokeWidth="0.5" strokeDasharray="3 6"/>
+          <line x1="20" y1="60" x2="160" y2="60" stroke={COLORS.sage} strokeWidth="0.5" strokeDasharray="3 6"/>
+          <line x1="20" y1="100" x2="160" y2="100" stroke={COLORS.sage} strokeWidth="0.5" strokeDasharray="3 6"/>
+        </svg>
+        <h2 style={{ position: 'relative', zIndex: 1, fontFamily: FONTS.serif, fontSize: 'clamp(32px, 3vw, 48px)', color: COLORS.espresso, marginBottom: 48 }}>How We <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>Work</span></h2>
+        <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
           {['Consultation','Design','Build','Walkthrough'].map((step, i) => (
             <div key={step} style={{ padding: 32 }}>
               <div style={{ width: 48, height: 48, borderRadius: '50%', backgroundColor: COLORS.espresso, color: COLORS.white, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONTS.serif, fontSize: 20, margin: '0 auto 20' }}>{i + 1}</div>

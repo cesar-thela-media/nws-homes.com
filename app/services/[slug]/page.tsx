@@ -33,8 +33,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div>
             {service.intro.map((p, i) => <p key={i} style={{ fontFamily: FONTS.sans, fontSize: 16, color: COLORS.sage, lineHeight: 1.7, marginBottom: 16 }}>{p}</p>)}
           </div>
-          <div style={{ backgroundColor: COLORS.placeholder, borderRadius: 24, height: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage }}>Photo placeholder</span>
+          <div style={{ position: 'relative', backgroundColor: COLORS.placeholder, borderRadius: 24, height: 400, overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${COLORS.espresso} 0%, rgba(43,33,24,0.7) 40%, transparent 70%)`, zIndex: 1 }} />
+            <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 100, height: 100, opacity: 0.2, zIndex: 0 }} viewBox="0 0 100 100" fill="none"><path d="M50 10L10 42V92H90V42L50 10Z" stroke={COLORS.sage} strokeWidth="1.5"/><rect x="38" y="60" width="24" height="32" stroke={COLORS.sage} strokeWidth="1.5"/></svg>
+            <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+              <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>Photo placeholder</span>
+            </div>
           </div>
         </div>
       </section>
