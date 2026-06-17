@@ -29,16 +29,14 @@ export default function AreasPage() {
 
       {/* ── Hero: espresso full-width with SVG map ── */}
       <section
+        className="about-hero"
         style={{
           backgroundColor: COLORS.espresso,
-          padding: '100px 80px 56px',
           position: 'relative',
           overflow: 'hidden',
           minHeight: '56vh',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 80,
           alignItems: 'center',
+          gap: 80,
         }}
       >
         {/* Blueprint grid watermark */}
@@ -94,7 +92,7 @@ export default function AreasPage() {
           >
             9 cities across Fort Bend County — same crew, same quality, wherever you are in Greater Houston.
           </p>
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div className="inline-stats">
             {[{ v: '9', l: 'Cities' }, { v: '500+', l: 'Projects' }, { v: '19 yrs', l: 'Experience' }].map((s) => (
               <div key={s.l}>
                 <p style={{ fontFamily: FONTS.serif, fontSize: 32, color: COLORS.white, margin: 0, lineHeight: 1 }}>{s.v}</p>
@@ -185,7 +183,7 @@ export default function AreasPage() {
 
       {/* ── City profiles: horizontal scrollable cards ── */}
       <section style={{ backgroundColor: COLORS.plaster, padding: '56px 0 64px' }}>
-        <div style={{ padding: '0 80px', marginBottom: 40 }}>
+        <div className="pad-x" style={{ marginBottom: 40 }}>
           <p
             style={{
               fontFamily: FONTS.sans,
@@ -215,15 +213,13 @@ export default function AreasPage() {
 
       {/* ── Don't see your city? ── */}
       <section
+        className="rsp-2col rsp-pad"
         style={{
           backgroundColor: COLORS.espresso,
-          padding: '80px 80px',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 80,
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
+          gap: 80,
         }}
       >
         <svg style={{ position: 'absolute', top: 40, right: 40, width: 160, height: 160, opacity: 0.05, pointerEvents: 'none' }} viewBox="0 0 160 160" fill="none">

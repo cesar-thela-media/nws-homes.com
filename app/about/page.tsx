@@ -32,16 +32,11 @@ export default function AboutPage() {
 
       {/* ── Hero: editorial "19 Years" number banner ── */}
       <section
+        className="about-hero"
         style={{
           backgroundColor: COLORS.espresso,
-          padding: '100px 80px 80px',
           position: 'relative',
           overflow: 'hidden',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 64,
-          alignItems: 'end',
-          minHeight: '60vh',
         }}
       >
         {/* Blueprint grid watermark */}
@@ -113,7 +108,7 @@ export default function AboutPage() {
             Full-service construction and remodeling in Richmond, TX — built on 35+ years of combined experience.
           </p>
           {/* Inline stats row */}
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div className="inline-stats">
             {[{ v: '500+', l: 'Projects' }, { v: '9', l: 'Cities' }, { v: '4.9★', l: 'Avg Rating' }].map(s => (
               <div key={s.l}>
                 <p style={{ fontFamily: FONTS.serif, fontSize: 32, color: COLORS.white, margin: 0, lineHeight: 1 }}>{s.v}</p>
@@ -125,7 +120,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Milestone Timeline ── */}
-      <section style={{ backgroundColor: COLORS.plaster, padding: '96px 80px', overflow: 'hidden' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster, overflow: 'hidden' }}>
         <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 16 }}>
           OUR STORY
         </p>
@@ -153,7 +148,7 @@ export default function AboutPage() {
               background: `linear-gradient(90deg, ${COLORS.terracotta} 0%, rgba(181,85,45,0.2) 100%)`,
             }}
           />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+          <div className="timeline-grid">
             {milestones.map((m, i) => {
               // Era-based dot states: outline (2007) → outline+dot (2012) → partial (2018) → filled+ring (2024)
               const dotStyles = [
@@ -201,7 +196,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Values: large italic word + photo mosaic ── */}
-      <section style={{ backgroundColor: COLORS.espresso, padding: '96px 80px', position: 'relative', overflow: 'hidden' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.espresso, position: 'relative', overflow: 'hidden' }}>
         {/* Subtle blueprint corner */}
         <svg style={{ position: 'absolute', bottom: 40, right: 40, width: 240, height: 240, opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 240 240" fill="none">
           <path d="M120 20L20 90V220H220V90L120 20Z" stroke="white" strokeWidth="1.5" />
@@ -219,14 +214,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── Photo Mosaic ── */}
-      <section style={{ backgroundColor: COLORS.plaster, padding: '96px 80px' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster }}>
         <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 16 }}>
           OUR WORK
         </p>
         <h2 style={{ fontFamily: FONTS.serif, fontSize: 'clamp(32px, 3vw, 48px)', color: COLORS.espresso, marginBottom: 40 }}>
           Built Across Fort Bend County.
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 16 }}>
+        <div className="mosaic-grid">
           {/* Large feature photo spans 2 rows */}
           <div style={{ gridRow: '1 / 3', borderRadius: 20, overflow: 'hidden', position: 'relative', backgroundColor: COLORS.placeholder }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -260,14 +255,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── How We Work: vertical step track ── */}
-      <section style={{ backgroundColor: COLORS.espresso, padding: '96px 80px', position: 'relative', overflow: 'hidden' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.espresso, position: 'relative', overflow: 'hidden' }}>
         <svg style={{ position: 'absolute', top: 40, right: 40, width: 180, height: 180, opacity: 0.05, pointerEvents: 'none' }} viewBox="0 0 180 180" fill="none">
           <line x1="20" y1="20" x2="160" y2="20" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
           <line x1="20" y1="60" x2="160" y2="60" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
           <line x1="20" y1="100" x2="160" y2="100" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
           <line x1="20" y1="140" x2="160" y2="140" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
         </svg>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start', position: 'relative', zIndex: 1 }}>
+        <div className="how-we-work" style={{ position: 'relative', zIndex: 1 }}>
           {/* Left: heading */}
           <div style={{ position: 'sticky', top: 120 }}>
             <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 16 }}>

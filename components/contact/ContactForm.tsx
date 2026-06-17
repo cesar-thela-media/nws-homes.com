@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 
 const SERVICES = ['Kitchen Remodeling', 'Bathroom Remodeling', 'Custom Home Build', 'Room Addition', 'Whole Home Reno', 'Other'];
@@ -66,6 +66,14 @@ function TextArea({ placeholder }: { placeholder: string }) {
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   if (submitted) {
     return (
@@ -111,7 +119,7 @@ export default function ContactForm() {
       <div style={{ marginBottom: 20 }}>
         <Field placeholder="Your Name" type="text" />
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 16, marginBottom: 20 }}>
         <Field placeholder="Your Phone" type="tel" />
         <Field placeholder="Your Email" type="email" />
       </div>

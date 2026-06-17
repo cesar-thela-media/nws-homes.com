@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 import type { Testimonial } from '@/lib/types';
 
@@ -24,24 +26,44 @@ function GoogleIcon() {
 }
 
 export default function TestimonialStrip({ testimonials, eyebrow = 'WORD TRAVELS', heading = 'Our Clients Do the Talking.' }: TestimonialStripProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   return (
-    <section style={{ backgroundColor: COLORS.plaster, padding: '80px 80px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '58fr 42fr', gap: 48, alignItems: 'start' }}>
-        {/* LEFT — Testimonial cards (matching landing page) */}
+    <section style={{ backgroundColor: COLORS.plaster, padding: isMobile ? '56px 24px' : '80px 80px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '58fr 42fr', gap: isMobile ? 40 : 48, alignItems: 'start' }}>
+
+        {/* LEFT — Testimonial cards */}
         <div>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 12 }}>{eyebrow}</p>
-          <h2 style={{ fontFamily: FONTS.serif, fontSize: 'clamp(32px, 3vw, 48px)', color: COLORS.espresso, marginBottom: 48 }}>{heading}</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          <h2 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '32px' : 'clamp(32px, 3vw, 48px)', color: COLORS.espresso, marginBottom: isMobile ? 28 : 48 }}>{heading}</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
             {testimonials.map((t, i) => (
-              <div key={t.id} style={{ backgroundColor: COLORS.white, borderRadius: 24, padding: 32, display: 'flex', flexDirection: 'column', transform: i === 1 ? 'translateY(-20px)' : 'none', boxShadow: i === 1 ? '0 24px 64px rgba(43,33,24,0.18)' : '0 8px 32px rgba(43,33,24,0.08)', outline: i === 1 ? '1px solid rgba(181,85,45,0.2)' : 'none', position: 'relative', zIndex: i === 1 ? 10 : 1 }}>
-                <div style={{ display: 'flex', gap: 4, marginBottom: 16 }}>{[...Array(5)].map((_, j) => <StarIcon key={j} />)}</div>
-                <p style={{ fontFamily: FONTS.serif, fontSize: 16, color: COLORS.espresso, fontStyle: 'italic', lineHeight: 1.6, flex: 1, marginBottom: 24 }}>&ldquo;{t.quote}&rdquo;</p>
-                <div style={{ borderTop: `1px solid rgba(154,154,140,0.2)`, paddingTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: '50%', backgroundColor: COLORS.espresso, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONTS.serif, fontSize: 16, color: COLORS.white, flexShrink: 0 }}>{t.initial}</div>
+              <div
+                key={t.id}
+                style={{
+                  backgroundColor: COLORS.white, borderRadius: 24,
+                  padding: isMobile ? 24 : 32,
+                  display: 'flex', flexDirection: 'column',
+                  transform: (i === 1 && !isMobile) ? 'translateY(-20px)' : 'none',
+                  boxShadow: i === 1 ? '0 24px 64px rgba(43,33,24,0.18)' : '0 8px 32px rgba(43,33,24,0.08)',
+                  outline: i === 1 ? '1px solid rgba(181,85,45,0.2)' : 'none',
+                  position: 'relative', zIndex: i === 1 ? 10 : 1,
+                }}
+              >
+                <div style={{ display: 'flex', gap: 4, marginBottom: 14 }}>{[...Array(5)].map((_, j) => <StarIcon key={j} />)}</div>
+                <p style={{ fontFamily: FONTS.serif, fontSize: 15, color: COLORS.espresso, fontStyle: 'italic', lineHeight: 1.6, flex: 1, marginBottom: 20 }}>&ldquo;{t.quote}&rdquo;</p>
+                <div style={{ borderTop: `1px solid rgba(154,154,140,0.2)`, paddingTop: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', backgroundColor: COLORS.espresso, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONTS.serif, fontSize: 15, color: COLORS.white, flexShrink: 0 }}>{t.initial}</div>
                   <div>
-                    <p style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, color: COLORS.espresso }}>{t.name}</p>
-                    <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage }}>{t.city}</p>
+                    <p style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, color: COLORS.espresso, margin: 0 }}>{t.name}</p>
+                    <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage, margin: 0 }}>{t.city}</p>
                   </div>
                   <div style={{ marginLeft: 'auto' }}>{t.source === 'Google' && <GoogleIcon />}</div>
                 </div>
@@ -50,24 +72,24 @@ export default function TestimonialStrip({ testimonials, eyebrow = 'WORD TRAVELS
           </div>
         </div>
 
-        {/* RIGHT — CTA panel with form (matching landing page TestimonialsSection) */}
-        <div style={{ backgroundColor: COLORS.espresso, borderRadius: 24, padding: 40, position: 'relative', overflow: 'hidden' }}>
+        {/* RIGHT — CTA panel */}
+        <div style={{ backgroundColor: COLORS.espresso, borderRadius: 24, padding: isMobile ? '32px 24px' : 40, position: 'relative', overflow: 'hidden' }}>
           <svg style={{ position: 'absolute', inset: 0, width: '60%', height: 'auto', margin: 'auto', opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 200 200" fill="none">
             <path d="M100 20L20 80V180H180V80L100 20Z" stroke="white" strokeWidth="2"/>
             <rect x="80" y="110" width="40" height="70" stroke="white" strokeWidth="2"/>
           </svg>
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20 }}>FREE CONSULTATION</p>
-            <h3 style={{ fontFamily: FONTS.serif, fontSize: 'clamp(28px, 3vw, 40px)', color: COLORS.white, lineHeight: 1.1, marginBottom: 12 }}>Let&apos;s Walk Your<br />Floor Plan.</h3>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, marginBottom: 28, lineHeight: 1.6 }}>Free on-site consultation — and 5% off when you mention the website.</p>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 16 }}>FREE CONSULTATION</p>
+            <h3 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '28px' : 'clamp(28px, 3vw, 40px)', color: COLORS.white, lineHeight: 1.1, marginBottom: 12 }}>Let&apos;s Walk Your<br />Floor Plan.</h3>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, marginBottom: 24, lineHeight: 1.6 }}>Free on-site consultation — and 5% off when you mention the website.</p>
             <form action="/contact" method="GET">
-              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: 12, marginBottom: 24 }}>
+              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: 12, marginBottom: 20 }}>
                 <input name="name" type="text" placeholder="Your Name" style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', fontFamily: FONTS.sans, fontSize: 15, color: COLORS.white }} />
               </div>
-              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: 12, marginBottom: 24 }}>
+              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: 12, marginBottom: 20 }}>
                 <input name="phone" type="tel" placeholder="Your Phone" style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', fontFamily: FONTS.sans, fontSize: 15, color: COLORS.white }} />
               </div>
-              <div style={{ position: 'relative', marginBottom: 24 }}>
+              <div style={{ position: 'relative', marginBottom: 20 }}>
                 <select name="service" defaultValue="" style={{ width: '100%', background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 16, padding: '14px 20px', fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, cursor: 'pointer', appearance: 'none', outline: 'none' }}>
                   <option value="" disabled>Service Needed</option>
                   <option value="custom-home-building">Custom Home Building</option>
@@ -83,8 +105,10 @@ export default function TestimonialStrip({ testimonials, eyebrow = 'WORD TRAVELS
                 </select>
                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke={COLORS.sage} strokeWidth="1.5" style={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}><path d="M1 1.5L6 6.5L11 1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
-              <button type="submit" style={{ width: '100%', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: 18, borderRadius: 9999, border: 'none', cursor: 'pointer' }}>Book My Consultation</button>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.sage, textAlign: 'center', marginTop: 20 }}>Mon–Fri 8–6 &nbsp;· &nbsp;Sat 8–12 &nbsp;· &nbsp;Richmond, TX</p>
+              <Link href="/contact" style={{ display: 'block', width: '100%', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '18px 0', borderRadius: 9999, textAlign: 'center', textDecoration: 'none' }}>
+                Book My Consultation
+              </Link>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.sage, textAlign: 'center', marginTop: 16 }}>Mon–Fri 8–6 &nbsp;· &nbsp;Sat 8–12 &nbsp;· &nbsp;Richmond, TX</p>
             </form>
           </div>
         </div>

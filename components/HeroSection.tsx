@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 
 const BeforeAfterSlider = dynamic(() => import('./BeforeAfterSlider'), {
@@ -10,10 +11,19 @@ const BeforeAfterSlider = dynamic(() => import('./BeforeAfterSlider'), {
 });
 
 export default function HeroSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <section
       style={{
-        minHeight: '100vh',
+        minHeight: isMobile ? 'auto' : '100vh',
         backgroundColor: COLORS.plaster,
         position: 'relative',
         overflow: 'hidden',
@@ -21,75 +31,63 @@ export default function HeroSection() {
         alignItems: 'center',
       }}
     >
-      {/* Blueprint lines */}
-      <svg
-        style={{
-          position: 'absolute',
-          top: '80px',
-          left: '64px',
-          width: '300px',
-          height: '300px',
-          opacity: 0.12,
-          zIndex: 0,
-          pointerEvents: 'none',
-          display: 'block',
-        }}
-        viewBox="0 0 300 300"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke={COLORS.sage} strokeWidth="1.5" />
-        <path d="M 240 300 L 300 300 L 300 240" fill="none" stroke={COLORS.sage} strokeWidth="1.5" />
-        <line x1="0" y1="32" x2="280" y2="32" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-        <line x1="0" y1="80" x2="280" y2="80" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-        <line x1="0" y1="128" x2="280" y2="128" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-        <line x1="32" y1="0" x2="32" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-        <line x1="80" y1="0" x2="80" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-        <line x1="128" y1="0" x2="128" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
-      </svg>
+      {/* Blueprint lines — desktop only */}
+      {!isMobile && (
+        <svg
+          style={{ position: 'absolute', top: '80px', left: '64px', width: '300px', height: '300px', opacity: 0.12, zIndex: 0, pointerEvents: 'none' }}
+          viewBox="0 0 300 300"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke={COLORS.sage} strokeWidth="1.5" />
+          <path d="M 240 300 L 300 300 L 300 240" fill="none" stroke={COLORS.sage} strokeWidth="1.5" />
+          <line x1="0" y1="32" x2="280" y2="32" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+          <line x1="0" y1="80" x2="280" y2="80" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+          <line x1="0" y1="128" x2="280" y2="128" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+          <line x1="32" y1="0" x2="32" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+          <line x1="80" y1="0" x2="80" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+          <line x1="128" y1="0" x2="128" y2="280" stroke={COLORS.sage} strokeWidth="0.7" strokeDasharray="4 10" />
+        </svg>
+      )}
 
-      {/* Main grid */}
+      {/* Main layout */}
       <div
         style={{
           position: 'relative',
           zIndex: 10,
-          display: 'grid',
-          gridTemplateColumns: '42fr 58fr',
-          gap: '32px',
-          alignItems: 'center',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: isMobile ? 'stretch' : 'center',
+          gap: isMobile ? 0 : 32,
           width: '100%',
-          padding: '96px 80px',
+          padding: isMobile ? '48px 24px 40px' : '96px 80px',
         }}
       >
-        {/* LEFT COLUMN */}
-        <div>
-          {/* Headline */}
+        {/* LEFT / TOP on mobile: text content */}
+        <div style={{ flex: isMobile ? 'none' : '42', order: isMobile ? 2 : 1 }}>
           <h1
             style={{
               fontFamily: FONTS.serif,
-              fontSize: 'clamp(64px, 5.5vw, 96px)',
+              fontSize: isMobile ? '52px' : 'clamp(64px, 5.5vw, 96px)',
               lineHeight: 1.02,
               letterSpacing: '-0.02em',
               color: COLORS.espresso,
               margin: 0,
             }}
           >
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
-              Built for the Way
-            </span>
+            <span style={{ display: 'block' }}>Built for the Way</span>
             <span style={{ display: 'block' }}>
               <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>You</span>
               {' '}Live.
             </span>
           </h1>
 
-          {/* Subtext */}
           <p
             style={{
               fontFamily: FONTS.sans,
               fontSize: '16px',
               color: COLORS.sage,
               lineHeight: 1.6,
-              marginTop: '24px',
+              marginTop: '20px',
               maxWidth: '400px',
             }}
           >
@@ -97,8 +95,7 @@ export default function HeroSection() {
             — crafted since 2007.
           </p>
 
-          {/* Buttons */}
-          <div style={{ display: 'flex', gap: '16px', marginTop: '40px' }}>
+          <div style={{ display: 'flex', gap: '12px', marginTop: '32px', flexWrap: 'wrap' }}>
             <Link
               href="/contact"
               style={{
@@ -108,9 +105,10 @@ export default function HeroSection() {
                 fontFamily: FONTS.sans,
                 fontSize: '14px',
                 fontWeight: 600,
-                padding: '16px 32px',
+                padding: isMobile ? '14px 28px' : '16px 32px',
                 borderRadius: '9999px',
                 textDecoration: 'none',
+                whiteSpace: 'nowrap',
               }}
             >
               Start Your Project
@@ -123,10 +121,11 @@ export default function HeroSection() {
                 color: COLORS.espresso,
                 fontFamily: FONTS.sans,
                 fontSize: '14px',
-                padding: '16px 32px',
+                padding: isMobile ? '14px 24px' : '16px 32px',
                 borderRadius: '9999px',
                 border: '1px solid rgba(43,33,24,0.3)',
                 textDecoration: 'none',
+                whiteSpace: 'nowrap',
               }}
             >
               View Our Work →
@@ -134,9 +133,8 @@ export default function HeroSection() {
           </div>
 
           {/* Trust badges */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: '40px' }}>
-            {/* Google badge */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingRight: '28px', marginRight: '28px', borderRight: '1px solid rgba(154,154,140,0.25)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: '32px', flexWrap: 'wrap', rowGap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingRight: '20px', marginRight: '20px', borderRight: '1px solid rgba(154,154,140,0.25)' }}>
               <svg width="20" height="20" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -148,8 +146,7 @@ export default function HeroSection() {
                 <div style={{ fontFamily: FONTS.sans, fontSize: '10px', color: COLORS.sage, lineHeight: 1.2, marginTop: '1px' }}>120+ Reviews</div>
               </div>
             </div>
-            {/* Houzz badge */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingRight: '28px', marginRight: '28px', borderRight: '1px solid rgba(154,154,140,0.25)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingRight: '20px', marginRight: '20px', borderRight: '1px solid rgba(154,154,140,0.25)' }}>
               <svg width="16" height="18" viewBox="0 0 14 16">
                 <path d="M0 16V5.5L7 0l7 5.5V16h-5v-5H5v5H0z" fill={COLORS.sage} />
               </svg>
@@ -158,7 +155,6 @@ export default function HeroSection() {
                 <div style={{ fontFamily: FONTS.sans, fontSize: '10px', color: COLORS.sage, lineHeight: 1.2, marginTop: '1px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>PRO</div>
               </div>
             </div>
-            {/* Years badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <svg width="16" height="18" viewBox="0 0 14 16">
                 <path d="M7 0L0 3v5c0 4.418 2.985 8.146 7 9 4.015-.854 7-4.582 7-9V3L7 0z" fill="none" stroke={COLORS.sage} strokeWidth="1.2" />
@@ -172,115 +168,69 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN — Slider */}
-        <div style={{ position: 'relative' }}>
+        {/* RIGHT / TOP on mobile: slider */}
+        <div style={{ flex: isMobile ? 'none' : '58', order: isMobile ? 1 : 2, position: 'relative', marginBottom: isMobile ? 32 : 0 }}>
+          {/* Espresso backing panel — desktop only */}
+          {!isMobile && (
+            <div
+              style={{
+                position: 'absolute', top: '12px', left: '12px', right: '-12px', bottom: '-12px',
+                backgroundColor: COLORS.espresso, borderRadius: '24px', zIndex: 0,
+              }}
+            />
+          )}
 
-          {/* Espresso backing panel */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '12px',
-              left: '12px',
-              right: '-12px',
-              bottom: '-12px',
-              backgroundColor: COLORS.espresso,
-              borderRadius: '24px',
-              zIndex: 0,
-            }}
-          />
-
-          {/* Slider card */}
           <div
             style={{
               position: 'relative',
-              borderRadius: '24px',
+              borderRadius: isMobile ? '16px' : '24px',
               overflow: 'hidden',
-              height: '520px',
+              height: isMobile ? '260px' : '520px',
               boxShadow: '0 24px 80px rgba(43,33,24,0.22)',
               zIndex: 1,
             }}
           >
             <BeforeAfterSlider />
 
-            {/* BEFORE chip */}
             <div
               style={{
-                position: 'absolute',
-                top: '16px',
-                left: '16px',
-                zIndex: 20,
-                backgroundColor: 'rgba(43,33,24,0.85)',
-                color: COLORS.white,
-                fontFamily: FONTS.sans,
-                fontSize: '11px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                padding: '6px 14px',
-                borderRadius: '9999px',
+                position: 'absolute', top: '12px', left: '12px', zIndex: 20,
+                backgroundColor: 'rgba(43,33,24,0.85)', color: COLORS.white,
+                fontFamily: FONTS.sans, fontSize: '10px', textTransform: 'uppercase',
+                letterSpacing: '0.12em', padding: '5px 12px', borderRadius: '9999px',
                 backdropFilter: 'blur(4px)',
               }}
             >
               BEFORE
             </div>
 
-            {/* AFTER chip */}
             <div
               style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                zIndex: 20,
-                backgroundColor: COLORS.terracotta,
-                color: COLORS.white,
-                fontFamily: FONTS.sans,
-                fontSize: '11px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                padding: '6px 14px',
-                borderRadius: '9999px',
+                position: 'absolute', top: '12px', right: '12px', zIndex: 20,
+                backgroundColor: COLORS.terracotta, color: COLORS.white,
+                fontFamily: FONTS.sans, fontSize: '10px', textTransform: 'uppercase',
+                letterSpacing: '0.12em', padding: '5px 12px', borderRadius: '9999px',
               }}
             >
               AFTER
             </div>
 
-            {/* Caption card */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '16px',
-                left: '16px',
-                zIndex: 20,
-                backgroundColor: COLORS.white,
-                borderRadius: '16px',
-                padding: '16px 20px',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-                maxWidth: '260px',
-              }}
-            >
-              <p
+            {!isMobile && (
+              <div
                 style={{
-                  fontFamily: FONTS.serif,
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  color: COLORS.espresso,
-                  lineHeight: 1.4,
-                  margin: 0,
+                  position: 'absolute', bottom: '16px', left: '16px', zIndex: 20,
+                  backgroundColor: COLORS.white, borderRadius: '16px', padding: '16px 20px',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.18)', maxWidth: '260px',
                 }}
               >
-                Whole-Home Remodel —
-              </p>
-              <p
-                style={{
-                  fontFamily: FONTS.sans,
-                  fontSize: '13px',
-                  color: COLORS.sage,
-                  marginTop: '4px',
-                  margin: '4px 0 0 0',
-                }}
-              >
-                Cinco Ranch, TX · Completed in 14 weeks
-              </p>
-            </div>
+                <p style={{ fontFamily: FONTS.serif, fontSize: '13px', fontWeight: 700, color: COLORS.espresso, lineHeight: 1.4, margin: 0 }}>
+                  Whole-Home Remodel —
+                </p>
+                <p style={{ fontFamily: FONTS.sans, fontSize: '13px', color: COLORS.sage, margin: '4px 0 0 0' }}>
+                  Cinco Ranch, TX · Completed in 14 weeks
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

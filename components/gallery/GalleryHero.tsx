@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 
 const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
@@ -25,6 +25,14 @@ export default function GalleryHero() {
   const pathname = usePathname();
   const router = useRouter();
   const activeCat = searchParams.get('cat') || 'all';
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const setCategory = useCallback(
     (cat: string) => {
@@ -45,8 +53,8 @@ export default function GalleryHero() {
       style={{
         backgroundColor: COLORS.espresso,
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        minHeight: '62vh',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+        minHeight: isMobile ? 'auto' : '62vh',
         overflow: 'hidden',
         position: 'relative',
       }}
@@ -74,7 +82,7 @@ export default function GalleryHero() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: '80px 56px 80px 80px',
+          padding: isMobile ? '64px 24px 40px' : '80px 56px 80px 80px',
         }}
       >
         <p
@@ -144,7 +152,7 @@ export default function GalleryHero() {
       </div>
 
       {/* RIGHT — 2×2 photo collage */}
-      <div
+      {!isMobile && <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
@@ -185,7 +193,7 @@ export default function GalleryHero() {
             />
           </div>
         ))}
-      </div>
+      </div>}
     </section>
   );
 }

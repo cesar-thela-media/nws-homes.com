@@ -15,15 +15,12 @@ export default function FAQsPage() {
 
       {/* ── Hero: 2-col editorial — decorative "?" + content ── */}
       <section
+        className="about-hero"
         style={{
           backgroundColor: COLORS.espresso,
-          padding: '100px 80px 80px',
           position: 'relative',
           overflow: 'hidden',
           minHeight: '54vh',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 64,
           alignItems: 'center',
         }}
       >
@@ -93,7 +90,7 @@ export default function FAQsPage() {
           </p>
 
           {/* Quick stats */}
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div className="inline-stats">
             {[
               { value: String(faqs.length), label: 'Questions' },
               { value: '5', label: 'Categories' },

@@ -1,5 +1,7 @@
+'use client';
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface ServiceCardProps {
   image: string;
@@ -8,17 +10,18 @@ interface ServiceCardProps {
   description: string;
   href: string;
   featured?: boolean;
+  isMobile?: boolean;
 }
 
-function ServiceCard({ image, icon, title, description, href, featured }: ServiceCardProps) {
+function ServiceCard({ image, icon, title, description, href, featured, isMobile }: ServiceCardProps) {
   return (
     <div
       style={{
-        height: featured ? "480px" : "420px",
+        height: isMobile ? "280px" : featured ? "480px" : "420px",
         position: "relative",
         borderRadius: "20px",
         overflow: "hidden",
-        ...(featured
+        ...(featured && !isMobile
           ? {
               transform: "scale(1.04)",
               zIndex: 10,
@@ -30,85 +33,57 @@ function ServiceCard({ image, icon, title, description, href, featured }: Servic
             }),
       }}
     >
-      {/* MOST REQUESTED ribbon — centered at top */}
       {featured && (
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 20,
-            backgroundColor: "#B5552D",
-            color: "white",
+            position: "absolute", top: 0, left: 0, right: 0, zIndex: 20,
+            backgroundColor: "#B5552D", color: "white",
             fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "10px",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.18em",
-            textAlign: "center",
-            padding: "7px 0",
+            fontSize: "10px", fontWeight: 700, textTransform: "uppercase",
+            letterSpacing: "0.18em", textAlign: "center", padding: "7px 0",
           }}
         >
           MOST REQUESTED
         </div>
       )}
 
-      {/* Photo */}
       <Image
         src={image}
         alt={title}
         fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, 25vw"
+        style={{ objectFit: 'cover' }}
+        sizes="(max-width: 900px) 100vw, 25vw"
       />
 
-      {/* Gradient overlay */}
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(43,33,24,0.95) 0%, rgba(43,33,24,0.75) 28%, rgba(43,33,24,0.25) 55%, rgba(43,33,24,0.0) 80%)",
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to top, rgba(43,33,24,0.95) 0%, rgba(43,33,24,0.75) 28%, rgba(43,33,24,0.25) 55%, rgba(43,33,24,0.0) 80%)",
         }}
       />
 
-      {/* Content */}
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "28px",
+          position: "absolute", inset: 0, display: "flex",
+          flexDirection: "column", justifyContent: "flex-end",
+          padding: isMobile ? "20px" : "28px",
         }}
       >
-        {/* Icon circle */}
         <div
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: "50%",
-            backgroundColor: "rgba(255,255,255,0.12)",
-            backdropFilter: "blur(4px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "14px",
-            flexShrink: 0,
+            width: 36, height: 36, borderRadius: "50%",
+            backgroundColor: "rgba(255,255,255,0.12)", backdropFilter: "blur(4px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            marginBottom: "10px", flexShrink: 0,
           }}
         >
           {icon}
         </div>
-
         <h3
           style={{
             fontFamily: "var(--font-playfair), Georgia, serif",
-            fontSize: "22px",
-            color: "white",
-            lineHeight: 1.2,
-            margin: "0 0 8px 0",
+            fontSize: isMobile ? "18px" : "22px",
+            color: "white", lineHeight: 1.2, margin: "0 0 6px 0",
           }}
         >
           {title}
@@ -116,10 +91,9 @@ function ServiceCard({ image, icon, title, description, href, featured }: Servic
         <p
           style={{
             fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "13px",
-            color: "#9A9B8C",
-            lineHeight: 1.55,
-            margin: "0 0 14px 0",
+            fontSize: "13px", color: "#9A9B8C", lineHeight: 1.55,
+            margin: isMobile ? "0" : "0 0 14px 0",
+            display: isMobile ? "none" : "block",
           }}
         >
           {description}
@@ -128,10 +102,8 @@ function ServiceCard({ image, icon, title, description, href, featured }: Servic
           href={href}
           style={{
             fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "13px",
-            color: "#B5552D",
-            fontWeight: 600,
-            textDecoration: "none",
+            fontSize: "13px", color: "#B5552D", fontWeight: 600, textDecoration: "none",
+            marginTop: isMobile ? "6px" : "0",
           }}
         >
           Explore →
@@ -213,31 +185,36 @@ const stats = [
 ];
 
 export default function ServicesSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <>
-      {/* ── Services cards ── */}
       <section style={{ backgroundColor: "#2B2118", overflow: "hidden" }}>
-        <div style={{ padding: "80px 80px 96px" }}>
-          {/* Header row */}
+        <div style={{ padding: isMobile ? "56px 24px 64px" : "80px 80px 96px" }}>
+
+          {/* Header */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "3fr 2fr",
-              gap: "64px",
+              gridTemplateColumns: isMobile ? "1fr" : "3fr 2fr",
+              gap: isMobile ? "16px" : "64px",
               alignItems: "start",
-              marginBottom: "56px",
+              marginBottom: isMobile ? "36px" : "56px",
             }}
           >
-            {/* LEFT */}
             <div>
               <p
                 style={{
                   fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                  fontSize: "11px",
-                  color: "#B5552D",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                  marginBottom: "16px",
+                  fontSize: "11px", color: "#B5552D", textTransform: "uppercase",
+                  letterSpacing: "0.15em", marginBottom: "16px",
                 }}
               >
                 WHAT WE BUILD
@@ -245,10 +222,8 @@ export default function ServicesSection() {
               <h2
                 style={{
                   fontFamily: "var(--font-playfair), Georgia, serif",
-                  fontSize: "clamp(40px, 3.1vw, 52px)",
-                  color: "white",
-                  lineHeight: 1.05,
-                  margin: 0,
+                  fontSize: isMobile ? "36px" : "clamp(40px, 3.1vw, 52px)",
+                  color: "white", lineHeight: 1.05, margin: 0,
                 }}
               >
                 One Team. Every Trade.
@@ -256,16 +231,12 @@ export default function ServicesSection() {
                 Zero Chaos.
               </h2>
             </div>
-            {/* RIGHT */}
-            <div style={{ paddingTop: "64px" }}>
+            <div style={{ paddingTop: isMobile ? 0 : "64px" }}>
               <p
                 style={{
                   fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                  fontSize: "15px",
-                  color: "#9A9B8C",
-                  lineHeight: 1.7,
-                  maxWidth: "400px",
-                  margin: 0,
+                  fontSize: "15px", color: "#9A9B8C", lineHeight: 1.7,
+                  maxWidth: "400px", margin: 0,
                 }}
               >
                 From first sketch to final walkthrough, one accountable crew handles
@@ -278,77 +249,54 @@ export default function ServicesSection() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "20px",
+              gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+              gap: isMobile ? "12px" : "20px",
               alignItems: "end",
             }}
           >
             {services.map((service, i) => (
-              <ServiceCard key={i} {...service} />
+              <ServiceCard key={i} {...service} isMobile={isMobile} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Stats bar with wood texture ── */}
+      {/* Stats bar */}
       <section
         style={{
-          background:
-            "linear-gradient(180deg, #7B5C3A 0%, #6B4A28 25%, #8B6840 50%, #5A3C22 75%, #6B4A28 100%)",
-          position: "relative",
-          overflow: "hidden",
+          background: "linear-gradient(180deg, #7B5C3A 0%, #6B4A28 25%, #8B6840 50%, #5A3C22 75%, #6B4A28 100%)",
+          position: "relative", overflow: "hidden",
         }}
       >
-        {/* Subtle wood grain lines */}
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "repeating-linear-gradient(90deg, transparent 0px, transparent 60px, rgba(0,0,0,0.04) 60px, rgba(0,0,0,0.04) 62px), repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 8px)",
+            position: "absolute", inset: 0,
+            backgroundImage: "repeating-linear-gradient(90deg, transparent 0px, transparent 60px, rgba(0,0,0,0.04) 60px, rgba(0,0,0,0.04) 62px), repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 8px)",
             pointerEvents: "none",
           }}
         />
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            padding: "48px 80px",
-            position: "relative",
-            zIndex: 1,
+            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+            padding: isMobile ? "40px 24px" : "48px 80px",
+            position: "relative", zIndex: 1,
+            rowGap: isMobile ? "32px" : 0,
           }}
         >
           {stats.map((stat, i) => (
             <div
               key={i}
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                display: "flex", flexDirection: "column", alignItems: "center",
+                borderLeft: isMobile ? (i % 2 === 1 ? "1px solid rgba(255,255,255,0.2)" : "none") : (i > 0 ? "1px solid rgba(255,255,255,0.2)" : "none"),
                 padding: "0 16px",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "var(--font-playfair), Georgia, serif",
-                  fontSize: "clamp(48px, 4vw, 64px)",
-                  color: "white",
-                  lineHeight: 1,
-                }}
-              >
+              <span style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: isMobile ? "44px" : "clamp(48px, 4vw, 64px)", color: "white", lineHeight: 1 }}>
                 {stat.value}
               </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                  fontSize: "11px",
-                  color: "rgba(255,255,255,0.6)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                  marginTop: "10px",
-                }}
-              >
+              <span style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.14em", marginTop: "10px" }}>
                 {stat.label}
               </span>
             </div>

@@ -1,5 +1,5 @@
 'use client';
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { COLORS, FONTS } from '@/lib/constants';
 
@@ -17,14 +17,23 @@ const DETAILS = [
 ];
 
 export default function FeaturedProject() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <section
       style={{
         backgroundColor: COLORS.plaster,
-        padding: '80px 80px 0',
+        padding: isMobile ? '40px 24px 0' : '80px 80px 0',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
+      <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', gap: isMobile ? 12 : 0, marginBottom: 32 }}>
         <div>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 8 }}>
             FEATURED PROJECT
@@ -33,15 +42,15 @@ export default function FeaturedProject() {
             A Kitchen That Changed <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>Everything.</span>
           </h2>
         </div>
-        <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, maxWidth: 340, textAlign: 'right', lineHeight: 1.6, margin: 0 }}>
+        {!isMobile && <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, maxWidth: 340, textAlign: 'right', lineHeight: 1.6, margin: 0 }}>
           Drag the slider to see the transformation. Dark cabinets, waterfall island, and full reconfiguration — 3 weeks start to finish.
-        </p>
+        </p>}
       </div>
 
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 320px',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 320px',
           gap: 0,
           borderRadius: 24,
           overflow: 'hidden',
@@ -49,8 +58,8 @@ export default function FeaturedProject() {
         }}
       >
         {/* Before/After Slider */}
-        <div style={{ height: 480, position: 'relative', backgroundColor: COLORS.placeholder }}>
-          <Suspense fallback={<div style={{ height: 480, backgroundColor: COLORS.placeholder, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.sage }}>Loading…</span></div>}>
+        <div style={{ height: isMobile ? 260 : 480, position: 'relative', backgroundColor: COLORS.placeholder }}>
+          <Suspense fallback={<div style={{ height: isMobile ? 260 : 480, backgroundColor: COLORS.placeholder, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.sage }}>Loading…</span></div>}>
             <BeforeAfterSlider beforeSrc={BEFORE} afterSrc={AFTER} />
           </Suspense>
           {/* Labels */}
@@ -87,7 +96,7 @@ export default function FeaturedProject() {
             ))}
           </div>
           <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginTop: 28 }}>
-            "NWS took our old 1990s kitchen and turned it into the best room in the house. On time and under budget."
+            &ldquo;NWS took our old 1990s kitchen and turned it into the best room in the house. On time and under budget.&rdquo;
           </p>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, marginTop: 10, fontWeight: 600 }}>
             — Michelle R., Katy TX

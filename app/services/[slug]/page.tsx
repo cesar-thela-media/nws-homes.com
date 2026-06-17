@@ -54,10 +54,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         }}
       >
         <div
+          className="nums-bar"
           style={{
-            display: 'grid',
             gridTemplateColumns: `repeat(${service.byTheNumbers.length}, 1fr)`,
-            padding: '0 80px',
           }}
         >
           {service.byTheNumbers.map((stat, i) => (
@@ -99,9 +98,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* ── Editorial intro — 2-col when service has gallery images ── */}
-      <section style={{ backgroundColor: COLORS.plaster, padding: '96px 80px' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster }}>
         {service.galleryImages && service.galleryImages.length >= 3 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
+          <div className="rsp-2col" style={{ gap: 72, alignItems: 'center' }}>
             {/* Left: text */}
             <div>
               <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 16 }}>
@@ -147,9 +146,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* ── What's Included: grouped checklist on dark ── */}
       <section
+        className="rsp-pad"
         style={{
           backgroundColor: COLORS.espresso,
-          padding: '96px 80px',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -176,7 +175,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </h2>
 
           {groups.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            <div className="included-grid">
               {groups.map((group) => (
                 <div
                   key={group.label}
@@ -245,7 +244,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* ── Before / After slider (only if service has before/after images) ── */}
       {service.beforeAfter && (
-        <section style={{ backgroundColor: COLORS.plaster, padding: '80px 80px 56px' }}>
+        <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 12, textAlign: 'center' }}>
             SEE THE DIFFERENCE
           </p>
@@ -261,6 +260,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             Before &amp; <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>After.</span>
           </h2>
           <div
+            className="before-after-wrap"
             style={{
               borderRadius: 24,
               overflow: 'hidden',
@@ -282,18 +282,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* ── Process: vertical step track ── */}
       <section
+        className="rsp-pad"
         style={{
           backgroundColor: service.beforeAfter ? COLORS.espresso : COLORS.plaster,
-          padding: '96px 80px',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
         <div
+          className="how-we-work"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 80,
             alignItems: 'start',
             position: 'relative',
             zIndex: 1,
@@ -412,7 +410,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* ── Related Services ── */}
       {related.length > 0 && (
-        <section style={{ backgroundColor: COLORS.plaster, padding: '0 80px 96px' }}>
+        <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster, paddingTop: 0 }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 12 }}>
             EXPLORE MORE
           </p>

@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 import type { Service } from '@/lib/types';
 
@@ -64,8 +64,17 @@ function RelatedCard({ r }: { r: Service }) {
 }
 
 export default function RelatedServicesGrid({ services }: { services: Service[] }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 20 }}>
       {services.map(r => <RelatedCard key={r.slug} r={r} />)}
     </div>
   );

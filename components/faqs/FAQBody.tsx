@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
 import type { FAQ } from '@/lib/types';
 import { FAQItem } from './FAQAccordion';
@@ -13,7 +13,15 @@ interface FAQBodyProps {
 export default function FAQBody({ faqs }: FAQBodyProps) {
   const [activeCategory, setActiveCategory] = useState<string>('General');
   const [search, setSearch] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const scrollToCategory = (cat: string) => {
     setActiveCategory(cat);
@@ -34,11 +42,11 @@ export default function FAQBody({ faqs }: FAQBodyProps) {
     : null;
 
   return (
-    <section style={{ backgroundColor: COLORS.plaster, padding: '80px 80px 48px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 64, alignItems: 'start' }}>
+    <section style={{ backgroundColor: COLORS.plaster, padding: isMobile ? '40px 24px 48px' : '80px 80px 48px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '220px 1fr', gap: isMobile ? 32 : 64, alignItems: 'start' }}>
 
         {/* LEFT — sticky category sidebar */}
-        <div style={{ position: 'sticky', top: 100 }}>
+        <div style={{ position: isMobile ? 'static' : 'sticky', top: 100 }}>
           {/* Search */}
           <div style={{ marginBottom: 20, position: 'relative' }}>
             <input

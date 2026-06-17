@@ -47,11 +47,9 @@ export default function ServicesPage() {
 
       {/* ── A: Catalog split hero ── */}
       <section
+        className="services-hero-split"
         style={{
           backgroundColor: COLORS.espresso,
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          minHeight: '65vh',
           overflow: 'hidden',
           position: 'relative',
         }}
@@ -63,7 +61,7 @@ export default function ServicesPage() {
         </svg>
 
         {/* LEFT — editorial */}
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '100px 56px 80px 80px' }}>
+        <div className="rsp-pad-t" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingRight: 56 }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 20 }}>
             Home / Services
           </p>
@@ -85,7 +83,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Inline stats */}
-          <div style={{ display: 'flex', gap: 40 }}>
+          <div className="inline-stats">
             {[{ v: '500+', l: 'Projects' }, { v: '19', l: 'Years' }, { v: '4.9★', l: 'Avg Rating' }].map(s => (
               <div key={s.l}>
                 <p style={{ fontFamily: FONTS.serif, fontSize: 30, color: COLORS.white, margin: 0, lineHeight: 1 }}>{s.v}</p>
@@ -111,7 +109,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── B: Featured Spotlight — asymmetric 3-up grid ── */}
-      <section style={{ backgroundColor: COLORS.plaster, padding: '96px 80px' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.plaster }}>
         <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 12 }}>
           MOST REQUESTED
         </p>
@@ -119,7 +117,7 @@ export default function ServicesPage() {
           Where Most Clients <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>Start.</span>
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '280px 280px', gap: 16 }}>
+        <div className="spotlight-grid">
           {spotlightServices.map((svc, i) => (
             <Link
               key={svc.slug}
@@ -153,7 +151,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── C: Service Directory — horizontal list rows by category ── */}
-      <section style={{ backgroundColor: COLORS.espresso, padding: '96px 80px', position: 'relative', overflow: 'hidden' }}>
+      <section className="rsp-pad" style={{ backgroundColor: COLORS.espresso, position: 'relative', overflow: 'hidden' }}>
         {/* Blueprint watermark */}
         <svg style={{ position: 'absolute', bottom: 40, right: 40, width: 200, height: 200, opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 200 200" fill="none">
           <path d="M100 15L15 85V185H185V85L100 15Z" stroke="white" strokeWidth="1.5" />
@@ -198,7 +196,7 @@ export default function ServicesPage() {
 
       {/* ── D: Stats bar ── */}
       <section style={{ backgroundColor: COLORS.espresso, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', padding: '0 80px' }}>
+        <div className="stats-bar">
           {[
             { value: '500+', label: 'Projects Completed' },
             { value: '19',   label: 'Years in Business' },

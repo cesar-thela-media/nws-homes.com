@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
@@ -41,7 +41,6 @@ function ServicesDropdown({ isOpen }: { isOpen: boolean }) {
       padding: '16px 0 12px', minWidth: 480, zIndex: 100,
       border: '1px solid rgba(154,154,140,0.12)',
     }}>
-      {/* View All Services */}
       <div style={{ padding: '0 20px 12px' }}>
         <Link
           href="/services"
@@ -54,10 +53,7 @@ function ServicesDropdown({ isOpen }: { isOpen: boolean }) {
         </Link>
       </div>
       <div style={{ height: 1, backgroundColor: 'rgba(154,154,140,0.14)', margin: '0 0 12px' }} />
-
-      {/* 2-column layout */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '0 20px', gap: '0 24px' }}>
-        {/* LEFT: New Construction */}
         <div>
           <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.sage, textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700, padding: '0 0 8px 0', margin: 0 }}>
             New Construction
@@ -71,8 +67,6 @@ function ServicesDropdown({ isOpen }: { isOpen: boolean }) {
             {customHome.label}
           </Link>
         </div>
-
-        {/* RIGHT: Remodeling */}
         <div>
           <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.sage, textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700, padding: '0 0 8px 0', margin: 0 }}>
             Remodeling & Renovation
@@ -123,6 +117,17 @@ export default function NavBar() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 900);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
   const servicesActive = pathname.startsWith('/services');
@@ -147,7 +152,9 @@ export default function NavBar() {
         position: 'sticky', top: 0, zIndex: 50,
         backgroundColor: 'rgba(247,244,239,0.95)', backdropFilter: 'blur(10px)',
         borderBottom: '1px solid rgba(154,154,140,0.15)',
-        height: 72, display: 'flex', alignItems: 'center', padding: '0 80px',
+        height: 72, display: 'flex', alignItems: 'center',
+        padding: isMobile ? '0 20px' : '0 80px',
+        justifyContent: 'space-between',
       }}>
 
         {/* Logo */}
@@ -156,120 +163,133 @@ export default function NavBar() {
             <path d="M3 16 L10 4 L17 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
             <path d="M11 16 L18 4 L25 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
           </svg>
-          <span style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <span style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 12 : 13, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             NWS Custom Homes
           </span>
         </Link>
 
-        {/* Desktop nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 36, margin: '0 auto', position: 'relative' }}>
-
-          {/* Services dropdown */}
-          <div
-            style={{ position: 'relative', paddingBottom: 16 }}
-            onMouseEnter={() => setOpenMenu('services')}
-            onMouseLeave={() => setOpenMenu(null)}
-          >
-            <span
-              style={linkStyle(servicesActive)}
-              onMouseEnter={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK; }}
+        {/* Desktop nav links — hidden on mobile */}
+        {!isMobile && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 36, margin: '0 auto', position: 'relative' }}>
+            <div
+              style={{ position: 'relative', paddingBottom: 16 }}
+              onMouseEnter={() => setOpenMenu('services')}
+              onMouseLeave={() => setOpenMenu(null)}
             >
-              Services
-              <Chevron open={openMenu === 'services'} />
-            </span>
-            <ServicesDropdown isOpen={openMenu === 'services'} />
-          </div>
+              <span
+                style={linkStyle(servicesActive)}
+                onMouseEnter={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
+                onMouseLeave={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK; }}
+              >
+                Services
+                <Chevron open={openMenu === 'services'} />
+              </span>
+              <ServicesDropdown isOpen={openMenu === 'services'} />
+            </div>
 
-          {/* Gallery dropdown */}
-          <div
-            style={{ position: 'relative', paddingBottom: 16 }}
-            onMouseEnter={() => setOpenMenu('gallery')}
-            onMouseLeave={() => setOpenMenu(null)}
-          >
-            <span
-              style={linkStyle(galleryActive)}
-              onMouseEnter={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK; }}
+            <div
+              style={{ position: 'relative', paddingBottom: 16 }}
+              onMouseEnter={() => setOpenMenu('gallery')}
+              onMouseLeave={() => setOpenMenu(null)}
             >
-              Gallery
-              <Chevron open={openMenu === 'gallery'} />
-            </span>
-            <GalleryDropdown isOpen={openMenu === 'gallery'} />
+              <span
+                style={linkStyle(galleryActive)}
+                onMouseEnter={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
+                onMouseLeave={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK; }}
+              >
+                Gallery
+                <Chevron open={openMenu === 'gallery'} />
+              </span>
+              <GalleryDropdown isOpen={openMenu === 'gallery'} />
+            </div>
+
+            <Link href="/areas" style={linkStyle(isActive('/areas'))}
+              onMouseEnter={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK_HOVER; }}
+              onMouseLeave={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK; }}>
+              Areas
+            </Link>
+            <Link href="/faqs" style={linkStyle(isActive('/faqs'))}
+              onMouseEnter={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK_HOVER; }}
+              onMouseLeave={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK; }}>
+              FAQs
+            </Link>
+            <Link href="/about" style={linkStyle(isActive('/about'))}
+              onMouseEnter={e => { if (!isActive('/about')) e.currentTarget.style.color = INK_HOVER; }}
+              onMouseLeave={e => { if (!isActive('/about')) e.currentTarget.style.color = INK; }}>
+              About
+            </Link>
           </div>
+        )}
 
-          <Link
-            href="/areas"
-            style={linkStyle(isActive('/areas'))}
-            onMouseEnter={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK_HOVER; }}
-            onMouseLeave={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK; }}
-          >
-            Areas
-          </Link>
+        {/* Right side */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 20, flexShrink: 0 }}>
+          {!isMobile && (
+            <>
+              <Link
+                href="/contact"
+                style={{ backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, padding: '10px 22px', borderRadius: 9999, textDecoration: 'none' }}
+              >
+                Free Consultation
+              </Link>
+              <a
+                href={CONTACT.phoneHref}
+                style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: FONTS.sans, fontSize: 13, color: COLORS.espresso, textDecoration: 'none' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={COLORS.sage} strokeWidth="1.5">
+                  <path d="M2 2C2 2 3.5.5 5 .5S7 2 7.5 3.5 6.5 5 6.5 5s.5 1.5 2 3 3 2 3 2 1.5-1 2-1S15 10.5 15 12s-1.5 2-1.5 2C8 18-4 4 2 2z" strokeLinecap="round" />
+                </svg>
+                {CONTACT.phone}
+              </a>
+            </>
+          )}
 
-          <Link
-            href="/faqs"
-            style={linkStyle(isActive('/faqs'))}
-            onMouseEnter={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK_HOVER; }}
-            onMouseLeave={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK; }}
-          >
-            FAQs
-          </Link>
+          {/* Mobile: call button */}
+          {isMobile && (
+            <a
+              href={CONTACT.phoneHref}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38, borderRadius: 9999, backgroundColor: COLORS.plaster, border: '1px solid rgba(154,154,140,0.25)', color: COLORS.espresso, textDecoration: 'none' }}
+              aria-label="Call us"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke={COLORS.terracotta} strokeWidth="1.5">
+                <path d="M2.5 2.5C2.5 2.5 4 1 5.5 1S7.5 2.5 8 4 7 5.5 7 5.5s.5 1.5 2 3 3 2 3 2 1.5-1 2-1S15.5 11 15.5 12.5s-2 2-2 2C8 19-3 5 2.5 2.5z" strokeLinecap="round" />
+              </svg>
+            </a>
+          )}
 
-          <Link
-            href="/about"
-            style={linkStyle(isActive('/about'))}
-            onMouseEnter={e => { if (!isActive('/about')) e.currentTarget.style.color = INK_HOVER; }}
-            onMouseLeave={e => { if (!isActive('/about')) e.currentTarget.style.color = INK; }}
-          >
-            About
-          </Link>
-        </div>
-
-        {/* Right CTA + phone */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexShrink: 0 }}>
-          <Link
-            href="/contact"
-            style={{ backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, padding: '10px 22px', borderRadius: 9999, textDecoration: 'none' }}
-          >
-            Free Consultation
-          </Link>
-          <a
-            href={CONTACT.phoneHref}
-            style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: FONTS.sans, fontSize: 13, color: COLORS.espresso, textDecoration: 'none' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={COLORS.sage} strokeWidth="1.5">
-              <path d="M2 2C2 2 3.5.5 5 .5S7 2 7.5 3.5 6.5 5 6.5 5s.5 1.5 2 3 3 2 3 2 1.5-1 2-1S15 10.5 15 12s-1.5 2-1.5 2C8 18-4 4 2 2z" strokeLinecap="round" />
-            </svg>
-            {CONTACT.phone}
-          </a>
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
-            aria-label="Menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
-              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
+          {/* Hamburger — mobile only */}
+          {isMobile && (
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }}
+              aria-label="Menu"
+            >
+              {mobileOpen ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
+                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
+                  <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+              )}
+            </button>
+          )}
         </div>
       </nav>
 
       {/* Mobile menu overlay */}
-      {mobileOpen && (
+      {mobileOpen && isMobile && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 200, backgroundColor: COLORS.white, padding: '24px', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <svg width="24" height="20" viewBox="0 0 28 24" fill="none">
                 <path d="M3 16 L10 4 L17 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
                 <path d="M11 16 L18 4 L25 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
               </svg>
-              <span style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>NWS Custom Homes</span>
+              <span style={{ fontFamily: FONTS.sans, fontSize: 12, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>NWS Custom Homes</span>
             </div>
-            <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
+            <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
@@ -291,7 +311,7 @@ export default function NavBar() {
               href={link.href}
               onClick={() => setMobileOpen(false)}
               style={{
-                display: 'block', padding: '16px 0',
+                display: 'block', padding: '15px 0',
                 fontFamily: FONTS.sans, fontSize: 16,
                 color: pathname === link.href ? COLORS.terracotta : COLORS.espresso,
                 fontWeight: pathname === link.href ? 600 : 400,
@@ -302,12 +322,21 @@ export default function NavBar() {
             </Link>
           ))}
 
-          <a
-            href={CONTACT.phoneHref}
-            style={{ display: 'block', marginTop: 32, textAlign: 'center', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '18px', borderRadius: 9999, textDecoration: 'none' }}
-          >
-            Call {CONTACT.phone}
-          </a>
+          <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              style={{ display: 'block', textAlign: 'center', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '18px', borderRadius: 9999, textDecoration: 'none' }}
+            >
+              Free Consultation
+            </Link>
+            <a
+              href={CONTACT.phoneHref}
+              style={{ display: 'block', textAlign: 'center', border: `1px solid ${COLORS.terracotta}`, color: COLORS.terracotta, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '16px', borderRadius: 9999, textDecoration: 'none' }}
+            >
+              Call {CONTACT.phone}
+            </a>
+          </div>
         </div>
       )}
     </>
