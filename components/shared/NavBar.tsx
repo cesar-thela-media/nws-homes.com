@@ -157,21 +157,19 @@ export default function NavBar() {
       }}>
 
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
-          <svg width="28" height="24" viewBox="0 0 28 24" fill="none">
-            <path d="M3 16 L10 4 L17 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-            <path d="M11 16 L18 4 L25 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-          </svg>
-          <span style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 12 : 13, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-            NWS Custom Homes
-          </span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+          <img
+            src="/nws-logo.png"
+            alt="NWS Custom Homes"
+            style={{ height: isMobile ? 36 : 46, width: 'auto', display: 'block' }}
+          />
         </Link>
 
         {/* Desktop nav links — hidden on mobile */}
         {!isMobile && (
-          <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 36 }}>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 36 }}>
             <div
-              style={{ position: 'relative', paddingBottom: 16 }}
+              style={{ position: 'relative', paddingBottom: 16, display: 'flex', alignItems: 'center' }}
               onMouseEnter={() => setOpenMenu('services')}
               onMouseLeave={() => setOpenMenu(null)}
             >
@@ -187,7 +185,7 @@ export default function NavBar() {
             </div>
 
             <div
-              style={{ position: 'relative', paddingBottom: 16 }}
+              style={{ position: 'relative', paddingBottom: 16, display: 'flex', alignItems: 'center' }}
               onMouseEnter={() => setOpenMenu('gallery')}
               onMouseLeave={() => setOpenMenu(null)}
             >
@@ -221,7 +219,7 @@ export default function NavBar() {
         )}
 
         {/* Right side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 20, flexShrink: 0, marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 20, flexShrink: 0 }}>
           {!isMobile && (
             <>
               <Link
@@ -280,13 +278,13 @@ export default function NavBar() {
       {mobileOpen && isMobile && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 200, backgroundColor: COLORS.white, padding: '24px', overflowY: 'auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <svg width="24" height="20" viewBox="0 0 28 24" fill="none">
-                <path d="M3 16 L10 4 L17 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-                <path d="M11 16 L18 4 L25 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-              </svg>
-              <span style={{ fontFamily: FONTS.sans, fontSize: 12, fontWeight: 600, color: COLORS.espresso, textTransform: 'uppercase', letterSpacing: '0.1em' }}>NWS Custom Homes</span>
-            </div>
+            <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <img
+                src="/nws-logo.png"
+                alt="NWS Custom Homes"
+                style={{ height: 36, width: 'auto', display: 'block' }}
+              />
+            </Link>
             <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
                 <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
