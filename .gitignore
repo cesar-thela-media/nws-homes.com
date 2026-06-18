@@ -32,6 +32,9 @@ yarn-error.log*
 *.jpeg
 *.png
 
+# allow logo assets
+!public/nws-logo.png
+
 # internal docs not for repo
 PRD/
 nws-full-frontend-PRD.md
