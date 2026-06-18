@@ -1,0 +1,86 @@
+
+> nws-new@0.1.0 dev
+> set NODE_ENV=development && next dev --port 3001
+
+ ⚠ You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+(node:28108) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ⚠ You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env
+ ✓ Ready in 3.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 2.1s (589 modules)
+ GET / 200 in 2499ms
+ ✓ Compiled /about in 504ms (603 modules)
+ GET /about 200 in 738ms
+ GET /about 200 in 79ms
+ ✓ Compiled /services in 404ms (611 modules)
+ GET /services 200 in 600ms
+ ✓ Compiled /faqs in 505ms (621 modules)
+ GET /faqs 200 in 764ms
+ ✓ Compiled /gallery in 470ms (611 modules)
+ GET /gallery 200 in 678ms
+ ○ Compiling /areas ...
+ ✓ Compiled /areas in 800ms (619 modules)
+ GET /areas 200 in 1193ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 554ms (628 modules)
+ GET /contact 200 in 872ms
+ ○ Compiling /services/[slug] ...
+ ✓ Compiled /services/[slug] in 1174ms (639 modules)
+ GET /services/kitchen-remodeling 200 in 2712ms
+ GET /areas 200 in 221ms
+ ✓ Compiled in 909ms (634 modules)
+ ✓ Compiled in 437ms (634 modules)
+ ✓ Compiled in 650ms (634 modules)
+ ✓ Compiled in 425ms (634 modules)
+ ✓ Compiled in 446ms (634 modules)
+ ✓ Compiled in 497ms (634 modules)
+ ✓ Compiled in 332ms (634 modules)
+ ✓ Compiled in 353ms (634 modules)
+ ✓ Compiled in 322ms (634 modules)
+ ✓ Compiled in 579ms (634 modules)
+ ✓ Compiled / in 391ms (359 modules)
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\idder\tmg\NWS-new-website-rework\.next\server\webpack-runtime.js:33:42)
+    at JSON.parse (<anonymous>)
+digest: "1105399332"
+TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\idder\tmg\NWS-new-website-rework\.next\server\webpack-runtime.js:33:42)
+    at require (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:40:20064)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108376
+    at ea (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108583)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:110813
+    at Object._fromJSON (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:111370)
+    at JSON.parse (<anonymous>)
+    at ec (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:109078)
+    at eo (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108123)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115291
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115308
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115341
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115358
+    at t (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115581)
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\idder\tmg\NWS-new-website-rework\.next\server\webpack-runtime.js:33:42)
+    at require (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:40:20064)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108376
+    at ea (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108583)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:110813
+    at Object._fromJSON (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:111370)
+    at JSON.parse (<anonymous>)
+    at ec (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:109078)
+    at eo (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:108123)
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115291
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115308
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115341
+    at C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115358
+    at t (C:\Users\idder\tmg\NWS-new-website-rework\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:35:115581) {
+  page: '/'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1089ms (885 modules)
+ GET / 500 in 2152ms
+[?25h
