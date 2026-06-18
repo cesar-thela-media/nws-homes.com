@@ -5,9 +5,11 @@ import PageHero from '@/components/shared/PageHero';
 import TestimonialStrip from '@/components/shared/TestimonialStrip';
 import CTABanner from '@/components/shared/CTABanner';
 import RelatedServicesGrid from '@/components/services/RelatedServicesGrid';
-import BeforeAfterSlider from '@/components/BeforeAfterSlider';
+import dynamicNext from 'next/dynamic';
 import { COLORS, FONTS } from '@/lib/constants';
 import type { Metadata } from 'next';
+
+const BeforeAfterSlider = dynamicNext(() => import('@/components/BeforeAfterSlider'), { ssr: false });
 
 export const dynamic = 'force-dynamic';
 
