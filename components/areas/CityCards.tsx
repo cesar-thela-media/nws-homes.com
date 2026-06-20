@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 import type { Area } from '@/lib/types';
 
@@ -17,9 +17,46 @@ const projectCounts: Record<string, number> = {
 
 export default function CityCards({ areas }: { areas: Area[] }) {
   const [hovered, setHovered] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: 'left' | 'right') => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: dir === 'left' ? -300 : 300, behavior: 'smooth' });
+    }
+  };
 
   return (
+    <div style={{ position: 'relative' }}>
+      {/* Scroll buttons */}
+      <button
+        onClick={() => scroll('left')}
+        aria-label="Scroll left"
+        style={{
+          position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', zIndex: 10,
+          width: 40, height: 40, borderRadius: '50%',
+          backgroundColor: COLORS.white, border: `1px solid rgba(43,33,24,0.15)`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+        }}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke={COLORS.espresso} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      <button
+        onClick={() => scroll('right')}
+        aria-label="Scroll right"
+        style={{
+          position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', zIndex: 10,
+          width: 40, height: 40, borderRadius: '50%',
+          backgroundColor: COLORS.white, border: `1px solid rgba(43,33,24,0.15)`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+        }}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke={COLORS.espresso} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+
     <div
+      ref={scrollRef}
       style={{
         display: 'flex',
         gap: 16,
@@ -171,6 +208,7 @@ export default function CityCards({ areas }: { areas: Area[] }) {
           </div>
         );
       })}
+    </div>
     </div>
   );
 }
