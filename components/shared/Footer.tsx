@@ -37,7 +37,7 @@ export default function Footer() {
           </Link>
 
           <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, lineHeight: 1.65, maxWidth: 300, margin: '0 0 24px 0' }}>
-            Building Fort Bend County since 2007. Full-service custom home construction and remodeling — one crew, every trade, zero chaos.
+            Building Fort Bend County since 2007. Full-service custom home construction and remodeling, one crew, every trade, zero chaos.
           </p>
 
           <div
