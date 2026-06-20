@@ -10,13 +10,6 @@ const remodelingLinks = services
   .filter(s => s.slug !== 'custom-home-building')
   .map(s => ({ label: s.navLabel, href: `/services/${s.slug}` }));
 
-const galleryLinks = [
-  { label: 'Custom Homes Gallery', href: '/gallery?cat=custom-homes' },
-  { label: 'Kitchen Gallery', href: '/gallery?cat=kitchen' },
-  { label: 'Bathroom Gallery', href: '/gallery?cat=bathroom' },
-  { label: 'Remodeling Gallery', href: '/gallery?cat=remodeling' },
-];
-
 const INK = 'rgba(43,33,24,0.72)';
 const INK_HOVER = COLORS.espresso;
 
@@ -90,31 +83,6 @@ function ServicesDropdown({ isOpen }: { isOpen: boolean }) {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function GalleryDropdown({ isOpen }: { isOpen: boolean }) {
-  if (!isOpen) return null;
-  return (
-    <div style={{
-      position: 'absolute', top: 'calc(100% + 8px)', left: '50%', transform: 'translateX(-50%)',
-      backgroundColor: COLORS.white, borderRadius: 14,
-      boxShadow: '0 12px 40px rgba(43,33,24,0.13), 0 2px 8px rgba(43,33,24,0.06)',
-      padding: '6px 0', minWidth: 230, zIndex: 100,
-      border: '1px solid rgba(154,154,140,0.12)',
-    }}>
-      {galleryLinks.map(item => (
-        <Link
-          key={item.href}
-          href={item.href}
-          style={{ display: 'block', padding: '11px 20px', fontFamily: FONTS.sans, fontSize: 13, color: INK, textDecoration: 'none', transition: 'background 0.1s, color 0.1s' }}
-          onMouseEnter={e => { e.currentTarget.style.backgroundColor = COLORS.plaster; e.currentTarget.style.color = COLORS.terracotta; }}
-          onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = INK; }}
-        >
-          {item.label}
-        </Link>
-      ))}
     </div>
   );
 }

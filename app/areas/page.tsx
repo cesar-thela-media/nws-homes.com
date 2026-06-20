@@ -9,19 +9,6 @@ export const metadata: Metadata = {
   description: 'NWS Custom Homes serves Richmond, Sugar Land, Katy, Fulshear, Cinco Ranch, Rosenberg, and surrounding areas. Call (281) 299-2309.',
 };
 
-// Approximate relative positions for Fort Bend County city dots (x%, y% of SVG viewport)
-const cityDots: { slug: string; label: string; cx: number; cy: number; primary?: boolean }[] = [
-  { slug: 'richmond',    label: 'Richmond',         cx: 42, cy: 55, primary: true },
-  { slug: 'sugar-land',  label: 'Sugar Land',        cx: 58, cy: 38 },
-  { slug: 'katy',        label: 'Katy',              cx: 22, cy: 30 },
-  { slug: 'fulshear',    label: 'Fulshear',          cx: 18, cy: 52 },
-  { slug: 'cinco-ranch', label: 'Cinco Ranch',       cx: 26, cy: 44 },
-  { slug: 'rosenberg',   label: 'Rosenberg',         cx: 40, cy: 70 },
-  { slug: 'weston-lakes',label: 'Weston Lakes',      cx: 28, cy: 62 },
-  { slug: 'west-houston',label: 'West Houston',      cx: 62, cy: 26 },
-  { slug: 'park-row',    label: 'Park Row',          cx: 50, cy: 42 },
-];
-
 
 export default function AreasPage() {
   return (

@@ -1,6 +1,5 @@
 import CTABanner from '@/components/shared/CTABanner';
 import FAQBody from '@/components/faqs/FAQBody';
-import { COLORS, FONTS } from '@/lib/constants';
 import { faqs } from '@/data/faqs';
 import type { Metadata } from 'next';
 
