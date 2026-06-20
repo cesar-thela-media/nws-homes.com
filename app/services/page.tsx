@@ -21,7 +21,7 @@ const previewReel = [
 
 const spotlightServices = [
   { slug: 'kitchen-remodeling',   label: 'Kitchen Remodeling',   src: `${NWS}/kitchen-gallery-7.jpeg`,  desc: 'The heart of your home, rebuilt for how you actually live.', tall: true },
-  { slug: 'custom-home-building', label: 'Custom Home Building',  src: `${NWS}/custom-homes-7.jpeg`,    desc: 'Architecture and construction under one roof — built around your life.', tall: false },
+  { slug: 'custom-home-building', label: 'Custom Home Building',  src: `${NWS}/custom-homes-7.jpeg`,    desc: 'Architecture and construction under one roof, built around your life.', tall: false },
   { slug: 'bathroom-remodeling',  label: 'Bathroom & Shower',     src: `${NWS}/bathroom-gallery-7.jpeg`,desc: 'Spa-worthy bathrooms that blend comfort, style, and function.', tall: false },
 ];
 
@@ -73,7 +73,7 @@ export default function ServicesPage() {
             <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>You Need.</span>
           </h1>
           <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, maxWidth: 400, margin: '0 0 36px 0' }}>
-            From ground-up custom builds to bathroom transformations — one accountable crew handles every trade.
+            From ground-up custom builds to bathroom transformations. One accountable crew handles every trade.
           </p>
 
           {/* Service count badge */}
@@ -211,7 +211,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CTABanner heading="One Call. Every Trade." body="Tell us what you need — we handle everything from first sketch to final walkthrough." primaryLabel="Get a Free Quote" primaryHref="/contact" />
+      <CTABanner heading="One Call. Every Trade." body="Tell us what you need. We handle everything from first sketch to final walkthrough." primaryLabel="Get a Free Quote" primaryHref="/contact" />
     </main>
   );
 }

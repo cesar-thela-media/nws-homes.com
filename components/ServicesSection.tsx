@@ -231,7 +231,7 @@ export default function ServicesSection() {
                 Zero Chaos.
               </h2>
             </div>
-            <div style={{ paddingTop: isMobile ? 0 : "64px" }}>
+            <div style={{ paddingTop: isMobile ? 0 : "64px", paddingLeft: isMobile ? 0 : "24px" }}>
               <p
                 style={{
                   fontFamily: "var(--font-dm-sans), system-ui, sans-serif",

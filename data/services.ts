@@ -18,7 +18,7 @@ export const services: Service[] = [
       { value: '4.9★', label: 'Client rating' },
     ],
     intro: [
-      'Building a custom home is the biggest investment most families ever make. At NWS, we treat it that way — every decision is yours, every detail is deliberate, and every phase is communicated clearly before it begins.',
+      'Building a custom home is the biggest investment most families ever make. At NWS, we treat it that way: every decision is yours, every detail is deliberate, and every phase is communicated clearly before it begins.',
       'We handle architecture coordination, permitting, material sourcing, and full construction under one roof. No subcontractor roulette. No surprise change orders. The same crew that broke ground finishes your home.',
     ],
     includes: [
@@ -37,21 +37,21 @@ export const services: Service[] = [
       { label: 'Finish & Handoff', items: ['Interior finishes & fixtures', 'Landscaping coordination', 'Final walkthrough & warranty'] },
     ],
     processSteps: ['Land & Vision Consultation', 'Design & Permit', 'Build Phase', 'Final Walkthrough'],
-    processDescriptions: ['We walk your lot, talk through your lifestyle, and lock in a realistic scope and budget before any drawings are made.', 'Our in-house designer produces floor plans. We pull every permit needed so nothing delays your build.', 'Foundation to roof — our crew works continuously on your site with weekly owner updates and photo reports.', 'You walk every room with us before we hand over the keys. Every punch-list item is resolved before close-out.'],
+    processDescriptions: ['We walk your lot, talk through your lifestyle, and lock in a realistic scope and budget before any drawings are made.', 'Our in-house designer produces floor plans. We pull every permit needed so nothing delays your build.', 'Foundation to roof: our crew works continuously on your site with weekly owner updates and photo reports.', 'You walk every room with us before we hand over the keys. Every punch-list item is resolved before close-out.'],
     beforeAfter: {
       before: `${NWS}/custom-homes-3.jpeg`,
       after: `${NWS}/custom-homes-7.jpeg`,
     },
     relatedSlugs: ['whole-home-remodeling', 'room-additions', 'open-concept'],
     iconType: 'house',
-    cardDescription: 'Architecture and construction under one roof — built around your life, your land, and your budget.',
+    cardDescription: 'Architecture and construction under one roof, built around your life, your land, and your budget.',
   },
   {
     slug: 'kitchen-remodeling',
     navLabel: 'Kitchen Remodeling',
     title: 'Kitchen',
     titleAccent: 'Remodeling.',
-    heroSubtitle: 'From layout to finishes — the kitchen your family deserves.',
+    heroSubtitle: 'From layout to finishes, the kitchen your family deserves.',
     heroImage: `${NWS}/kitchen-gallery-7.jpeg`,
     galleryImages: [`${NWS}/kitchen-gallery-1.jpeg`, `${NWS}/kitchen-gallery-3.jpeg`, `${NWS}/kitchen-gallery-5.jpeg`],
     byTheNumbers: [
@@ -82,7 +82,7 @@ export const services: Service[] = [
       { label: 'Systems', items: ['Appliance rough-in', 'Lighting & electrical'] },
     ],
     processSteps: ['Consultation & Measurement', 'Material Selection', 'Demo & Prep', 'Install & Finish'],
-    processDescriptions: ['We measure every inch and discuss layout, cabinet style, countertop preferences, and your cooking habits before a design goes on paper.', 'We source cabinet lines, countertop slabs, backsplash, and fixtures together — so everything coordinates before demo starts.', 'Old kitchen is removed cleanly in one day. Sub-floor leveling, electrical, and plumbing rough-in happen before anything goes back in.', 'Cabinets, countertops, tile, lighting, and appliances installed in sequence — no waiting on trades from other companies.'],
+    processDescriptions: ['We measure every inch and discuss layout, cabinet style, countertop preferences, and your cooking habits before a design goes on paper.', 'We source cabinet lines, countertop slabs, backsplash, and fixtures together, so everything coordinates before demo starts.', 'Old kitchen is removed cleanly in one day. Sub-floor leveling, electrical, and plumbing rough-in happen before anything goes back in.', 'Cabinets, countertops, tile, lighting, and appliances installed in sequence with no waiting on trades from other companies.'],
     relatedSlugs: ['bathroom-remodeling', 'whole-home-remodeling', 'open-concept'],
     iconType: 'kitchen',
     cardDescription: 'From layout to finishes, the kitchen of your dreams built for how you actually cook.',
@@ -105,7 +105,7 @@ export const services: Service[] = [
       after: `${NWS}/bathroom-gallery-7.jpeg`,
     },
     intro: [
-      'A bathroom remodel is one of the highest-ROI projects you can do on a home. We treat it like it — premium materials, precise tile work, and finishes that last decades, not years.',
+      'A bathroom remodel is one of the highest-ROI projects you can do on a home. We treat it like it: premium materials, precise tile work, and finishes that last decades, not years.',
       'Whether you want a master bath overhaul, a guest bath refresh, or a full wet room conversion, we handle permits, demo, tile, fixtures, and all plumbing rough-in in-house.',
     ],
     includes: [
@@ -123,7 +123,7 @@ export const services: Service[] = [
       { label: 'Systems', items: ['Plumbing rough-in', 'Lighting & exhaust'] },
     ],
     processSteps: ['Design Consultation', 'Material Selection', 'Demo & Waterproofing', 'Tile & Fixtures'],
-    processDescriptions: ['We discuss layout changes, tile style, fixture preferences, and any accessibility needs before finalizing the design drawing.', 'Tile, vanity, mirror, lighting, and plumbing fixtures are all selected together so the room looks curated, not assembled.', 'Demo and haul-off in one day. Waterproofing membrane is installed and cured before any tile is set — no shortcuts.', 'Tile is set, grout sealed, vanity installed, and all fixtures connected. Final inspection before reveal.'],
+    processDescriptions: ['We discuss layout changes, tile style, fixture preferences, and any accessibility needs before finalizing the design drawing.', 'Tile, vanity, mirror, lighting, and plumbing fixtures are all selected together so the room looks curated, not assembled.', 'Demo and haul-off in one day. Waterproofing membrane is installed and cured before any tile is set. No shortcuts.', 'Tile is set, grout sealed, vanity installed, and all fixtures connected. Final inspection before reveal.'],
     relatedSlugs: ['shower-remodel', 'bathtub-remodel', 'kitchen-remodeling'],
     iconType: 'bath',
     cardDescription: 'Spa-worthy bathrooms that blend comfort, style, and real-world function.',
@@ -133,7 +133,7 @@ export const services: Service[] = [
     navLabel: 'Whole Home Remodeling',
     title: 'Whole Home',
     titleAccent: 'Remodeling.',
-    heroSubtitle: 'Top-to-bottom transformation — every room, one accountable crew.',
+    heroSubtitle: 'Top-to-bottom transformation, every room, one accountable crew.',
     heroImage: `${NWS}/remodeling-1.jpeg`,
     galleryImages: [`${NWS}/remodeling-1.jpeg`, `${NWS}/remodeling-2.jpeg`, `${NWS}/remodeling-3.jpeg`],
     byTheNumbers: [
@@ -142,7 +142,7 @@ export const services: Service[] = [
       { value: '1 crew', label: 'No subcontractors' },
     ],
     intro: [
-      "A whole-home remodel is the most complex project a homeowner can undertake. It requires a contractor who can manage multiple simultaneous trades without losing the thread — or your budget.",
+      "A whole-home remodel is the most complex project a homeowner can undertake. It requires a contractor who can manage multiple simultaneous trades without losing the thread, or your budget.",
       "We've completed full-home transformations from Cinco Ranch to Sugar Land. One project manager. One crew. One fixed price. No chaos.",
     ],
     includes: [
@@ -161,14 +161,14 @@ export const services: Service[] = [
       { label: 'Finishes & Systems', items: ['Paint & interior finishes', 'Electrical & lighting updates', 'Plumbing updates', 'Final staging walkthrough'] },
     ],
     processSteps: ['Scope & Budget Session', 'Phased Design Plan', 'Staged Build', 'Room-by-Room Handoff'],
-    processDescriptions: ['We walk every room together, prioritize what matters most, and build a realistic phased budget — no inflated estimates.', 'Each phase gets its own timeline and material selections so decisions don\'t bottleneck the build.', 'We work room to room to minimize disruption. You stay informed with weekly photos and project manager check-ins.', 'Each room is completed and signed off before the crew moves to the next. No half-finished spaces at close.'],
+    processDescriptions: ['We walk every room together, prioritize what matters most, and build a realistic phased budget, with no inflated estimates.', 'Each phase gets its own timeline and material selections so decisions don\'t bottleneck the build.', 'We work room to room to minimize disruption. You stay informed with weekly photos and project manager check-ins.', 'Each room is completed and signed off before the crew moves to the next. No half-finished spaces at close.'],
     beforeAfter: {
       before: `${NWS}/remodeling-1.jpeg`,
       after: `${NWS}/remodeling-5.jpeg`,
     },
     relatedSlugs: ['kitchen-remodeling', 'bathroom-remodeling', 'room-additions'],
     iconType: 'home',
-    cardDescription: 'Top-to-bottom transformation — every room, one accountable crew.',
+    cardDescription: 'Top-to-bottom transformation, every room, one accountable crew.'
   },
   {
     slug: 'shower-remodel',
@@ -184,7 +184,7 @@ export const services: Service[] = [
       { value: '100%', label: 'Waterproof guarantee' },
     ],
     intro: [
-      'Your shower should be the best part of your morning. We build zero-entry walk-ins, frameless glass enclosures, steam showers, and custom tile surrounds — all with proper waterproofing that lasts.',
+      'Your shower should be the best part of your morning. We build zero-entry walk-ins, frameless glass enclosures, steam showers, and custom tile surrounds, all with proper waterproofing that lasts.',
       'We handle tile layout design, waterproofing membrane, plumbing rough-in, glass installation, and fixture selection in-house.',
     ],
     includes: [
@@ -202,7 +202,7 @@ export const services: Service[] = [
       { label: 'Enclosure & Systems', items: ['Frameless glass enclosures', 'Plumbing rough-in & fixtures', 'Steam system rough-in'] },
     ],
     processSteps: ['Measurement & Design', 'Tile & Fixture Selection', 'Waterproof & Tile', 'Glass & Fixtures'],
-    processDescriptions: ['We template the exact shower footprint and design the tile layout, bench height, niche positions, and drain placement before demo.', 'Tile format, grout color, shower head, and glass style are all coordinated in one selection session.', 'Membrane is installed first. Tile is set only after cure time — our waterproofing warranty depends on it.', 'Frameless glass panels are templated on-site, fabricated, and installed. All fixtures torqued and sealed.'],
+    processDescriptions: ['We template the exact shower footprint and design the tile layout, bench height, niche positions, and drain placement before demo.', 'Tile format, grout color, shower head, and glass style are all coordinated in one selection session.', 'Membrane is installed first. Tile is set only after cure time. Our waterproofing warranty depends on it.', 'Frameless glass panels are templated on-site, fabricated, and installed. All fixtures torqued and sealed.'],
     beforeAfter: {
       before: `${NWS}/bathroom-gallery-1.jpeg`,
       after: `${NWS}/bathroom-gallery-5.jpeg`,
@@ -216,7 +216,7 @@ export const services: Service[] = [
     navLabel: 'Bathtub Remodel',
     title: 'Bathtub',
     titleAccent: 'Remodel.',
-    heroSubtitle: 'From clawfoot to freestanding — the perfect centerpiece for your bathroom.',
+    heroSubtitle: 'From clawfoot to freestanding, the perfect centerpiece for your bathroom.',
     heroImage: `${NWS}/bathroom-gallery-6.jpeg`,
     galleryImages: [`${NWS}/bathroom-gallery-3.jpeg`, `${NWS}/bathroom-gallery-5.jpeg`, `${NWS}/bathroom-gallery-7.jpeg`],
     byTheNumbers: [
@@ -225,7 +225,7 @@ export const services: Service[] = [
       { value: '4.9★', label: 'Client rating' },
     ],
     intro: [
-      'The right bathtub transforms a bathroom from functional to restorative. We install freestanding soaking tubs, clawfoots, alcove tubs, and jetted systems — with all plumbing and surround work done in-house.',
+      'The right bathtub transforms a bathroom from functional to restorative. We install freestanding soaking tubs, clawfoots, alcove tubs, and jetted systems, with all plumbing and surround work done in-house.',
       'We also do tub-to-shower conversions for homeowners ready to reclaim the space.',
     ],
     includes: [
@@ -250,7 +250,7 @@ export const services: Service[] = [
     },
     relatedSlugs: ['shower-remodel', 'bathroom-remodeling', 'whole-home-remodeling'],
     iconType: 'tub',
-    cardDescription: 'From clawfoot to freestanding — the perfect centerpiece for your bathroom.',
+    cardDescription: 'From clawfoot to freestanding, the perfect centerpiece for your bathroom.'
   },
   {
     slug: 'room-additions',
@@ -266,7 +266,7 @@ export const services: Service[] = [
       { value: '80%', label: 'ROI on resale' },
     ],
     intro: [
-      "A well-built room addition is indistinguishable from the original structure. We handle the full scope: foundation, framing, roofline integration, exterior match, and interior finish — all permitted and inspected.",
+      "A well-built room addition is indistinguishable from the original structure. We handle the full scope: foundation, framing, roofline integration, exterior match, and interior finish, all permitted and inspected.",
       "We've added master suites, sunrooms, second stories, in-law suites, and bonus rooms across Fort Bend County.",
     ],
     includes: [
@@ -284,14 +284,14 @@ export const services: Service[] = [
       { label: 'Interior', items: ['Electrical & HVAC extension', 'Interior finishes'] },
     ],
     processSteps: ['Structural Assessment', 'Design & Permit', 'Foundation & Frame', 'Finish & Inspect'],
-    processDescriptions: ['A structural engineer evaluates tie-in points to your existing home and determines footing requirements for your addition type.', 'We design the addition to match your roofline, exterior material, and interior flow — then pull all permits.', 'Foundation poured, framed, and dried-in before interior work begins. Roofline tied in by our own carpenters.', 'Interior finishes, exterior siding match, and all systems connected. City inspection passed before final walk.'],
+    processDescriptions: ['A structural engineer evaluates tie-in points to your existing home and determines footing requirements for your addition type.', 'We design the addition to match your roofline, exterior material, and interior flow, then pull all permits.', 'Foundation poured, framed, and dried-in before interior work begins. Roofline tied in by our own carpenters.', 'Interior finishes, exterior siding match, and all systems connected. City inspection passed before final walk.'],
     beforeAfter: {
       before: `${NWS}/custom-homes-2.jpeg`,
       after: `${NWS}/custom-homes-8.jpeg`,
     },
     relatedSlugs: ['custom-home-building', 'whole-home-remodeling', 'garage-conversions'],
     iconType: 'addition',
-    cardDescription: 'Seamless additions that look original to your home — master suites, second stories, sunrooms.',
+    cardDescription: 'Seamless additions that look original to your home: master suites, second stories, sunrooms.',
   },
   {
     slug: 'basement-remodeling',
@@ -307,7 +307,7 @@ export const services: Service[] = [
       { value: '70%', label: 'ROI on resale' },
     ],
     intro: [
-      "An unfinished basement is untapped potential. We convert raw concrete space into home theaters, playrooms, home offices, gyms, and full living suites — with proper egress, electrical, and moisture management.",
+      "An unfinished basement is untapped potential. We convert raw concrete space into home theaters, playrooms, home offices, gyms, and full living suites, with proper egress, electrical, and moisture management.",
       'Every basement project includes a moisture assessment before we frame a single wall.',
     ],
     includes: [
@@ -325,7 +325,7 @@ export const services: Service[] = [
       { label: 'Finish', items: ['Drywall & paint', 'Flooring installation', 'Custom layouts & built-ins'] },
     ],
     processSteps: ['Moisture Assessment', 'Design & Layout', 'Frame & Rough-in', 'Finish & Inspect'],
-    processDescriptions: ['We test for moisture intrusion and map egress before design begins — moisture issues discovered mid-project are expensive.', 'Layout is drawn to maximize your intended use: theater seating, home office workflow, gym floor plan, or suite flow.', 'Framing, insulation, electrical, and any plumbing rough-in are completed and inspected before drywall goes up.', 'Drywall, paint, flooring, and trim installed to match the rest of your home. City inspection signed off.'],
+    processDescriptions: ['We test for moisture intrusion and map egress before design begins. Moisture issues discovered mid-project are expensive.', 'Layout is drawn to maximize your intended use: theater seating, home office workflow, gym floor plan, or suite flow.', 'Framing, insulation, electrical, and any plumbing rough-in are completed and inspected before drywall goes up.', 'Drywall, paint, flooring, and trim installed to match the rest of your home. City inspection signed off.'],
     beforeAfter: {
       before: `${NWS}/remodeling-2.jpeg`,
       after: `${NWS}/remodeling-3.jpeg`,
@@ -339,7 +339,7 @@ export const services: Service[] = [
     navLabel: 'Garage Conversions',
     title: 'Garage',
     titleAccent: 'Conversions.',
-    heroSubtitle: 'Office, gym, guest suite — your garage has more potential than you think.',
+    heroSubtitle: 'Office, gym, guest suite: your garage has more potential than you think.',
     heroImage: `${NWS}/remodeling-4.jpeg`,
     galleryImages: [`${NWS}/custom-homes-2.jpeg`, `${NWS}/custom-homes-3.jpeg`, `${NWS}/remodeling-3.jpeg`],
     byTheNumbers: [
@@ -349,7 +349,7 @@ export const services: Service[] = [
     ],
     intro: [
       'A garage conversion adds livable square footage without the cost of a full addition. We handle insulation, HVAC extension, electrical, flooring, and all interior finishes.',
-      'We also do garage remodels for homeowners who want to keep the garage function but improve the space — epoxy floors, built-in storage, upgraded doors.',
+      'We also do garage remodels for homeowners who want to keep the garage function but improve the space: epoxy floors, built-in storage, upgraded doors.',
     ],
     includes: [
       'Insulation & vapor barrier',
@@ -366,14 +366,14 @@ export const services: Service[] = [
       { label: 'Finish', items: ['Drywall & interior finish', 'Flooring (LVP, epoxy, tile)'] },
     ],
     processSteps: ['Feasibility Assessment', 'Design & Permit', 'Rough-in Phase', 'Finish & Inspect'],
-    processDescriptions: ['We evaluate the existing garage structure, HOA restrictions (if applicable), and utility locations before committing to a layout.', 'Space is designed for your intended use and permitted with the city — conversions without permits create title issues at resale.', 'Insulation, HVAC extension, and electrical rough-in are all completed and inspected before walls are closed.', 'Drywall, flooring, paint, and any built-ins are installed. Final inspection and walkthrough before handoff.'],
+    processDescriptions: ['We evaluate the existing garage structure, HOA restrictions (if applicable), and utility locations before committing to a layout.', 'Space is designed for your intended use and permitted with the city. Conversions without permits create title issues at resale.', 'Insulation, HVAC extension, and electrical rough-in are all completed and inspected before walls are closed.', 'Drywall, flooring, paint, and any built-ins are installed. Final inspection and walkthrough before handoff.'],
     beforeAfter: {
       before: `${NWS}/custom-homes-4.jpeg`,
       after: `${NWS}/remodeling-4.jpeg`,
     },
     relatedSlugs: ['room-additions', 'basement-remodeling', 'whole-home-remodeling'],
     iconType: 'garage',
-    cardDescription: 'Office, gym, guest suite — your garage has more potential than you think.',
+    cardDescription: 'Office, gym, guest suite: your garage has more potential than you think.'
   },
   {
     slug: 'open-concept',
@@ -390,7 +390,7 @@ export const services: Service[] = [
     ],
     intro: [
       'Open concept layouts make homes feel larger, brighter, and better connected. We handle structural assessment, load-bearing wall removal with proper beam installation, and the full finish work afterward.',
-      'Every wall removal includes a structural engineer sign-off and full permit — no exceptions.',
+      'Every wall removal includes a structural engineer sign-off and full permit, with no exceptions.',
     ],
     includes: [
       'Structural engineering assessment',
@@ -407,7 +407,7 @@ export const services: Service[] = [
       { label: 'Finish', items: ['Electrical rerouting', 'Flooring unification', 'Ceiling & drywall repair'] },
     ],
     processSteps: ['Structural Assessment', 'Engineer Sign-off & Permit', 'Demo & Beam Install', 'Finish Work'],
-    processDescriptions: ['We identify load paths, locate utilities in the target wall, and scope the beam size required before any demolition is discussed.', 'A licensed structural engineer stamps the beam drawing. Permit is pulled — no shortcuts that void your homeowner\'s insurance.', 'Wall is opened, temporary shoring installed, beam placed and connected to bearing points. No guesswork under load.', 'Patched ceiling, flooring transition, paint, and electrical rerouting done. Space feels intentional, not patched.'],
+    processDescriptions: ['We identify load paths, locate utilities in the target wall, and scope the beam size required before any demolition is discussed.', 'A licensed structural engineer stamps the beam drawing. Permit is pulled. No shortcuts that void your homeowner\'s insurance.', 'Wall is opened, temporary shoring installed, beam placed and connected to bearing points. No guesswork under load.', 'Patched ceiling, flooring transition, paint, and electrical rerouting done. Space feels intentional, not patched.'],
     beforeAfter: {
       before: `${NWS}/kitchen-gallery-2.jpeg`,
       after: `${NWS}/kitchen-gallery-6.jpeg`,

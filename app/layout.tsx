@@ -7,7 +7,7 @@ import BackToTop from "@/components/shared/BackToTop";
 export const metadata: Metadata = {
   title: "NWS Custom Homes | Built for the Way You Live",
   description:
-    "Custom homes and whole-home remodels across Richmond, Katy & Sugar Land — crafted since 2007.",
+    "Custom homes and whole-home remodels across Richmond, Katy & Sugar Land, crafted since 2007.",
 };
 
 export default function RootLayout({

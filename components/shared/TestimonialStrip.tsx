@@ -81,7 +81,7 @@ export default function TestimonialStrip({ testimonials, eyebrow = 'WORD TRAVELS
           <div style={{ position: 'relative', zIndex: 1 }}>
             <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 16 }}>FREE CONSULTATION</p>
             <h3 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '28px' : 'clamp(28px, 3vw, 40px)', color: COLORS.white, lineHeight: 1.1, marginBottom: 12 }}>Let&apos;s Walk Your<br />Floor Plan.</h3>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, marginBottom: 24, lineHeight: 1.6 }}>Free on-site consultation — and 5% off when you mention the website.</p>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, marginBottom: 24, lineHeight: 1.6 }}>Free on-site consultation, and 5% off when you mention the website.</p>
             <form action="/contact" method="GET">
               <div style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: 12, marginBottom: 20 }}>
                 <input name="name" type="text" placeholder="Your Name" style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', fontFamily: FONTS.sans, fontSize: 15, color: COLORS.white }} />

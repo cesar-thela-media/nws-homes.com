@@ -43,7 +43,7 @@ export default function FeaturedProject() {
           </h2>
         </div>
         {!isMobile && <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, maxWidth: 340, textAlign: 'right', lineHeight: 1.6, margin: 0 }}>
-          Drag the slider to see the transformation. Dark cabinets, waterfall island, and full reconfiguration — 3 weeks start to finish.
+          Drag the slider to see the transformation. Dark cabinets, waterfall island, and full reconfiguration, completed in 3 weeks start to finish.
         </p>}
       </div>
 
@@ -99,7 +99,7 @@ export default function FeaturedProject() {
             &ldquo;NWS took our old 1990s kitchen and turned it into the best room in the house. On time and under budget.&rdquo;
           </p>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, marginTop: 10, fontWeight: 600 }}>
-            — Michelle R., Katy TX
+            Michelle R., Katy TX
           </p>
         </div>
       </div>

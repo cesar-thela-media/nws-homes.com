@@ -7,20 +7,20 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About NWS Custom Homes | Richmond, TX Since 2007',
-  description: 'Learn about NWS Custom Homes and Remodeling — full-service construction and remodeling in Richmond, TX with 35+ years of combined experience.',
+  description: 'Learn about NWS Custom Homes and Remodeling: full-service construction and remodeling in Richmond, TX with 35+ years of combined experience.',
 };
 
 const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
 
 const milestones = [
-  { year: '2007', label: 'Founded', body: 'Started as a two-man operation in Richmond, TX — one crew, one promise.' },
+  { year: '2007', label: 'Founded', body: 'Started as a two-man operation in Richmond, TX. One crew, one promise.' },
   { year: '2012', label: 'First Custom Home', body: 'Completed our first ground-up custom build in Fulshear. The client still calls us for every renovation.' },
   { year: '2018', label: 'Regional Expansion', body: 'Grew to serve 9 cities across Fort Bend County with dedicated project managers per territory.' },
   { year: '2024', label: '500+ Projects', body: 'Over 500 completed projects. Same crew, same standards, same Richmond, TX roots.' },
 ];
 
 const processSteps = [
-  { step: '01', title: 'Consultation', body: 'We visit your home, listen to your goals, and assess the scope — at no charge.' },
+  { step: '01', title: 'Consultation', body: 'We visit your home, listen to your goals, and assess the scope, at no charge.' },
   { step: '02', title: 'Design & Quote', body: 'You receive a detailed fixed-price quote and design plan within 5 business days.' },
   { step: '03', title: 'Build', body: 'Our crew handles every trade. You get a dedicated project manager and weekly updates.' },
   { step: '04', title: 'Walkthrough', body: 'We don\'t close until you\'re satisfied. A final walkthrough with a 1-year labor warranty.' },
@@ -105,7 +105,7 @@ export default function AboutPage() {
               margin: '0 0 40px 0',
             }}
           >
-            Full-service construction and remodeling in Richmond, TX — built on 35+ years of combined experience.
+            Full-service construction and remodeling in Richmond, TX, built on 35+ years of combined experience.
           </p>
           {/* Inline stats row */}
           <div className="inline-stats">
@@ -336,7 +336,7 @@ export default function AboutPage() {
       </section>
 
       <TestimonialStrip testimonials={getTestimonials(undefined, 3)} />
-      <CTABanner heading="Ready to Start Your Project?" body="Free on-site consultation — and 5% off when you mention the website." primaryLabel="Book a Consultation" primaryHref="/contact" />
+      <CTABanner heading="Ready to Start Your Project?" body="Free on-site consultation, and 5% off when you mention the website." primaryLabel="Book a Consultation" primaryHref="/contact" />
     </main>
   );
 }

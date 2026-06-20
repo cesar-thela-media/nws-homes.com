@@ -86,7 +86,7 @@ export default function FAQsPage() {
               margin: '0 0 40px 0',
             }}
           >
-            Everything you need to know before starting your project — from pricing and timelines to permits and warranties.
+            Everything you need to know before starting your project, from pricing and timelines to permits and warranties.
           </p>
 
           {/* Quick stats */}
@@ -110,7 +110,7 @@ export default function FAQsPage() {
 
       <CTABanner
         heading="Ready to Get Started?"
-        body="Free consultation — we'll talk through your project and give you a firm quote."
+        body="Free consultation. We'll talk through your project and give you a firm quote."
         primaryLabel="Contact Us"
         primaryHref="/contact"
       />

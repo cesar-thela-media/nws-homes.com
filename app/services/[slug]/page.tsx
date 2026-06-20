@@ -333,7 +333,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 maxWidth: 380,
               }}
             >
-              Every project follows the same four-step system — so you always know exactly where you stand.
+              Every project follows the same four-step system, so you always know exactly where you stand.
             </p>
           </div>
 
@@ -433,7 +433,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <TestimonialStrip testimonials={testimonials} eyebrow="WHAT CLIENTS SAY" />
       <CTABanner
         heading={`Start Your ${service.title} Project`}
-        body="Free on-site consultation — fixed price before we begin."
+        body="Free on-site consultation, with fixed price before we begin."
         primaryLabel="Get a Free Quote"
         primaryHref="/contact"
       />

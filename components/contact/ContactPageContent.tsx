@@ -104,7 +104,7 @@ export default function ContactPageContent() {
                 <div style={{ paddingTop: 28 }}>
                   <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', margin: '0 0 8px 0' }}>Location</p>
                   <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: COLORS.white, margin: 0 }}>
-                    {CONTACT.address} — serving all of Fort Bend County
+                    {CONTACT.address}, serving all of Fort Bend County
                   </p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function ContactPageContent() {
               <div>
                 <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', margin: '0 0 6px 0' }}>Location</p>
                 <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
-                  {CONTACT.address} — serving all of Fort Bend County
+                  {CONTACT.address}, serving all of Fort Bend County
                 </p>
               </div>
             </div>

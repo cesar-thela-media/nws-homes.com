@@ -72,6 +72,7 @@ export default function HeroSection() {
               letterSpacing: '-0.02em',
               color: COLORS.espresso,
               margin: 0,
+              textAlign: isMobile ? 'center' : 'left',
             }}
           >
             <span style={{ display: 'block' }}>Built for the Way</span>
@@ -91,8 +92,8 @@ export default function HeroSection() {
               maxWidth: '400px',
             }}
           >
-            Custom homes and whole-home remodels across Richmond, Katy &amp; Sugar Land
-            — crafted since 2007.
+            Custom homes and whole-home remodels across Richmond, Katy &amp; Sugar Land,
+            crafted since 2007.
           </p>
 
           <div style={{ display: 'flex', gap: '12px', marginTop: '32px', flexWrap: 'wrap' }}>
@@ -224,7 +225,7 @@ export default function HeroSection() {
                 }}
               >
                 <p style={{ fontFamily: FONTS.serif, fontSize: '13px', fontWeight: 700, color: COLORS.espresso, lineHeight: 1.4, margin: 0 }}>
-                  Whole-Home Remodel —
+                  Whole-Home Remodel
                 </p>
                 <p style={{ fontFamily: FONTS.sans, fontSize: '13px', color: COLORS.sage, margin: '4px 0 0 0' }}>
                   Cinco Ranch, TX · Completed in 14 weeks

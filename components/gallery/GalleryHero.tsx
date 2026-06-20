@@ -120,7 +120,7 @@ export default function GalleryHero() {
             margin: '0 0 48px 0',
           }}
         >
-          500+ projects across Fort Bend County — kitchens, bathrooms, custom homes, and full remodels.
+          500+ projects across Fort Bend County: kitchens, bathrooms, custom homes, and full remodels.
         </p>
 
         {/* Filter pills */}

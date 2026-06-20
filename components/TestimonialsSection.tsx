@@ -12,7 +12,7 @@ const testimonials = [
     name: "Michael R.", city: "Katy, TX", initial: "M", featured: true,
   },
   {
-    quote: "Months after closing they still answered every call. That's not customer service — that's integrity.",
+    quote: "Months after closing they still answered every call. That's not customer service. That's integrity.",
     name: "Sarah T.", city: "Sugar Land, TX", initial: "S", featured: false,
   },
 ];
@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
                 marginBottom: "32px", position: "relative", zIndex: 1,
               }}
             >
-              Free on-site consultation — and 5% off when you mention the website.
+              Free on-site consultation, and 5% off when you mention the website.
             </p>
 
             <form action="/contact" method="GET" style={{ position: "relative", zIndex: 1 }}>

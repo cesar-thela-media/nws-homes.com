@@ -90,7 +90,7 @@ export default function AreasPage() {
               margin: '0 0 48px 0',
             }}
           >
-            9 cities across Fort Bend County — same crew, same quality, wherever you are in Greater Houston.
+            9 cities across Fort Bend County. Same crew, same quality, wherever you are in Greater Houston.
           </p>
           <div className="inline-stats">
             {[{ v: '9', l: 'Cities' }, { v: '500+', l: 'Projects' }, { v: '19 yrs', l: 'Experience' }].map((s) => (
@@ -249,7 +249,7 @@ export default function AreasPage() {
               margin: 0,
             }}
           >
-            We serve the entire Greater Houston metro area. If you&apos;re in Fort Bend County or surrounding areas, give us a call — we likely serve you.
+            We serve the entire Greater Houston metro area. If you&apos;re in Fort Bend County or surrounding areas, give us a call. We likely serve you.
           </p>
         </div>
 

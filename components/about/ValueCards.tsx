@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 
 const values = [
-  { num: '01', word: 'Craft', body: 'Every cut, every joint, every finish is done by someone who takes pride in their work — and it shows.' },
+  { num: '01', word: 'Craft', body: 'Every cut, every joint, every finish is done by someone who takes pride in their work, and it shows.' },
   { num: '02', word: 'Clarity', body: 'Fixed-price quotes before we begin. No surprise invoices. No change orders without your approval in writing.' },
   { num: '03', word: 'Commitment', body: 'We give you a timeline before we start and we stick to it. If something changes, you hear about it immediately.' },
 ];
