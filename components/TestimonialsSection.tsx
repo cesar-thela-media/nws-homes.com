@@ -78,7 +78,9 @@ function TestimonialCard({ quote, name, city, initial, featured, isMobile }: {
           <p style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "13px", color: "#2B2118", fontWeight: 600, lineHeight: 1.3, margin: 0 }}>{name}</p>
           <p style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "12px", color: "#9A9B8C", lineHeight: 1.3, margin: 0 }}>{city}</p>
         </div>
-        <GoogleIcon />
+        <a href="https://g.page/r/CRyZ8e5jvBiVEBM/review" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
+          <GoogleIcon />
+        </a>
       </div>
     </div>
   );

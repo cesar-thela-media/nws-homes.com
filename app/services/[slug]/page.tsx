@@ -1,8 +1,6 @@
 import { getServiceBySlug, getRelatedServices } from '@/data/services';
-import { getTestimonials } from '@/data/testimonials';
 import { notFound } from 'next/navigation';
 import PageHero from '@/components/shared/PageHero';
-import TestimonialStrip from '@/components/shared/TestimonialStrip';
 import CTABanner from '@/components/shared/CTABanner';
 import RelatedServicesGrid from '@/components/services/RelatedServicesGrid';
 import dynamicNext from 'next/dynamic';
@@ -26,7 +24,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const service = getServiceBySlug(params.slug);
   if (!service) notFound();
   const related = getRelatedServices(service.relatedSlugs);
-  const testimonials = getTestimonials(service.slug, 3);
   const groups = service.includeGroups ?? [];
 
   return (
@@ -51,7 +48,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* ── By the Numbers strip ── */}
       <section
         style={{
-          backgroundColor: COLORS.espresso,
+          backgroundColor: COLORS.plaster,
           padding: '0',
           borderTop: `3px solid ${COLORS.terracotta}`,
         }}
@@ -70,7 +67,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                borderRight: i < service.byTheNumbers.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                borderRight: i < service.byTheNumbers.length - 1 ? '1px solid rgba(154,155,140,0.15)' : 'none',
               }}
             >
               <span
@@ -88,7 +85,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 style={{
                   fontFamily: FONTS.sans,
                   fontSize: 11,
-                  color: 'rgba(255,255,255,0.5)',
+                  color: COLORS.sage,
                   textTransform: 'uppercase',
                   letterSpacing: '0.14em',
                 }}
