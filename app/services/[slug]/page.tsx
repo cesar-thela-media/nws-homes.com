@@ -40,6 +40,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         subtitle={service.heroSubtitle}
         image={service.heroImage}
         variant={service.heroVariant}
+        layout="centered"
         breadcrumb={[
           { label: 'Home', href: '/' },
           { label: 'Services', href: '/services' },
@@ -155,11 +156,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           overflow: 'hidden',
         }}
       >
-        {/* Blueprint watermark */}
-        <svg style={{ position: 'absolute', top: 40, right: 40, width: 160, height: 160, opacity: 0.05, pointerEvents: 'none' }} viewBox="0 0 160 160" fill="none">
-          <path d="M80 10L10 65V150H150V65L80 10Z" stroke="white" strokeWidth="1.5" />
-          <rect x="65" y="90" width="30" height="60" stroke="white" strokeWidth="1" />
-        </svg>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 12 }}>
@@ -430,12 +426,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </section>
       )}
 
-      <TestimonialStrip testimonials={testimonials} eyebrow="WHAT CLIENTS SAY" />
       <CTABanner
         heading={`Start Your ${service.title} Project`}
         body="Free on-site consultation, with fixed price before we begin."
         primaryLabel="Get a Free Quote"
         primaryHref="/contact"
+        fullWidth
       />
     </main>
   );

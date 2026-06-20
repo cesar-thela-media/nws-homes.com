@@ -27,13 +27,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginBottom: 16 }}>
-            <svg width="28" height="24" viewBox="0 0 28 24" fill="none">
-              <path d="M3 16 L10 4 L17 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-              <path d="M11 16 L18 4 L25 16" stroke={COLORS.terracotta} strokeWidth="2" fill="none" strokeLinejoin="round" />
-            </svg>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 700, color: COLORS.white, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              NWS Custom Homes
-            </span>
+            <img src="/nws-logo.png" alt="NWS Custom Homes" style={{ height: 40, width: 'auto', display: 'block' }} />
           </Link>
 
           <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: COLORS.sage, lineHeight: 1.65, maxWidth: 300, margin: '0 0 24px 0' }}>
@@ -52,7 +46,7 @@ export default function Footer() {
                 <svg key={i} width="13" height="13" viewBox="0 0 13 13" fill={COLORS.terracotta}><path d="M6.5 1l1.3 3.7H11L8.3 6.8l1.1 3.7L6.5 8.3 3.6 10.5l1.1-3.7L2 4.7h3.2z"/></svg>
               ))}
             </div>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.white, fontWeight: 600 }}>4.9</span>
+            <span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.white, fontWeight: 600 }}>5.0</span>
             <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage }}>Google Reviews</span>
             <a href="https://g.page/r/CRyZ8e5jvBiVEBM/review" target="_blank" rel="noopener noreferrer"
               style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.terracotta, textDecoration: 'none', fontWeight: 600 }}>

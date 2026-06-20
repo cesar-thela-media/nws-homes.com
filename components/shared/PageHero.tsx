@@ -14,9 +14,10 @@ interface PageHeroProps {
   breadcrumb: BreadcrumbItem[];
   image?: string;
   variant?: 'dark';
+  layout?: 'split' | 'centered';
 }
 
-export default function PageHero({ eyebrow, titleLine1, titleLine2, titleAccent, subtitle, breadcrumb, image, variant }: PageHeroProps) {
+export default function PageHero({ eyebrow, titleLine1, titleLine2, titleAccent, subtitle, breadcrumb, image, variant, layout = 'split' }: PageHeroProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -27,12 +28,56 @@ export default function PageHero({ eyebrow, titleLine1, titleLine2, titleAccent,
   }, []);
 
   const dark = variant === 'dark';
+  const centered = layout === 'centered';
   const bg = dark ? COLORS.espresso : COLORS.plaster;
   const headingColor = dark ? COLORS.white : COLORS.espresso;
   const subtitleColor = dark ? 'rgba(255,255,255,0.6)' : COLORS.sage;
   const crumbColor = dark ? 'rgba(255,255,255,0.4)' : COLORS.sage;
   const lineColor = dark ? 'rgba(255,255,255,0.15)' : COLORS.sage;
 
+  // Centered layout: image as full-bleed background
+  if (centered && image) {
+    return (
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        minHeight: isMobile ? '50vh' : '60vh',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        backgroundColor: COLORS.espresso,
+      }}>
+        {/* Full-bleed background image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt={titleLine1} style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover', display: 'block',
+        }} />
+        {/* Dark overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'rgba(43,33,24,0.72)',
+          zIndex: 1,
+        }} />
+
+        <div style={{
+          position: 'relative', zIndex: 2,
+          padding: isMobile ? '80px 24px' : '120px 80px',
+          textAlign: 'center', maxWidth: 800,
+        }}>
+          <p style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 12 : 14, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 20 }}>
+            {eyebrow}
+          </p>
+
+          <h1 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '44px' : 'clamp(56px, 6vw, 96px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: COLORS.white, margin: '0 0 20px 0' }}>
+            {titleLine1}{' '}
+            <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>{titleAccent}</span>
+          </h1>
+
+          {subtitle && <p style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 15 : 17, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: '0 auto', maxWidth: 500 }}>{subtitle}</p>}
+        </div>
+      </section>
+    );
+  }
+
+  // Original split layout
   return (
     <section style={{
       backgroundColor: bg,

@@ -208,22 +208,12 @@ export default function NavBar() {
               <ServicesDropdown isOpen={openMenu === 'services'} />
             </div>
 
-            {/* Gallery */}
-            <div
-              style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
-              onMouseEnter={() => setOpenMenu('gallery')}
-              onMouseLeave={() => setOpenMenu(null)}
-            >
-              <span
-                style={linkStyle(galleryActive)}
-                onMouseEnter={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
-                onMouseLeave={e => { if (!galleryActive) (e.currentTarget as HTMLElement).style.color = INK; }}
-              >
-                Gallery <Chevron open={openMenu === 'gallery'} />
-              </span>
-              <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, height: 16 }} />
-              <GalleryDropdown isOpen={openMenu === 'gallery'} />
-            </div>
+            {/* Gallery — plain link, no dropdown */}
+            <Link href="/gallery" style={linkStyle(galleryActive)}
+              onMouseEnter={e => { if (!galleryActive) e.currentTarget.style.color = INK_HOVER; }}
+              onMouseLeave={e => { if (!galleryActive) e.currentTarget.style.color = INK; }}>
+              Gallery
+            </Link>
 
             <Link href="/areas" style={linkStyle(isActive('/areas'))}
               onMouseEnter={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK_HOVER; }}

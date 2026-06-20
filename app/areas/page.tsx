@@ -102,82 +102,18 @@ export default function AreasPage() {
           </div>
         </div>
 
-        {/* RIGHT — stylized dot map */}
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <svg
-            viewBox="0 0 400 380"
-            fill="none"
-            style={{ width: '100%', maxWidth: 460 }}
-          >
-            {/* Fort Bend County rough outline (simplified polygon) */}
-            <path
-              d="M320 60 L380 90 L370 200 L340 280 L280 340 L200 360 L120 340 L60 270 L40 180 L60 100 L120 55 L200 40 Z"
-              fill="rgba(181,85,45,0.06)"
-              stroke="rgba(181,85,45,0.25)"
-              strokeWidth="1.5"
-              strokeDasharray="6 4"
-            />
-            {/* Surrounding region hint */}
-            <path
-              d="M340 40 L400 70 L400 180 L380 250 L360 310 L300 360 L200 380 L100 360 L40 300 L20 200 L30 100 L80 40 L160 20 L260 25 Z"
-              fill="none"
-              stroke="rgba(255,255,255,0.06)"
-              strokeWidth="1"
-              strokeDasharray="3 8"
-            />
-
-            {/* Connection lines between cities */}
-            {cityDots.map((dot, i) =>
-              i > 0 ? (
-                <line
-                  key={`line-${dot.slug}`}
-                  x1={cityDots[0].cx * 4}
-                  y1={cityDots[0].cy * 3.8}
-                  x2={dot.cx * 4}
-                  y2={dot.cy * 3.8}
-                  stroke="rgba(181,85,45,0.15)"
-                  strokeWidth="1"
-                />
-              ) : null
-            )}
-
-            {/* City dots + labels */}
-            {cityDots.map((dot) => (
-              <g key={dot.slug}>
-                {/* Pulse ring for primary */}
-                {dot.primary && (
-                  <circle
-                    cx={dot.cx * 4}
-                    cy={dot.cy * 3.8}
-                    r="14"
-                    fill="rgba(181,85,45,0.12)"
-                    stroke={COLORS.terracotta}
-                    strokeWidth="1"
-                    strokeOpacity="0.4"
-                  />
-                )}
-                {/* Dot */}
-                <circle
-                  cx={dot.cx * 4}
-                  cy={dot.cy * 3.8}
-                  r={dot.primary ? 7 : 5}
-                  fill={dot.primary ? COLORS.terracotta : 'rgba(181,85,45,0.6)'}
-                />
-                {/* Label */}
-                <text
-                  x={dot.cx * 4}
-                  y={dot.cy * 3.8 + (dot.primary ? 20 : 16)}
-                  textAnchor="middle"
-                  fill="rgba(255,255,255,0.75)"
-                  fontSize={dot.primary ? 11 : 9}
-                  fontFamily="system-ui, sans-serif"
-                  fontWeight={dot.primary ? '600' : '400'}
-                >
-                  {dot.label}
-                </text>
-              </g>
-            ))}
-          </svg>
+        {/* RIGHT — Google Maps embed */}
+        <div style={{ position: 'relative', zIndex: 1, borderRadius: 20, overflow: 'hidden', height: 420 }}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110859.302409662!2d-95.83068330117697!3d29.62216074695836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640db1f6b5d2d2b%3A0x1899f1ee63bc1895!2sRichmond%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="NWS Custom Homes Service Area"
+          />
         </div>
       </section>
 

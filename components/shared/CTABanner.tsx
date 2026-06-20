@@ -9,9 +9,10 @@ interface CTABannerProps {
   body: string;
   primaryLabel: string;
   primaryHref: string;
+  fullWidth?: boolean;
 }
 
-export default function CTABanner({ eyebrow = 'START YOUR PROJECT', heading, body, primaryLabel, primaryHref }: CTABannerProps) {
+export default function CTABanner({ eyebrow = 'START YOUR PROJECT', heading, body, primaryLabel, primaryHref, fullWidth }: CTABannerProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -22,8 +23,8 @@ export default function CTABanner({ eyebrow = 'START YOUR PROJECT', heading, bod
   }, []);
 
   return (
-    <section style={{ backgroundColor: COLORS.plaster, padding: isMobile ? '40px 24px' : '80px 80px' }}>
-      <div style={{ backgroundColor: COLORS.espresso, borderRadius: isMobile ? 24 : 32, padding: isMobile ? '48px 28px' : '80px 64px', position: 'relative', overflow: 'hidden', maxWidth: 900, margin: '0 auto' }}>
+    <section style={{ backgroundColor: COLORS.plaster, padding: fullWidth ? 0 : (isMobile ? '40px 24px' : '80px 80px') }}>
+      <div style={{ backgroundColor: COLORS.espresso, borderRadius: fullWidth ? 0 : (isMobile ? 24 : 32), padding: isMobile ? '48px 28px' : '80px 64px', position: 'relative', overflow: 'hidden', maxWidth: fullWidth ? 'none' : 900, margin: fullWidth ? 0 : '0 auto' }}>
         <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, height: 300, opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 300 300" fill="none">
           <polygon points="150,30 270,120 30,120" fill="none" stroke="white" strokeWidth="2"/>
           <rect x="50" y="120" width="200" height="150" fill="none" stroke="white" strokeWidth="2"/>
