@@ -136,6 +136,7 @@ export default function AreasPage() {
 
       {/* ── Don't see your city? ── */}
       <section
+        className="areas-dont-see"
         style={{
           backgroundColor: COLORS.espresso,
           padding: '80px 24px',

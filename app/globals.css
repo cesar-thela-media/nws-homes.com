@@ -173,6 +173,11 @@ img-comparison-slider {
     gap: 24px !important;
     min-height: auto !important;
   }
+  .about-hero > div:first-child { text-align: center !important; }
+  .about-hero .inline-stats { justify-content: center !important; }
+
+  /* Larger Don't See Your City heading */
+  .areas-dont-see h2 { font-size: clamp(32px, 5vw, 48px) !important; }
   .about-hero .big-number { font-size: 100px !important; }
 
   .inline-stats { gap: 24px !important; flex-wrap: wrap !important; }
