@@ -74,10 +74,6 @@ export default function TestimonialStrip({ testimonials, eyebrow = 'WORD TRAVELS
 
         {/* RIGHT — CTA panel */}
         <div style={{ backgroundColor: COLORS.espresso, borderRadius: 24, padding: isMobile ? '32px 24px' : 40, position: 'relative', overflow: 'hidden' }}>
-          <svg style={{ position: 'absolute', inset: 0, width: '60%', height: 'auto', margin: 'auto', opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 200 200" fill="none">
-            <path d="M100 20L20 80V180H180V80L100 20Z" stroke="white" strokeWidth="2"/>
-            <rect x="80" y="110" width="40" height="70" stroke="white" strokeWidth="2"/>
-          </svg>
           <div style={{ position: 'relative', zIndex: 1 }}>
             <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 16 }}>FREE CONSULTATION</p>
             <h3 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '28px' : 'clamp(28px, 3vw, 40px)', color: COLORS.white, lineHeight: 1.1, marginBottom: 12 }}>Let&apos;s Walk Your<br />Floor Plan.</h3>

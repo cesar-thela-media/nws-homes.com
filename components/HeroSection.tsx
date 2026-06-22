@@ -59,11 +59,11 @@ export default function HeroSection() {
           alignItems: isMobile ? 'stretch' : 'center',
           gap: isMobile ? 0 : 32,
           width: '100%',
-          padding: isMobile ? '48px 24px 40px' : '96px 80px',
+          padding: isMobile ? '32px 24px 24px' : '72px 80px 64px',
         }}
       >
-        {/* LEFT / TOP on mobile: text content */}
-        <div style={{ flex: isMobile ? 'none' : '42', order: isMobile ? 2 : 1 }}>
+        {/* Text content — first on mobile, left on desktop */}
+        <div style={{ flex: isMobile ? 'none' : '42', order: isMobile ? 1 : 1 }}>
           <h1
             style={{
               fontFamily: FONTS.serif,
@@ -89,14 +89,15 @@ export default function HeroSection() {
               color: COLORS.sage,
               lineHeight: 1.6,
               marginTop: '20px',
-              maxWidth: '400px',
+              maxWidth: isMobile ? '100%' : '400px',
+              textAlign: isMobile ? 'center' : 'left',
             }}
           >
             Custom homes and whole-home remodels across Richmond, Katy &amp; Sugar Land,
             crafted since 2007.
           </p>
 
-          <div style={{ display: 'flex', gap: '12px', marginTop: '32px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '12px', marginTop: '32px', flexWrap: 'wrap', justifyContent: isMobile ? 'center' : 'flex-start' }}>
             <Link
               href="/contact"
               style={{
@@ -134,7 +135,7 @@ export default function HeroSection() {
           </div>
 
           {/* Trust badges */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: '32px', flexWrap: 'wrap', rowGap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: '32px', flexWrap: 'wrap', rowGap: 12, justifyContent: isMobile ? 'center' : 'flex-start' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingRight: '20px', marginRight: '20px', borderRight: '1px solid rgba(154,154,140,0.25)' }}>
               <svg width="20" height="20" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -169,8 +170,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* RIGHT / TOP on mobile: slider */}
-        <div style={{ flex: isMobile ? 'none' : '58', order: isMobile ? 1 : 2, position: 'relative', marginBottom: isMobile ? 32 : 0 }}>
+        {/* Before/After slider — below text on mobile, right on desktop */}
+        <div style={{ flex: isMobile ? 'none' : '58', order: isMobile ? 2 : 2, position: 'relative', marginTop: isMobile ? 24 : 0 }}>
           {/* Espresso backing panel — desktop only */}
           {!isMobile && (
             <div

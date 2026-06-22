@@ -27,14 +27,6 @@ export default function ContactPageContent() {
           overflow: 'hidden',
         }}
       >
-        {/* Blueprint watermark */}
-        <svg style={{ position: 'absolute', top: 60, left: 60, width: 220, height: 220, opacity: 0.04, pointerEvents: 'none', zIndex: 0 }} viewBox="0 0 220 220" fill="none">
-          <path d="M110 18L18 85V202H202V85L110 18Z" stroke="white" strokeWidth="1.5" />
-          <rect x="88" y="130" width="44" height="72" stroke="white" strokeWidth="1" />
-          <line x1="18" y1="130" x2="88" y2="130" stroke="white" strokeWidth="0.5" strokeDasharray="4 6" />
-          <line x1="202" y1="130" x2="132" y2="130" stroke="white" strokeWidth="0.5" strokeDasharray="4 6" />
-        </svg>
-
         {/* LEFT — form panel */}
         <div
           style={{
@@ -82,7 +74,7 @@ export default function ContactPageContent() {
         {!isMobile && (
           <div style={{ position: 'relative', overflow: 'hidden' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${NWS}/kitchen-gallery-7.jpeg`} alt="NWS remodeled kitchen" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={`${NWS}/custom-homes-7.jpeg`} alt="NWS custom home exterior" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(43,33,24,0.97) 0%, rgba(43,33,24,0.7) 40%, rgba(43,33,24,0.2) 70%, transparent 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 48px 56px', zIndex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>

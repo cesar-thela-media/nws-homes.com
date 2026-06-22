@@ -1,7 +1,4 @@
-import TestimonialStrip from '@/components/shared/TestimonialStrip';
-import CTABanner from '@/components/shared/CTABanner';
 import ValueCards from '@/components/about/ValueCards';
-import { getTestimonials } from '@/data/testimonials';
 import { COLORS, FONTS } from '@/lib/constants';
 import type { Metadata } from 'next';
 
@@ -167,12 +164,6 @@ export default function AboutPage() {
 
       {/* ── How We Work: vertical step track ── */}
       <section className="rsp-pad" style={{ backgroundColor: COLORS.espresso, position: 'relative', overflow: 'hidden' }}>
-        <svg style={{ position: 'absolute', top: 40, right: 40, width: 180, height: 180, opacity: 0.05, pointerEvents: 'none' }} viewBox="0 0 180 180" fill="none">
-          <line x1="20" y1="20" x2="160" y2="20" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
-          <line x1="20" y1="60" x2="160" y2="60" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
-          <line x1="20" y1="100" x2="160" y2="100" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
-          <line x1="20" y1="140" x2="160" y2="140" stroke="white" strokeWidth="0.5" strokeDasharray="3 6" />
-        </svg>
         <div className="how-we-work" style={{ position: 'relative', zIndex: 1 }}>
           {/* Left: heading */}
           <div style={{ position: 'sticky', top: 120 }}>
@@ -246,8 +237,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <TestimonialStrip testimonials={getTestimonials(undefined, 3)} />
-      <CTABanner heading="Ready to Start Your Project?" body="Free on-site consultation, and 5% off when you mention the website." primaryLabel="Book a Consultation" primaryHref="/contact" />
+
     </main>
   );
 }

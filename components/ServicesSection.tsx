@@ -15,12 +15,16 @@ interface ServiceCardProps {
 
 function ServiceCard({ image, icon, title, description, href, featured, isMobile }: ServiceCardProps) {
   return (
-    <div
+    <Link
+      href={href}
       style={{
         height: isMobile ? "280px" : featured ? "480px" : "420px",
         position: "relative",
         borderRadius: "20px",
         overflow: "hidden",
+        display: "block",
+        textDecoration: "none",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
         ...(featured && !isMobile
           ? {
               transform: "scale(1.04)",
@@ -31,6 +35,14 @@ function ServiceCard({ image, icon, title, description, href, featured, isMobile
           : {
               boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
             }),
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = featured && !isMobile ? "scale(1.07)" : "scale(1.03) translateY(-4px)";
+        e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.5)";
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = featured && !isMobile ? "scale(1.04)" : "scale(1)";
+        e.currentTarget.style.boxShadow = featured && !isMobile ? "0 0 0 6px rgba(181,85,45,0.18), 0 24px 64px rgba(0,0,0,0.4)" : "0 8px 32px rgba(0,0,0,0.3)";
       }}
     >
       {featured && (
@@ -98,18 +110,22 @@ function ServiceCard({ image, icon, title, description, href, featured, isMobile
         >
           {description}
         </p>
-        <Link
-          href={href}
+        <span
           style={{
+            display: 'inline-block',
             fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "13px", color: "#B5552D", fontWeight: 600, textDecoration: "none",
+            fontSize: "12px", color: "white", fontWeight: 600,
+            backgroundColor: "#B5552D", padding: "8px 16px",
+            borderRadius: 9999,
             marginTop: isMobile ? "6px" : "0",
+            textDecoration: 'none',
+            alignSelf: 'flex-start',
           }}
         >
-          Explore →
-        </Link>
+          Explore
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
 

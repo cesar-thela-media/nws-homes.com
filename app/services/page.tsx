@@ -152,12 +152,6 @@ export default function ServicesPage() {
 
       {/* ── C: Service Directory — horizontal list rows by category ── */}
       <section className="rsp-pad" style={{ backgroundColor: COLORS.espresso, position: 'relative', overflow: 'hidden' }}>
-        {/* Blueprint watermark */}
-        <svg style={{ position: 'absolute', bottom: 40, right: 40, width: 200, height: 200, opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 200 200" fill="none">
-          <path d="M100 15L15 85V185H185V85L100 15Z" stroke="white" strokeWidth="1.5" />
-          <rect x="80" y="115" width="40" height="70" stroke="white" strokeWidth="1" />
-        </svg>
-
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 12 }}>
             ALL SERVICES

@@ -1,4 +1,4 @@
-import CTABanner from '@/components/shared/CTABanner';
+
 import CityCards from '@/components/areas/CityCards';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
 import { areas } from '@/data/areas';
@@ -188,12 +188,6 @@ export default function AreasPage() {
         </div>
       </section>
 
-      <CTABanner
-        heading="Ready to Build?"
-        body="Free consultation anywhere in Greater Houston."
-        primaryLabel="Contact Us"
-        primaryHref="/contact"
-      />
     </main>
   );
 }

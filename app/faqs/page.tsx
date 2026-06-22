@@ -1,4 +1,3 @@
-import CTABanner from '@/components/shared/CTABanner';
 import FAQBody from '@/components/faqs/FAQBody';
 import { faqs } from '@/data/faqs';
 import type { Metadata } from 'next';
@@ -14,13 +13,6 @@ export default function FAQsPage() {
 
       {/* ── FAQ body: sticky sidebar + accordion ── */}
       <FAQBody faqs={faqs} />
-
-      <CTABanner
-        heading="Ready to Get Started?"
-        body="Free consultation. We'll talk through your project and give you a firm quote."
-        primaryLabel="Contact Us"
-        primaryHref="/contact"
-      />
     </main>
   );
 }

@@ -15,7 +15,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer style={{ backgroundColor: COLORS.espresso, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+    <footer style={{ backgroundColor: '#3D3429', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div
         style={{
           display: 'grid',

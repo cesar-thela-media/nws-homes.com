@@ -146,15 +146,6 @@ export default function TestimonialsSection() {
               position: "relative", overflow: "hidden",
             }}
           >
-            <svg
-              style={{ position: "absolute", bottom: -20, right: -20, width: 200, height: 200, opacity: 0.06, pointerEvents: "none" }}
-              viewBox="0 0 200 200" fill="none"
-            >
-              <path d="M100 20L20 80V180H180V80L100 20Z" stroke="white" strokeWidth="2" />
-              <rect x="75" y="110" width="50" height="70" stroke="white" strokeWidth="2" />
-              <line x1="20" y1="80" x2="180" y2="80" stroke="white" strokeWidth="1" strokeDasharray="4 6" />
-              <line x1="100" y1="20" x2="100" y2="110" stroke="white" strokeWidth="1" strokeDasharray="4 6" />
-            </svg>
 
             <h2
               style={{

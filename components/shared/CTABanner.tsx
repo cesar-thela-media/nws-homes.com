@@ -25,13 +25,6 @@ export default function CTABanner({ eyebrow = 'START YOUR PROJECT', heading, bod
   return (
     <section style={{ backgroundColor: COLORS.plaster, padding: fullWidth ? 0 : (isMobile ? '40px 24px' : '80px 80px') }}>
       <div style={{ backgroundColor: COLORS.espresso, borderRadius: fullWidth ? 0 : (isMobile ? 24 : 32), padding: isMobile ? '48px 28px' : '80px 64px', position: 'relative', overflow: 'hidden', maxWidth: fullWidth ? 'none' : 900, margin: fullWidth ? 0 : '0 auto' }}>
-        <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, height: 300, opacity: 0.04, pointerEvents: 'none' }} viewBox="0 0 300 300" fill="none">
-          <polygon points="150,30 270,120 30,120" fill="none" stroke="white" strokeWidth="2"/>
-          <rect x="50" y="120" width="200" height="150" fill="none" stroke="white" strokeWidth="2"/>
-          <rect x="120" y="185" width="60" height="85" fill="none" stroke="white" strokeWidth="1.5"/>
-          <rect x="70" y="140" width="45" height="45" fill="none" stroke="white" strokeWidth="1"/>
-          <rect x="185" y="140" width="45" height="45" fill="none" stroke="white" strokeWidth="1"/>
-        </svg>
 
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20 }}>{eyebrow}</p>
