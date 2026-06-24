@@ -31,12 +31,6 @@ yarn-error.log*
 # cesar notes
 /cesar-notes
 
-# dev screenshots
-*.jpeg
-*.png
-
-# allow logo assets
-!public/nws-logo.png
 
 # internal docs not for repo
 PRD/
