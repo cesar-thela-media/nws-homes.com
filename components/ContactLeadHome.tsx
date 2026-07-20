@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import ContactForm from "@/components/contact/ContactForm";
 import { CONTACT } from "@/lib/constants";
@@ -11,11 +11,11 @@ export default function ContactLeadHome() {
           <p className="mb-3 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
             Get in touch
           </p>
-          <h2 className="m-0 font-serif text-[36px] leading-tight text-espresso sm:text-[42px]">
+          <h2 className="m-0 font-sans text-[36px] leading-tight text-espresso sm:text-[42px]">
             Start your project with a free consultation.
           </h2>
           <p className="mt-4 max-w-[420px] font-sans text-base text-sage">
-            Tell us about your home and goals. We respond within one business day —
+            Tell us about your home and goals. We respond within one business day &mdash;
             no automated call centers.
           </p>
           <div className="mt-8 space-y-3 font-sans text-sm text-espresso">

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import { Badge } from "@/components/ui/badge";
@@ -28,24 +28,24 @@ export default function BeforeAfterSection() {
           <p className="mb-3 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
             Transformations
           </p>
-          <h2 className="m-0 font-serif text-[36px] leading-tight tracking-[-0.02em] text-espresso sm:text-[44px]">
+          <h2 className="m-0 font-sans text-[36px] leading-tight tracking-[-0.02em] text-espresso sm:text-[44px]">
             See the difference a whole-home remodel makes.
           </h2>
           <p className="mt-4 max-w-[480px] font-sans text-base leading-relaxed text-sage">
-            Drag the slider to compare before and after. These are real NWS project photos —
+            Drag the slider to compare before and after. These are real NWS project photos &mdash;
             kitchens, baths, and full remodels for families across Fort Bend and west Houston.
           </p>
           <ul className="mt-6 space-y-2 font-sans text-sm text-espresso/90">
             <li className="flex gap-2">
-              <span className="text-primary">•</span>
+              <span className="text-primary">&bull;</span>
               Fixed-price scopes before we lift a tool
             </li>
             <li className="flex gap-2">
-              <span className="text-primary">•</span>
+              <span className="text-primary">&bull;</span>
               One crew from demo through final walkthrough
             </li>
             <li className="flex gap-2">
-              <span className="text-primary">•</span>
+              <span className="text-primary">&bull;</span>
               Local references you can actually call
             </li>
           </ul>
@@ -67,7 +67,7 @@ export default function BeforeAfterSection() {
             <Badge className="absolute right-3 top-3 z-20">After</Badge>
             <Card className="absolute bottom-4 left-4 z-20 hidden max-w-[280px] border-0 shadow-xl lg:block">
               <CardContent className="p-4">
-                <p className="m-0 font-serif text-[13px] font-bold leading-snug text-espresso">
+                <p className="m-0 font-sans text-[13px] font-bold leading-snug text-espresso">
                   Kitchen &amp; living remodel
                 </p>
                 <p className="mt-1 mb-0 font-sans text-[13px] text-sage">

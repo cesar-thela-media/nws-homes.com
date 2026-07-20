@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -40,7 +40,7 @@ export default function CTABanner({
           <p className="mb-5 font-sans text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
             {eyebrow}
           </p>
-          <h2 className="mb-4 font-serif text-[32px] leading-tight text-white lg:text-[clamp(40px,4vw,64px)]">
+          <h2 className="mb-4 font-sans text-[32px] leading-tight text-white lg:text-[clamp(40px,4vw,64px)]">
             {heading}
           </h2>
           <p className="mb-9 font-sans text-[15px] leading-relaxed text-sage lg:text-base">
@@ -55,7 +55,7 @@ export default function CTABanner({
             </Button>
           </div>
           <p className="mt-6 font-sans text-xs text-white/35">
-            Mon–Fri 8–6 &nbsp;· &nbsp;Sat 8–12 &nbsp;· &nbsp;Richmond, TX
+            Mon&ndash;Fri 8&ndash;6 &nbsp;&middot; &nbsp;Sat 8&ndash;12 &nbsp;&middot; &nbsp;Richmond, TX
           </p>
         </div>
       </div>

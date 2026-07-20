@@ -4,7 +4,7 @@ import CTA from "@/components/v2/sections/CTA";
 import { faqs } from "@/data/faqs";
 
 export const metadata: Metadata = {
-  title: "FAQs | NWS Custom Homes",
+  title: "FAQs",
   description:
     "Common questions about NWS custom home building, remodeling process, pricing, and service areas.",
 };

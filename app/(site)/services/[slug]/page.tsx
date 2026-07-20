@@ -13,9 +13,9 @@ export const dynamic = 'force-dynamic';
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const service = getServiceBySlug(params.slug);
-  if (!service) return { title: 'Service Not Found | NWS Custom Homes' };
+  if (!service) return { title: 'Service Not Found' };
   return {
-    title: `${service.navLabel} | NWS Custom Homes Richmond TX`,
+    title: `${service.navLabel} | Richmond, TX`,
     description: service.cardDescription,
   };
 }

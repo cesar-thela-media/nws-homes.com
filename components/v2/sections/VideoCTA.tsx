@@ -11,7 +11,7 @@ const STATS = [
   { value: "500+", label: "Projects Completed" },
   { value: "19 yrs", label: "In Business" },
   { value: "9", label: "Cities Served" },
-  { value: "4.9★", label: "Client Rating" },
+  { value: "4.9 / 5", label: "Google Rating" },
 ];
 
 const marqueeItems = [

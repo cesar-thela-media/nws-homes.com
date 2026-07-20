@@ -5,7 +5,7 @@ import { t } from "@/components/v2/lib/typography";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Areas We Serve | NWS Custom Homes",
+  title: "Areas We Serve",
   description:
     "NWS serves Richmond, Sugar Land, Katy, Fulshear, Cinco Ranch, Rosenberg, Weston Lakes, Park Row, and West Houston.",
 };

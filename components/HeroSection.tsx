@@ -11,13 +11,13 @@ export default function HeroSection() {
     <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden lg:min-h-[92vh]">
       <Image
         src={HERO_IMAGE}
-        alt="Custom home built by NWS Homes in the Richmond–Katy–Sugar Land area"
+        alt="Custom home built by NWS in Richmond, Katy, and Sugar Land TX"
         fill
         priority
         className="object-cover"
         sizes="100vw"
       />
-      {/* Theme wash for readability — image remains visible */}
+      {/* Theme wash for readability */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-espresso/70 via-espresso/55 to-espresso/80"
         aria-hidden
@@ -33,10 +33,10 @@ export default function HeroSection() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-[900px] flex-col items-center px-6 py-20 text-center lg:px-10 lg:py-28">
         <p className="mb-4 font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-plaster/85">
-          Richmond · Katy · Sugar Land
+          Richmond &middot; Katy &middot; Sugar Land
         </p>
 
-        <h1 className="m-0 font-serif text-[46px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[clamp(64px,5.5vw,88px)]">
+        <h1 className="m-0 font-sans text-[46px] leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[clamp(64px,5.5vw,88px)]">
           <span className="block">Built for the Way</span>
           <span className="block">
             <span className="italic text-primary">You</span> Live.
@@ -64,7 +64,7 @@ export default function HeroSection() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-plaster/90">
           <div className="text-center">
-            <div className="font-sans text-sm font-semibold text-white">4.9★</div>
+            <div className="font-sans text-sm font-semibold text-white">4.9 / 5</div>
             <div className="font-sans text-[11px] text-plaster/70">Google reviews</div>
           </div>
           <div className="h-8 w-px bg-white/25" aria-hidden />

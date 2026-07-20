@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, type FormEvent } from "react";
 import { Check } from "lucide-react";
@@ -67,7 +67,7 @@ export default function ContactForm() {
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary bg-primary/10">
           <Check className="h-6 w-6 text-primary" strokeWidth={2.5} />
         </div>
-        <p className="mb-2 font-serif text-xl text-espresso">Message Sent!</p>
+        <p className="mb-2 font-sans text-xl text-espresso">Message Sent!</p>
         <p className="font-sans text-sm text-sage">
           We&apos;ll be in touch within 1 business day.
         </p>
@@ -126,7 +126,7 @@ export default function ContactForm() {
       ) : null}
 
       <Button type="submit" size="lg" className="w-full" disabled={pending}>
-        {pending ? "Sending…" : "Send Message →"}
+        {pending ? "Sending..." : "Send Message →"}
       </Button>
 
       <div className="mt-7 border-t border-espresso/10 pt-6">

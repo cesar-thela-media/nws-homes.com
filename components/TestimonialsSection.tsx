@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,7 @@ function TestimonialCard({ quote, name, city, featured, isMobile }: {
             <StarIcon key={i} />
           ))}
         </div>
-        <p className="mb-[18px] flex-1 font-serif text-sm italic leading-relaxed text-espresso">
+        <p className="mb-[18px] flex-1 font-sans text-sm italic leading-relaxed text-espresso">
           &ldquo;{quote}&rdquo;
         </p>
         <Separator className="mb-4 bg-sage/20" />
@@ -109,7 +109,7 @@ export default function TestimonialsSection() {
             alignItems: "start",
           }}
         >
-          {/* LEFT — Testimonials */}
+          {/* LEFT - Testimonials */}
           <div>
             <p style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "11px", color: "#B5552D", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "16px" }}>
               WORD TRAVELS
@@ -140,7 +140,7 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* RIGHT — CTA Panel */}
+          {/* RIGHT - CTA Panel */}
           <div
             style={{
               backgroundColor: "#2B2118", borderRadius: "24px",
@@ -214,7 +214,7 @@ export default function TestimonialsSection() {
                 <Link href="/contact">Book My Consultation</Link>
               </Button>
               <p className="text-center font-sans text-xs text-sage">
-                Mon–Fri 8–6 &nbsp;·&nbsp; Sat 8–12 &nbsp;·&nbsp; Richmond, TX
+                Mon&ndash;Fri 8&ndash;6 &nbsp;&middot;&nbsp; Sat 8&ndash;12 &nbsp;&middot;&nbsp; Richmond, TX
               </p>
             </form>
           </div>

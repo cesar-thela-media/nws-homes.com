@@ -32,7 +32,7 @@ const stats = [
 ];
 
 export const metadata: Metadata = {
-  title: "About | NWS Custom Homes",
+  title: "About",
   description:
     "NWS Custom Homes has been building and remodeling across Richmond, Katy & Sugar Land since 2007.",
 };

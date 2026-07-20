@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contact | NWS Custom Homes",
+  title: "Contact",
   description:
     "Request a free consultation for custom homes and remodels across Richmond, Katy & Sugar Land.",
 };

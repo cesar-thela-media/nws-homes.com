@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -55,7 +55,7 @@ function ServiceCard({ image, icon, title, description, href, featured, isMobile
         </div>
         <h3
           className={cn(
-            "mb-1.5 font-serif leading-tight text-white",
+            "mb-1.5 font-sans leading-tight text-white",
             isMobile ? "text-lg" : "text-[22px]"
           )}
         >
@@ -70,7 +70,7 @@ function ServiceCard({ image, icon, title, description, href, featured, isMobile
           {description}
         </p>
         <span className="mt-1.5 inline-flex self-start rounded-full bg-primary px-5 py-2.5 font-sans text-xs font-semibold text-white shadow-md transition-all group-hover:bg-primary/90 group-hover:shadow-lg lg:mt-0">
-          Explore →
+          Explore â†’
         </span>
       </div>
     </Link>
@@ -145,7 +145,7 @@ const stats = [
   { value: "500+", label: "Projects" },
   { value: "19", label: "Years" },
   { value: "9", label: "Cities Served" },
-  { value: "4.9★", label: "Average" },
+  { value: "4.9 / 5", label: "Average" },
 ];
 
 export default function ServicesSection() {

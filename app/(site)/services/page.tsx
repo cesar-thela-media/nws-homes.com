@@ -5,7 +5,7 @@ import { t } from "@/components/v2/lib/typography";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Services | NWS Custom Homes",
+  title: "Services",
   description:
     "Custom home building, kitchen & bath remodeling, room additions, and whole-home renovations across Fort Bend County.",
 };
