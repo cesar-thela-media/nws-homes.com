@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ContactForm from './ContactForm';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 export default function ContactPageContent() {
   const [isMobile, setIsMobile] = useState(false);

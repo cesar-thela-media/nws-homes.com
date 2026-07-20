@@ -3,7 +3,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 const collagePhotos = [
   { src: `${NWS}/kitchen-gallery-7.jpeg`, alt: 'Kitchen remodel' },

@@ -1,6 +1,6 @@
 import type { Area } from '@/lib/types';
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 export const areas: Area[] = [
   { slug:'richmond',label:'Richmond',state:'TX',isPrimary:true,tagline:'Our Home Base',description:"NWS has called Richmond home since 2007. We know the neighborhoods, the permit offices, and the communities inside-out.",image:`${NWS}/custom-homes-7.jpeg` },

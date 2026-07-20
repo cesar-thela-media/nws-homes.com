@@ -38,6 +38,11 @@ nws-full-frontend-PRD.md
 
 # local env files
 .env*.local
+.env
+
+# boss/progress packs (not for client repos)
+.progress/
+.project-summary.md
 
 # vercel
 .vercel

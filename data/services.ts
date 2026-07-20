@@ -1,6 +1,6 @@
 import type { Service } from '@/lib/types';
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 export const services: Service[] = [
   {

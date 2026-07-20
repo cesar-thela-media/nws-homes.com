@@ -1,343 +1,221 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { COLORS, FONTS, CONTACT } from '@/lib/constants';
-import { services } from '@/data/services';
+"use client";
 
-const customHome = { label: 'Custom Home Building', href: '/services/custom-home-building' };
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, Phone, ChevronDown } from "lucide-react";
+import { CONTACT } from "@/lib/constants";
+import { services } from "@/data/services";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const customHome = {
+  label: "Custom Home Building",
+  href: "/services/custom-home-building",
+};
 const remodelingLinks = services
-  .filter(s => s.slug !== 'custom-home-building')
-  .map(s => ({ label: s.navLabel, href: `/services/${s.slug}` }));
+  .filter((s) => s.slug !== "custom-home-building")
+  .map((s) => ({ label: s.navLabel, href: `/services/${s.slug}` }));
 
-const INK = 'rgba(43,33,24,0.72)';
-const INK_HOVER = COLORS.espresso;
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="10" height="6" viewBox="0 0 10 6" fill="none"
-      style={{
-        transition: 'transform 0.2s',
-        transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        marginLeft: 4,
-        flexShrink: 0,
-      }}
-    >
-      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ServicesDropdown({ isOpen }: { isOpen: boolean }) {
-  if (!isOpen) return null;
-  return (
-    <div style={{
-      position: 'absolute', top: 'calc(100% + 8px)', left: '50%', transform: 'translateX(-50%)',
-      backgroundColor: COLORS.white, borderRadius: 16,
-      boxShadow: '0 16px 48px rgba(43,33,24,0.15), 0 2px 8px rgba(43,33,24,0.06)',
-      padding: '16px 0 12px', minWidth: 500, zIndex: 100,
-      border: '1px solid rgba(154,154,140,0.12)',
-    }}>
-      <div style={{ padding: '0 20px 12px' }}>
-        <Link
-          href="/services"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: FONTS.sans, fontSize: 13, color: COLORS.terracotta, fontWeight: 600, textDecoration: 'none', letterSpacing: '0.02em' }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '0.75'; }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
-        >
-          View All Services →
-        </Link>
-      </div>
-      <div style={{ height: 1, backgroundColor: 'rgba(154,154,140,0.14)', margin: '0 0 12px' }} />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '0 20px', gap: '0 24px' }}>
-        <div>
-          <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.sage, textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700, margin: '0 0 8px 0' }}>
-            New Construction
-          </p>
-          <Link
-            href={customHome.href}
-            style={{ display: 'block', padding: '9px 10px', fontFamily: FONTS.sans, fontSize: 13, color: INK, textDecoration: 'none', borderRadius: 8, transition: 'background 0.1s, color 0.1s' }}
-            onMouseEnter={e => { e.currentTarget.style.backgroundColor = COLORS.plaster; e.currentTarget.style.color = COLORS.terracotta; }}
-            onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = INK; }}
-          >
-            {customHome.label}
-          </Link>
-        </div>
-        <div>
-          <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.sage, textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700, margin: '0 0 8px 0' }}>
-            Remodeling & Renovation
-          </p>
-          {remodelingLinks.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{ display: 'block', padding: '7px 10px', fontFamily: FONTS.sans, fontSize: 13, color: INK, textDecoration: 'none', borderRadius: 8, transition: 'background 0.1s, color 0.1s' }}
-              onMouseEnter={e => { e.currentTarget.style.backgroundColor = COLORS.plaster; e.currentTarget.style.color = COLORS.terracotta; }}
-              onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = INK; }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+const mobileLinks = [
+  { label: "Home", href: "/" },
+  { label: "All Services", href: "/services" },
+  { label: "Custom Home Building", href: "/services/custom-home-building" },
+  ...remodelingLinks,
+  { label: "Gallery", href: "/gallery" },
+  { label: "Areas We Serve", href: "/areas" },
+  { label: "FAQs", href: "/faqs" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function NavBar() {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 900);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+    setOpen(false);
+  }, [pathname]);
 
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
+  const servicesActive = pathname.startsWith("/services");
+  const galleryActive = pathname.startsWith("/gallery");
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
-  const servicesActive = pathname.startsWith('/services');
-  const galleryActive = pathname.startsWith('/gallery');
-
-  const linkStyle = (active: boolean): React.CSSProperties => ({
-    fontFamily: FONTS.sans,
-    fontSize: 13,
-    fontWeight: 500,
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    textDecoration: 'none',
-    cursor: 'pointer',
-    color: active ? COLORS.terracotta : INK,
-    borderBottom: active ? `2px solid ${COLORS.terracotta}` : '2px solid transparent',
-    paddingBottom: 2,
-    transition: 'color 0.15s',
-    display: 'inline-flex',
-    alignItems: 'center',
-    lineHeight: 1,
-  });
+  const navLinkClass = (active: boolean) =>
+    cn(
+      "inline-flex items-center gap-1 border-b-2 pb-0.5 font-sans text-[13px] font-medium uppercase tracking-[0.08em] transition-colors",
+      active
+        ? "border-primary text-primary"
+        : "border-transparent text-espresso/70 hover:text-espresso"
+    );
 
   return (
-    <>
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        backgroundColor: 'rgba(247,244,239,0.96)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(154,154,140,0.15)',
-        height: 72,
-        display: 'flex',
-        alignItems: 'center',
-        padding: isMobile ? '0 20px' : '0 80px',
-      }}>
+    <nav className="sticky top-0 z-50 flex h-[72px] items-center border-b border-sage/15 bg-plaster/96 px-5 backdrop-blur-md lg:px-20">
+      <Link href="/" className="flex shrink-0 items-center no-underline">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/nws-logo.png"
+          alt="NWS Custom Homes"
+          className="block h-9 w-auto object-contain lg:h-[46px]"
+        />
+      </Link>
 
-        {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-          <img
-            src="/nws-logo.png"
-            alt="NWS Custom Homes"
-            width={isMobile ? 120 : 150}
-            height={isMobile ? 36 : 46}
-            style={{ height: isMobile ? 36 : 46, width: 'auto', display: 'block', objectFit: 'contain' }}
-          />
-        </Link>
-
-        {/* Desktop nav — absolutely centered so it's immune to logo/CTA width asymmetry */}
-        {!isMobile && (
-          <div style={{
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 32,
-          }}>
-
-            {/* Services */}
-            <div
-              style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
-              onMouseEnter={() => setOpenMenu('services')}
-              onMouseLeave={() => setOpenMenu(null)}
-            >
-              <span
-                style={linkStyle(servicesActive)}
-                onMouseEnter={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK_HOVER; }}
-                onMouseLeave={e => { if (!servicesActive) (e.currentTarget as HTMLElement).style.color = INK; }}
-              >
-                Services <Chevron open={openMenu === 'services'} />
-              </span>
-              {/* Invisible bridge — extends hover zone down without inflating height */}
-              <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, height: 16 }} />
-              <ServicesDropdown isOpen={openMenu === 'services'} />
-            </div>
-
-            {/* Gallery — plain link, no dropdown */}
-            <Link href="/gallery" style={linkStyle(galleryActive)}
-              onMouseEnter={e => { if (!galleryActive) e.currentTarget.style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!galleryActive) e.currentTarget.style.color = INK; }}>
-              Gallery
-            </Link>
-
-            <Link href="/areas" style={linkStyle(isActive('/areas'))}
-              onMouseEnter={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!isActive('/areas')) e.currentTarget.style.color = INK; }}>
-              Areas
-            </Link>
-            <Link href="/faqs" style={linkStyle(isActive('/faqs'))}
-              onMouseEnter={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!isActive('/faqs')) e.currentTarget.style.color = INK; }}>
-              FAQs
-            </Link>
-            <Link href="/about" style={linkStyle(isActive('/about'))}
-              onMouseEnter={e => { if (!isActive('/about')) e.currentTarget.style.color = INK_HOVER; }}
-              onMouseLeave={e => { if (!isActive('/about')) e.currentTarget.style.color = INK; }}>
-              About
-            </Link>
-          </div>
-        )}
-
-        {/* Right side — pushed to far right */}
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 20, flexShrink: 0 }}>
-          {!isMobile && (
-            <>
+      {/* Desktop center nav */}
+      <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={cn(navLinkClass(servicesActive), "outline-none")}
+          >
+            Services
+            <ChevronDown className="h-3 w-3 opacity-70" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="center"
+            className="w-[520px] rounded-2xl border-sage/15 p-4 shadow-xl"
+          >
+            <div className="mb-2 px-1">
               <Link
-                href="/contact"
-                style={{
-                  backgroundColor: COLORS.terracotta, color: COLORS.white,
-                  fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600,
-                  padding: '10px 22px', borderRadius: 9999, textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                }}
+                href="/services"
+                className="font-sans text-[13px] font-semibold text-primary no-underline hover:opacity-80"
               >
-                Free Consultation
+                View All Services →
               </Link>
-              <a
-                href={CONTACT.phoneHref}
-                style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: FONTS.sans, fontSize: 13, color: COLORS.espresso, textDecoration: 'none', whiteSpace: 'nowrap' }}
-              >
-                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke={COLORS.sage} strokeWidth="1.5">
-                  <path d="M2 2C2 2 3.5.5 5 .5S7 2 7.5 3.5 6.5 5 6.5 5s.5 1.5 2 3 3 2 3 2 1.5-1 2-1S15 10.5 15 12s-1.5 2-1.5 2C8 18-4 4 2 2z" strokeLinecap="round" />
-                </svg>
-                {CONTACT.phone}
-              </a>
-            </>
-          )}
+            </div>
+            <DropdownMenuSeparator />
+            <div className="grid grid-cols-2 gap-x-4 pt-2">
+              <div>
+                <DropdownMenuLabel className="px-2 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-sage">
+                  New Construction
+                </DropdownMenuLabel>
+                <DropdownMenuItem asChild className="cursor-pointer rounded-lg">
+                  <Link href={customHome.href}>{customHome.label}</Link>
+                </DropdownMenuItem>
+              </div>
+              <div>
+                <DropdownMenuLabel className="px-2 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-sage">
+                  Remodeling & Renovation
+                </DropdownMenuLabel>
+                {remodelingLinks.map((item) => (
+                  <DropdownMenuItem
+                    key={item.href}
+                    asChild
+                    className="cursor-pointer rounded-lg"
+                  >
+                    <Link href={item.href}>{item.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
-          {/* Mobile: call icon */}
-          {isMobile && (
-            <a
-              href={CONTACT.phoneHref}
-              aria-label="Call us"
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38, borderRadius: 9999, backgroundColor: COLORS.plaster, border: '1px solid rgba(154,154,140,0.25)', textDecoration: 'none' }}
-            >
-              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke={COLORS.terracotta} strokeWidth="1.5">
-                <path d="M2.5 2.5C2.5 2.5 4 1 5.5 1S7.5 2.5 8 4 7 5.5 7 5.5s.5 1.5 2 3 3 2 3 2 1.5-1 2-1S15.5 11 15.5 12.5s-2 2-2 2C8 19-3 5 2.5 2.5z" strokeLinecap="round" />
-              </svg>
-            </a>
-          )}
+        <Link href="/gallery" className={navLinkClass(galleryActive)}>
+          Gallery
+        </Link>
+        <Link href="/areas" className={navLinkClass(isActive("/areas"))}>
+          Areas
+        </Link>
+        <Link href="/faqs" className={navLinkClass(isActive("/faqs"))}>
+          FAQs
+        </Link>
+        <Link href="/about" className={navLinkClass(isActive("/about"))}>
+          About
+        </Link>
+      </div>
 
-          {/* Hamburger */}
-          {isMobile && (
-            <button
-              onClick={() => setMobileOpen(v => !v)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileOpen ? (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
-                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              ) : (
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
-                  <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
-                </svg>
-              )}
-            </button>
-          )}
+      <div className="ml-auto flex shrink-0 items-center gap-2.5 lg:gap-5">
+        <div className="hidden items-center gap-5 lg:flex">
+          <Button asChild size="sm" className="h-10 px-5 text-[13px]">
+            <Link href="/contact">Free Consultation</Link>
+          </Button>
+          <a
+            href={CONTACT.phoneHref}
+            className="inline-flex items-center gap-1.5 font-sans text-[13px] text-espresso no-underline"
+          >
+            <Phone className="h-3.5 w-3.5 text-sage" />
+            {CONTACT.phone}
+          </a>
         </div>
-      </nav>
 
-      {/* Mobile full-screen menu */}
-      {mobileOpen && isMobile && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 200, backgroundColor: COLORS.white, overflowY: 'auto' }}>
-          {/* Mobile menu header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 20px 0' }}>
-            <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <Button
+          asChild
+          size="icon"
+          variant="outline"
+          className="h-[38px] w-[38px] border-sage/25 bg-plaster lg:hidden"
+        >
+          <a href={CONTACT.phoneHref} aria-label="Call us">
+            <Phone className="h-4 w-4 text-primary" />
+          </a>
+        </Button>
+
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="h-10 w-10 lg:hidden"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-full max-w-full border-0 p-0 sm:max-w-md">
+            <SheetHeader className="border-b border-sage/15 px-5 py-5 text-left">
+              <SheetTitle className="sr-only">Menu</SheetTitle>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nws-logo.png"
                 alt="NWS Custom Homes"
-                width={120}
-                height={36}
-                style={{ height: 36, width: 'auto', display: 'block', objectFit: 'contain' }}
+                className="h-9 w-auto object-contain"
               />
-            </Link>
-            <button
-              onClick={() => setMobileOpen(false)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', alignItems: 'center' }}
-              aria-label="Close menu"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={COLORS.espresso} strokeWidth="1.8">
-                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile links */}
-          <div style={{ padding: '24px 20px 0' }}>
-            {[
-              { label: 'Home', href: '/' },
-              { label: 'All Services', href: '/services' },
-              { label: 'Custom Home Building', href: '/services/custom-home-building' },
-              ...remodelingLinks,
-              { label: 'Gallery', href: '/gallery' },
-              { label: 'Areas We Serve', href: '/areas' },
-              { label: 'FAQs', href: '/faqs' },
-              { label: 'About', href: '/about' },
-              { label: 'Contact', href: '/contact' },
-            ].map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  display: 'block',
-                  padding: '14px 0',
-                  fontFamily: FONTS.sans,
-                  fontSize: 16,
-                  color: pathname === link.href ? COLORS.terracotta : COLORS.espresso,
-                  fontWeight: pathname === link.href ? 600 : 400,
-                  textDecoration: 'none',
-                  borderBottom: '1px solid rgba(154,154,140,0.12)',
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile CTA */}
-          <div style={{ padding: '28px 20px 40px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              style={{ display: 'block', textAlign: 'center', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '17px', borderRadius: 9999, textDecoration: 'none' }}
-            >
-              Free Consultation
-            </Link>
-            <a
-              href={CONTACT.phoneHref}
-              style={{ display: 'block', textAlign: 'center', border: `1.5px solid ${COLORS.terracotta}`, color: COLORS.terracotta, fontFamily: FONTS.sans, fontSize: 15, fontWeight: 600, padding: '15px', borderRadius: 9999, textDecoration: 'none' }}
-            >
-              Call {CONTACT.phone}
-            </a>
-          </div>
-        </div>
-      )}
-    </>
+            </SheetHeader>
+            <div className="flex flex-col px-5 pt-2">
+              {mobileLinks.map((link) => (
+                <SheetClose asChild key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "border-b border-sage/12 py-3.5 font-sans text-base no-underline",
+                      pathname === link.href
+                        ? "font-semibold text-primary"
+                        : "font-normal text-espresso"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </SheetClose>
+              ))}
+            </div>
+            <div className="mt-auto flex flex-col gap-3 p-5 pt-7">
+              <SheetClose asChild>
+                <Button asChild size="lg" className="w-full">
+                  <Link href="/contact">Free Consultation</Link>
+                </Button>
+              </SheetClose>
+              <Button asChild variant="outline" size="lg" className="w-full border-primary text-primary">
+                <a href={CONTACT.phoneHref}>Call {CONTACT.phone}</a>
+              </Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </nav>
   );
 }

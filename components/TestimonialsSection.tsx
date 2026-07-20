@@ -1,6 +1,12 @@
 'use client';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
@@ -40,51 +46,45 @@ function TestimonialCard({ quote, name, city, featured, isMobile }: {
   quote: string; name: string; city: string; featured?: boolean; isMobile?: boolean;
 }) {
   return (
-    <div
-      style={{
-        backgroundColor: "white", borderRadius: "20px", padding: "32px 28px",
-        display: "flex", flexDirection: "column",
-        transform: (featured && !isMobile) ? "translateY(-16px)" : "none",
-        boxShadow: featured ? "0 24px 64px rgba(43,33,24,0.16)" : "0 4px 24px rgba(43,33,24,0.07)",
-        outline: featured ? "1px solid rgba(181,85,45,0.2)" : "none",
-        position: "relative", zIndex: featured ? 10 : 1,
-      }}
+    <Card
+      className={cn(
+        "relative flex flex-col rounded-[20px] border-0 bg-white",
+        featured && !isMobile && "-translate-y-4 z-10 shadow-[0_24px_64px_rgba(43,33,24,0.16)] ring-1 ring-primary/20",
+        !(featured && !isMobile) && "shadow-[0_4px_24px_rgba(43,33,24,0.07)]"
+      )}
     >
-      <div style={{ display: "flex", gap: "3px", marginBottom: "14px" }}>
-        {[...Array(5)].map((_, i) => <StarIcon key={i} />)}
-      </div>
-      <p
-        style={{
-          fontFamily: "var(--font-playfair), Georgia, serif",
-          fontSize: "14px", color: "#2B2118", fontStyle: "italic",
-          lineHeight: 1.65, marginBottom: "18px", flex: 1,
-        }}
-      >
-        &ldquo;{quote}&rdquo;
-      </p>
-      <div style={{ width: "100%", height: 1, backgroundColor: "rgba(154,154,140,0.2)", marginBottom: "16px" }} />
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <div
-          style={{
-            width: 36, height: 36, borderRadius: "50%", backgroundColor: "#E8E2D9",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            flexShrink: 0, overflow: 'hidden',
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="7" r="4" stroke="#2B2118" strokeWidth="1.5"/>
-            <path d="M3 18c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="#2B2118" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
+      <CardContent className="flex flex-1 flex-col p-7 pt-8">
+        <div className="mb-3.5 flex gap-[3px]">
+          {[...Array(5)].map((_, i) => (
+            <StarIcon key={i} />
+          ))}
         </div>
-        <div style={{ flex: 1 }}>
-          <p style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "13px", color: "#2B2118", fontWeight: 600, lineHeight: 1.3, margin: 0 }}>{name}</p>
-          <p style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "12px", color: "#9A9B8C", lineHeight: 1.3, margin: 0 }}>{city}</p>
+        <p className="mb-[18px] flex-1 font-serif text-sm italic leading-relaxed text-espresso">
+          &ldquo;{quote}&rdquo;
+        </p>
+        <Separator className="mb-4 bg-sage/20" />
+        <div className="flex items-center gap-2.5">
+          <Avatar className="h-9 w-9 bg-[#E8E2D9]">
+            <AvatarFallback className="bg-[#E8E2D9] font-sans text-xs font-semibold text-espresso">
+              {name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1">
+            <p className="m-0 font-sans text-[13px] font-semibold leading-tight text-espresso">{name}</p>
+            <p className="m-0 font-sans text-xs leading-tight text-sage">{city}</p>
+          </div>
+          <a
+            href="https://g.page/r/CRyZ8e5jvBiVEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex"
+            aria-label="Google review"
+          >
+            <GoogleIcon />
+          </a>
         </div>
-        <a href="https://g.page/r/CRyZ8e5jvBiVEBM/review" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
-          <GoogleIcon />
-        </a>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -171,23 +171,28 @@ export default function TestimonialsSection() {
               Free on-site consultation, and 5% off when you mention the website.
             </p>
 
-            <form action="/contact" method="GET" style={{ position: "relative", zIndex: 1 }}>
-              <div style={{ borderBottom: "1px solid rgba(255,255,255,0.2)", paddingBottom: "12px", marginBottom: "24px" }}>
-                <input
-                  type="text" name="name" placeholder="Name"
-                  style={{ background: "transparent", width: "100%", fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "14px", color: "white", border: "none", outline: "none" }}
+            <form action="/contact" method="GET" className="relative z-[1]">
+              <div className="mb-6 border-b border-white/20 pb-3">
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className="h-auto rounded-none border-0 bg-transparent px-0 py-0 text-sm text-white shadow-none placeholder:text-white/40 focus-visible:ring-0"
                 />
               </div>
-              <div style={{ borderBottom: "1px solid rgba(255,255,255,0.2)", paddingBottom: "12px", marginBottom: "24px" }}>
-                <input
-                  type="tel" name="phone" placeholder="Phone"
-                  style={{ background: "transparent", width: "100%", fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "14px", color: "white", border: "none", outline: "none" }}
+              <div className="mb-6 border-b border-white/20 pb-3">
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone"
+                  className="h-auto rounded-none border-0 bg-transparent px-0 py-0 text-sm text-white shadow-none placeholder:text-white/40 focus-visible:ring-0"
                 />
               </div>
-              <div style={{ position: "relative", marginBottom: "24px" }}>
+              <div className="relative mb-6">
                 <select
-                  name="service" defaultValue=""
-                  style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "12px", padding: "14px 18px", fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "14px", color: "#9A9B8C", cursor: "pointer", appearance: "none", outline: "none" }}
+                  name="service"
+                  defaultValue=""
+                  className="w-full appearance-none rounded-xl border border-white/20 bg-transparent px-[18px] py-3.5 font-sans text-sm text-sage outline-none"
                 >
                   <option value="" disabled>Service Needed</option>
                   <option value="custom-home-building">Custom Home Building</option>
@@ -201,23 +206,14 @@ export default function TestimonialsSection() {
                   <option value="garage-conversions">Garage Conversions</option>
                   <option value="open-concept">Open Concept</option>
                 </select>
-                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" style={{ position: "absolute", right: 18, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="pointer-events-none absolute right-[18px] top-1/2 -translate-y-1/2" aria-hidden>
                   <path d="M1 1.5L6 6.5L11 1.5" stroke="#9A9B8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <Link
-                href="/contact"
-                style={{
-                  display: "block", width: "100%", backgroundColor: "#B5552D", color: "white",
-                  borderRadius: "9999px", padding: "18px 0",
-                  fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                  fontSize: "15px", fontWeight: 600, textAlign: "center",
-                  cursor: "pointer", textDecoration: "none", marginBottom: "20px",
-                }}
-              >
-                Book My Consultation
-              </Link>
-              <p style={{ textAlign: "center", fontFamily: "var(--font-dm-sans), system-ui, sans-serif", fontSize: "12px", color: "#9A9B8C" }}>
+              <Button asChild size="lg" className="mb-5 w-full">
+                <Link href="/contact">Book My Consultation</Link>
+              </Button>
+              <p className="text-center font-sans text-xs text-sage">
                 Mon–Fri 8–6 &nbsp;·&nbsp; Sat 8–12 &nbsp;·&nbsp; Richmond, TX
               </p>
             </form>

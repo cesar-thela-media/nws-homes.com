@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
 import { services } from '@/data/services';
+import { Button } from '@/components/ui/button';
 
 export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
@@ -131,12 +132,9 @@ export default function Footer() {
             <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: 'rgba(255,255,255,0.5)', margin: 0 }}>{CONTACT.hours.saturday}</p>
           </div>
 
-          <Link
-            href="/contact"
-            style={{ display: 'block', textAlign: 'center', backgroundColor: COLORS.terracotta, color: COLORS.white, fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, padding: '13px 0', borderRadius: 9999, textDecoration: 'none' }}
-          >
-            Free Consultation →
-          </Link>
+          <Button asChild className="w-full">
+            <Link href="/contact">Free Consultation →</Link>
+          </Button>
         </div>
       </div>
 

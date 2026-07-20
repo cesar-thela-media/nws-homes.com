@@ -2,6 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface ServiceCardProps {
   image: string;
@@ -17,119 +19,65 @@ function ServiceCard({ image, icon, title, description, href, featured, isMobile
   return (
     <Link
       href={href}
-      style={{
-        height: isMobile ? "280px" : featured ? "480px" : "420px",
-        position: "relative",
-        borderRadius: "20px",
-        overflow: "hidden",
-        display: "block",
-        textDecoration: "none",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        ...(featured && !isMobile
-          ? {
-              transform: "scale(1.04)",
-              zIndex: 10,
-              outline: "2px solid #B5552D",
-              boxShadow: "0 0 0 6px rgba(181,85,45,0.18), 0 24px 64px rgba(0,0,0,0.4)",
-            }
-          : {
-              boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
-            }),
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.transform = featured && !isMobile ? "scale(1.07)" : "scale(1.03) translateY(-4px)";
-        e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.5)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.transform = featured && !isMobile ? "scale(1.04)" : "scale(1)";
-        e.currentTarget.style.boxShadow = featured && !isMobile ? "0 0 0 6px rgba(181,85,45,0.18), 0 24px 64px rgba(0,0,0,0.4)" : "0 8px 32px rgba(0,0,0,0.3)";
-      }}
+      className={cn(
+        "group relative block overflow-hidden rounded-[20px] no-underline transition-all duration-300",
+        isMobile ? "h-[280px]" : featured ? "z-10 h-[480px] scale-[1.04] shadow-[0_0_0_6px_rgba(181,85,45,0.18),0_24px_64px_rgba(0,0,0,0.4)] ring-2 ring-primary" : "h-[420px] shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
+        "hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(0,0,0,0.5)]",
+        featured && !isMobile && "hover:scale-[1.07]",
+        !featured && "hover:scale-[1.03]"
+      )}
     >
       {featured && (
-        <div
-          style={{
-            position: "absolute", top: 0, left: 0, right: 0, zIndex: 20,
-            backgroundColor: "#B5552D", color: "white",
-            fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "10px", fontWeight: 700, textTransform: "uppercase",
-            letterSpacing: "0.18em", textAlign: "center", padding: "7px 0",
-          }}
-        >
+        <Badge className="absolute left-0 right-0 top-0 z-20 w-full justify-center rounded-none py-1.5 tracking-[0.18em]">
           MOST REQUESTED
-        </div>
+        </Badge>
       )}
 
       <Image
         src={image}
         alt={title}
         fill
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: "cover" }}
         sizes="(max-width: 900px) 100vw, 25vw"
+        className="transition-transform duration-500 group-hover:scale-105"
       />
 
-      <div
-        style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(43,33,24,0.95) 0%, rgba(43,33,24,0.75) 28%, rgba(43,33,24,0.25) 55%, rgba(43,33,24,0.0) 80%)",
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/75 via-30% to-transparent to-80%" />
 
       <div
-        style={{
-          position: "absolute", inset: 0, display: "flex",
-          flexDirection: "column", justifyContent: "flex-end",
-          padding: isMobile ? "20px" : "28px",
-        }}
+        className={cn(
+          "absolute inset-0 flex flex-col justify-end",
+          isMobile ? "p-5" : "p-7"
+        )}
       >
-        <div
-          style={{
-            width: 36, height: 36, borderRadius: "50%",
-            backgroundColor: "rgba(255,255,255,0.12)", backdropFilter: "blur(4px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            marginBottom: "10px", flexShrink: 0,
-          }}
-        >
+        <div className="mb-2.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/12 backdrop-blur-sm">
           {icon}
         </div>
         <h3
-          style={{
-            fontFamily: "var(--font-playfair), Georgia, serif",
-            fontSize: isMobile ? "18px" : "22px",
-            color: "white", lineHeight: 1.2, margin: "0 0 6px 0",
-          }}
+          className={cn(
+            "mb-1.5 font-serif leading-tight text-white",
+            isMobile ? "text-lg" : "text-[22px]"
+          )}
         >
           {title}
         </h3>
         <p
-          style={{
-            fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "13px", color: "#9A9B8C", lineHeight: 1.55,
-            margin: isMobile ? "0" : "0 0 14px 0",
-            display: isMobile ? "none" : "block",
-          }}
+          className={cn(
+            "mb-3.5 font-sans text-[13px] leading-relaxed text-sage",
+            isMobile && "hidden"
+          )}
         >
           {description}
         </p>
-        <span
-          style={{
-            display: 'inline-block',
-            fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-            fontSize: "12px", color: "white", fontWeight: 600,
-            backgroundColor: "#B5552D", padding: "8px 16px",
-            borderRadius: 9999,
-            marginTop: isMobile ? "6px" : "0",
-            textDecoration: 'none',
-            alignSelf: 'flex-start',
-          }}
-        >
-          Explore
+        <span className="mt-1.5 inline-flex self-start rounded-full bg-primary px-5 py-2.5 font-sans text-xs font-semibold text-white shadow-md transition-all group-hover:bg-primary/90 group-hover:shadow-lg lg:mt-0">
+          Explore →
         </span>
       </div>
     </Link>
   );
 }
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 const services = [
   {

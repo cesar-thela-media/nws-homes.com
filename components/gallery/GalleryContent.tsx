@@ -3,6 +3,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 import { COLORS, FONTS } from '@/lib/constants';
 import { galleryItems } from '@/data/gallery';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 const categories = [
   { key: 'all', label: 'All' },
@@ -29,6 +30,7 @@ export default function GalleryContent() {
 
   const setCategory = useCallback(
     (cat: string) => {
+      if (!cat) return;
       const params = new URLSearchParams(searchParams.toString());
       if (cat === 'all') {
         params.delete('cat');
@@ -43,44 +45,24 @@ export default function GalleryContent() {
 
   return (
     <>
-      {/* Sticky filter bar — visible once hero scrolls away */}
+      {/* Sticky filter bar */}
       <div
-        style={{
-          position: 'sticky',
-          top: 72,
-          zIndex: 40,
-          backgroundColor: COLORS.espresso,
-          padding: isMobile ? '12px 24px' : '14px 80px',
-          display: 'flex',
-          gap: 8,
-          flexWrap: 'wrap',
-          borderBottom: '1px solid rgba(255,255,255,0.07)',
-        }}
+        className="sticky top-[72px] z-40 flex flex-wrap gap-2 border-b border-white/[0.07] bg-espresso px-6 py-3 lg:px-20 lg:py-3.5"
       >
-        {categories.map((cat) => {
-          const active = activeCat === cat.key;
-          return (
-            <button
-              key={cat.key}
-              onClick={() => setCategory(cat.key)}
-              style={{
-                fontFamily: FONTS.sans,
-                fontSize: 12,
-                fontWeight: 600,
-                padding: '7px 18px',
-                borderRadius: 9999,
-                border: `1px solid ${active ? COLORS.terracotta : 'rgba(255,255,255,0.18)'}`,
-                cursor: 'pointer',
-                backgroundColor: active ? COLORS.terracotta : 'transparent',
-                color: active ? COLORS.white : 'rgba(255,255,255,0.6)',
-                transition: 'background-color 0.15s, border-color 0.15s, color 0.15s',
-                letterSpacing: '0.04em',
-              }}
-            >
+        <ToggleGroup
+          type="single"
+          value={activeCat}
+          onValueChange={setCategory}
+          variant="darkChip"
+          size="sm"
+          className="flex flex-wrap justify-start gap-2"
+        >
+          {categories.map((cat) => (
+            <ToggleGroupItem key={cat.key} value={cat.key} className="h-8">
               {cat.label}
-            </button>
-          );
-        })}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </div>
 
       {/* Masonry grid */}

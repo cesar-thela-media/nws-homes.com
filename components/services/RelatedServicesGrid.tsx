@@ -1,61 +1,32 @@
-'use client';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { COLORS, FONTS } from '@/lib/constants';
-import type { Service } from '@/lib/types';
+"use client";
+
+import Link from "next/link";
+import type { Service } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 function RelatedCard({ r }: { r: Service }) {
-  const [hovered, setHovered] = useState(false);
   return (
     <Link
       href={`/services/${r.slug}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        textDecoration: 'none',
-        borderRadius: 20,
-        overflow: 'hidden',
-        position: 'relative',
-        height: 300,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        backgroundColor: COLORS.placeholder,
-        boxShadow: hovered ? '0 20px 52px rgba(43,33,24,0.22)' : '0 6px 24px rgba(43,33,24,0.1)',
-        transform: hovered ? 'translateY(-4px)' : 'none',
-        transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-      }}
+      className={cn(
+        "group relative flex h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-[#D8CFC4] no-underline",
+        "shadow-[0_6px_24px_rgba(43,33,24,0.1)] transition-all duration-200",
+        "hover:-translate-y-1 hover:shadow-[0_20px_52px_rgba(43,33,24,0.22)]"
+      )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={r.heroImage}
         alt={r.navLabel}
-        style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover', display: 'block',
-          transform: hovered ? 'scale(1.03)' : 'scale(1)',
-          transition: 'transform 0.4s ease',
-        }}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-400 group-hover:scale-[1.03]"
       />
-      {/* Gradient: only covers bottom 55%, lighter than before */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to top, rgba(43,33,24,0.92) 0%, rgba(43,33,24,0.55) 35%, rgba(43,33,24,0.1) 60%, transparent 100%)',
-        zIndex: 1,
-      }} />
-      <div style={{ position: 'relative', zIndex: 2, padding: '24px 24px 22px' }}>
-        <p style={{ fontFamily: FONTS.sans, fontSize: 10, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.16em', margin: '0 0 6px 0', fontWeight: 700 }}>
-          {r.navLabel.split(' ')[0].toUpperCase()}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-espresso via-espresso/55 via-35% to-transparent" />
+      <div className="relative z-[2] px-6 pb-[22px] pt-6">
+        <p className="mb-1.5 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
+          {r.navLabel.split(" ")[0].toUpperCase()}
         </p>
-        <h3 style={{ fontFamily: FONTS.serif, fontSize: 21, color: COLORS.white, margin: '0 0 10px 0', lineHeight: 1.15 }}>
-          {r.navLabel}
-        </h3>
-        <span style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4,
-          fontFamily: FONTS.sans, fontSize: 12, color: COLORS.terracotta, fontWeight: 600,
-          transform: hovered ? 'translateX(4px)' : 'none',
-          transition: 'transform 0.2s',
-        }}>
+        <h3 className="mb-2.5 font-serif text-[21px] leading-tight text-white">{r.navLabel}</h3>
+        <span className="inline-flex items-center gap-1 font-sans text-xs font-semibold text-primary transition-transform group-hover:translate-x-1">
           Explore →
         </span>
       </div>
@@ -64,18 +35,11 @@ function RelatedCard({ r }: { r: Service }) {
 }
 
 export default function RelatedServicesGrid({ services }: { services: Service[] }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 900);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 20 }}>
-      {services.map(r => <RelatedCard key={r.slug} r={r} />)}
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+      {services.map((r) => (
+        <RelatedCard key={r.slug} r={r} />
+      ))}
     </div>
   );
 }

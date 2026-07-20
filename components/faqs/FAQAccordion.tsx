@@ -1,19 +1,62 @@
-'use client';
-import { useState } from 'react';
-import { COLORS, FONTS } from '@/lib/constants';
-import type { FAQ } from '@/lib/types';
+"use client";
+
+import type { FAQ } from "@/lib/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 export function FAQItem({ faq }: { faq: FAQ }) {
-  const [open, setOpen] = useState(false);
   return (
-    <div style={{ backgroundColor: COLORS.white, borderRadius: 16, marginBottom: 12, overflow: 'hidden' }}>
-      <button onClick={() => setOpen(!open)} style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 32px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-        <span style={{ fontFamily: FONTS.serif, fontSize: 18, color: COLORS.espresso, flex: 1, paddingRight: 24 }}>{faq.question}</span>
-        <span style={{ fontFamily: FONTS.sans, fontSize: 20, color: COLORS.terracotta, flexShrink: 0, transition: 'transform 0.2s', transform: open ? 'rotate(45deg)' : 'none' }}>+</span>
-      </button>
-      <div style={{ maxHeight: open ? 400 : 0, overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
-        <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: COLORS.sage, lineHeight: 1.7, padding: '0 32px 24px' }}>{faq.answer}</p>
-      </div>
-    </div>
+    <Accordion type="single" collapsible className="mb-3">
+      <AccordionItem
+        value={faq.question}
+        className={cn(
+          "group/item overflow-hidden rounded-2xl border-0 bg-white shadow-[0_2px_16px_rgba(43,33,24,0.04)] transition-shadow",
+          "data-[state=open]:shadow-[0_8px_28px_rgba(43,33,24,0.08)]"
+        )}
+      >
+        <div className="h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-data-[state=open]/item:scale-x-100" />
+        <AccordionTrigger
+          className={cn(
+            "px-6 py-6 text-left font-serif text-lg font-normal text-espresso hover:no-underline md:px-8",
+            "[&[data-state=open]]:text-espresso [&[data-state=open]>svg]:text-primary"
+          )}
+        >
+          {faq.question}
+        </AccordionTrigger>
+        <AccordionContent className="px-6 pb-6 font-sans text-[15px] leading-relaxed text-sage md:px-8">
+          {faq.answer}
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+export function FAQAccordionList({ faqs }: { faqs: FAQ[] }) {
+  return (
+    <Accordion type="single" collapsible className="w-full space-y-3">
+      {faqs.map((faq) => (
+        <AccordionItem
+          key={faq.question}
+          value={faq.question}
+          className={cn(
+            "group/item overflow-hidden rounded-2xl border-0 bg-white shadow-[0_2px_16px_rgba(43,33,24,0.04)]",
+            "data-[state=open]:shadow-[0_8px_28px_rgba(43,33,24,0.08)]"
+          )}
+        >
+          <div className="h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-data-[state=open]/item:scale-x-100" />
+          <AccordionTrigger className="px-6 py-6 text-left font-serif text-lg font-normal text-espresso hover:no-underline md:px-8">
+            {faq.question}
+          </AccordionTrigger>
+          <AccordionContent className="px-6 pb-6 font-sans text-[15px] leading-relaxed text-sage md:px-8">
+            {faq.answer}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
   );
 }

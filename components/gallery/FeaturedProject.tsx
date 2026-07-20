@@ -5,7 +5,7 @@ import { COLORS, FONTS } from '@/lib/constants';
 
 const BeforeAfterSlider = dynamic(() => import('@/components/BeforeAfterSlider'), { ssr: false });
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 const BEFORE = `${NWS}/kitchen-gallery-9.jpeg`;
 const AFTER  = `${NWS}/kitchen-gallery-7.jpeg`;
 

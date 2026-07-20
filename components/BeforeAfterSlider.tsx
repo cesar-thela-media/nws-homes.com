@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 const DEFAULT_BEFORE = `${NWS}/kitchen-gallery-9.jpeg`;
 const DEFAULT_AFTER = `${NWS}/kitchen-gallery-7.jpeg`;

@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { COLORS, FONTS, CONTACT } from '@/lib/constants';
 import type { FAQ } from '@/lib/types';
 import { FAQItem } from './FAQAccordion';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const CATEGORY_ORDER = ['General', 'Process', 'Pricing', 'Quality', 'Areas'] as const;
 
@@ -49,24 +51,12 @@ export default function FAQBody({ faqs }: FAQBodyProps) {
         <div style={{ position: isMobile ? 'static' : 'sticky', top: 100 }}>
           {/* Search */}
           <div style={{ marginBottom: 20, position: 'relative' }}>
-            <input
+            <Input
               type="text"
               placeholder="Search questions…"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                fontFamily: FONTS.sans,
-                fontSize: 13,
-                color: COLORS.espresso,
-                background: 'transparent',
-                border: 'none',
-                borderBottom: `1.5px solid ${search ? COLORS.terracotta : 'rgba(43,33,24,0.2)'}`,
-                padding: '8px 24px 8px 0',
-                outline: 'none',
-                transition: 'border-color 0.2s',
-              }}
+              className="h-auto rounded-none border-0 border-b border-espresso/20 bg-transparent px-0 py-2 pr-6 text-[13px] shadow-none focus-visible:border-primary focus-visible:ring-0"
             />
             {search ? (
               <button
@@ -139,23 +129,9 @@ export default function FAQBody({ faqs }: FAQBodyProps) {
             <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage, lineHeight: 1.6, marginBottom: 16 }}>
               We&apos;re here to help. Give us a call or shoot us a message.
             </p>
-            <a
-              href={CONTACT.phoneHref}
-              style={{
-                display: 'block',
-                backgroundColor: COLORS.terracotta,
-                color: COLORS.white,
-                fontFamily: FONTS.sans,
-                fontSize: 12,
-                fontWeight: 600,
-                padding: '10px 0',
-                borderRadius: 9999,
-                textDecoration: 'none',
-                textAlign: 'center',
-              }}
-            >
-              {CONTACT.phone}
-            </a>
+            <Button asChild size="sm" className="w-full text-xs">
+              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+            </Button>
           </div>
         </div>
 

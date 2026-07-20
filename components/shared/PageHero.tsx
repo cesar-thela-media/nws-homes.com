@@ -1,9 +1,21 @@
-'use client';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { COLORS, FONTS } from '@/lib/constants';
+"use client";
 
-interface BreadcrumbItem { label: string; href: string; }
+import Link from "next/link";
+import { COLORS } from "@/lib/constants";
+import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+interface BreadcrumbItemType {
+  label: string;
+  href: string;
+}
 
 interface PageHeroProps {
   eyebrow: string;
@@ -11,141 +23,154 @@ interface PageHeroProps {
   titleLine2: string;
   titleAccent: string;
   subtitle?: string;
-  breadcrumb: BreadcrumbItem[];
+  breadcrumb: BreadcrumbItemType[];
   image?: string;
-  variant?: 'dark';
-  layout?: 'split' | 'centered';
+  variant?: "dark";
+  layout?: "split" | "centered";
 }
 
-export default function PageHero({ eyebrow, titleLine1, titleLine2, titleAccent, subtitle, breadcrumb, image, variant, layout = 'split' }: PageHeroProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 900);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  const dark = variant === 'dark';
-  const centered = layout === 'centered';
+export default function PageHero({
+  eyebrow,
+  titleLine1,
+  titleLine2,
+  titleAccent,
+  subtitle,
+  breadcrumb,
+  image,
+  variant,
+  layout = "split",
+}: PageHeroProps) {
+  const dark = variant === "dark";
+  const centered = layout === "centered";
   const bg = dark ? COLORS.espresso : COLORS.plaster;
   const headingColor = dark ? COLORS.white : COLORS.espresso;
-  const subtitleColor = dark ? 'rgba(255,255,255,0.6)' : COLORS.sage;
-  const crumbColor = dark ? 'rgba(255,255,255,0.4)' : COLORS.sage;
-  const lineColor = dark ? 'rgba(255,255,255,0.15)' : COLORS.sage;
+  const subtitleColor = dark ? "rgba(255,255,255,0.6)" : COLORS.sage;
+  const lineColor = dark ? "rgba(255,255,255,0.15)" : COLORS.sage;
 
-  // Centered layout: image as full-bleed background
   if (centered && image) {
     return (
-      <section style={{
-        position: 'relative', overflow: 'hidden',
-        minHeight: isMobile ? '50vh' : '60vh',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        backgroundColor: COLORS.espresso,
-      }}>
-        {/* Full-bleed background image */}
+      <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden bg-espresso lg:min-h-[60vh]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt={titleLine1} style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%',
-          objectFit: 'cover', display: 'block',
-        }} />
-        {/* Dark overlay */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'rgba(43,33,24,0.72)',
-          zIndex: 1,
-        }} />
-
-        <div style={{
-          position: 'relative', zIndex: 2,
-          padding: isMobile ? '80px 24px' : '120px 80px',
-          textAlign: 'center', maxWidth: 800,
-        }}>
-          <p style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 12 : 14, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: 20 }}>
+        <img
+          src={image}
+          alt={titleLine1}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 z-[1] bg-espresso/70" />
+        <div className="relative z-[2] max-w-[800px] px-6 py-20 text-center lg:px-20 lg:py-[120px]">
+          <p className="mb-5 font-sans text-xs uppercase tracking-[0.18em] text-primary lg:text-sm">
             {eyebrow}
           </p>
-
-          <h1 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '44px' : 'clamp(56px, 6vw, 96px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: COLORS.white, margin: '0 0 20px 0' }}>
-            {titleLine1}{' '}
-            <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>{titleAccent}</span>
+          <h1 className="mb-5 font-serif text-[44px] leading-[1.05] tracking-[-0.02em] text-white lg:text-[clamp(56px,6vw,96px)]">
+            {titleLine1}{" "}
+            <span className="italic text-primary">{titleAccent}</span>
           </h1>
-
-          {subtitle && <p style={{ fontFamily: FONTS.sans, fontSize: isMobile ? 15 : 17, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: '0 auto', maxWidth: 500 }}>{subtitle}</p>}
+          {subtitle && (
+            <p className="mx-auto max-w-[500px] font-sans text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+              {subtitle}
+            </p>
+          )}
         </div>
       </section>
     );
   }
 
-  // Original split layout
   return (
-    <section style={{
-      backgroundColor: bg,
-      padding: isMobile ? '80px 24px 48px' : '120px 80px 80px',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      {/* Blueprint lines — desktop only */}
-      {!isMobile && (
-        <svg style={{ position: 'absolute', top: 80, left: 64, width: 300, height: 300, opacity: dark ? 0.05 : 0.12, pointerEvents: 'none', zIndex: 0 }} viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke={lineColor} strokeWidth="1.5"/>
-          <path d="M 240 300 L 300 300 L 300 240" fill="none" stroke={lineColor} strokeWidth="1.5"/>
-          <line x1="0" y1="32" x2="280" y2="32" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-          <line x1="0" y1="80" x2="280" y2="80" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-          <line x1="0" y1="128" x2="280" y2="128" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-          <line x1="32" y1="0" x2="32" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-          <line x1="80" y1="0" x2="80" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-          <line x1="128" y1="0" x2="128" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10"/>
-        </svg>
-      )}
+    <section
+      className="relative overflow-hidden px-6 pb-12 pt-20 lg:px-20 lg:pb-20 lg:pt-[120px]"
+      style={{ backgroundColor: bg }}
+    >
+      <svg
+        className="pointer-events-none absolute left-16 top-20 z-0 hidden h-[300px] w-[300px] lg:block"
+        style={{ opacity: dark ? 0.05 : 0.12 }}
+        viewBox="0 0 300 300"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+      >
+        <path d="M 60 0 L 0 0 L 0 60" fill="none" stroke={lineColor} strokeWidth="1.5" />
+        <path d="M 240 300 L 300 300 L 300 240" fill="none" stroke={lineColor} strokeWidth="1.5" />
+        <line x1="0" y1="32" x2="280" y2="32" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+        <line x1="0" y1="80" x2="280" y2="80" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+        <line x1="0" y1="128" x2="280" y2="128" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+        <line x1="32" y1="0" x2="32" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+        <line x1="80" y1="0" x2="80" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+        <line x1="128" y1="0" x2="128" y2="280" stroke={lineColor} strokeWidth="0.7" strokeDasharray="4 10" />
+      </svg>
 
-      <div style={{
-        position: 'relative', zIndex: 10,
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: isMobile ? 32 : 64,
-        alignItems: 'center',
-      }}>
-        {/* Text content */}
+      <div className="relative z-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div>
-          <nav style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 28, flexWrap: 'wrap' }}>
-            {breadcrumb.map((crumb, i) => (
-              <span key={crumb.href} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {i > 0 && <span style={{ color: crumbColor, fontFamily: FONTS.sans, fontSize: 12 }}>›</span>}
-                <Link href={crumb.href} style={{ fontFamily: FONTS.sans, fontSize: 12, color: i === breadcrumb.length - 1 ? COLORS.terracotta : crumbColor, textDecoration: 'none' }}>{crumb.label}</Link>
-              </span>
-            ))}
-          </nav>
+          <Breadcrumb className="mb-7">
+            <BreadcrumbList>
+              {breadcrumb.map((crumb, i) => (
+                <BreadcrumbItem key={crumb.href}>
+                  {i > 0 && <BreadcrumbSeparator className="text-sage/50" />}
+                  {i === breadcrumb.length - 1 ? (
+                    <BreadcrumbPage className="font-sans text-xs text-primary">
+                      {crumb.label}
+                    </BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink asChild>
+                      <Link
+                        href={crumb.href}
+                        className="font-sans text-xs text-sage hover:text-espresso"
+                      >
+                        {crumb.label}
+                      </Link>
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              ))}
+            </BreadcrumbList>
+          </Breadcrumb>
 
-          <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.terracotta, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 16 }}>{eyebrow}</p>
+          <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.15em] text-primary">
+            {eyebrow}
+          </p>
 
-          <h1 style={{ fontFamily: FONTS.serif, fontSize: isMobile ? '42px' : 'clamp(48px, 4.5vw, 80px)', lineHeight: 1.02, letterSpacing: '-0.02em', color: headingColor, margin: 0 }}>
-            <span style={{ display: 'block' }}>{titleLine1}</span>
-            <span style={{ display: 'block' }}>
+          <h1
+            className="m-0 font-serif text-[42px] leading-[1.02] tracking-[-0.02em] lg:text-[clamp(48px,4.5vw,80px)]"
+            style={{ color: headingColor }}
+          >
+            <span className="block">{titleLine1}</span>
+            <span className="block">
               {titleLine2 && <span>{titleLine2} </span>}
-              <span style={{ fontStyle: 'italic', color: COLORS.terracotta }}>{titleAccent}</span>
+              <span className="italic text-primary">{titleAccent}</span>
             </span>
           </h1>
 
-          {subtitle && <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: subtitleColor, lineHeight: 1.6, marginTop: 24, maxWidth: 440 }}>{subtitle}</p>}
+          {subtitle && (
+            <p
+              className="mt-6 max-w-[440px] font-sans text-base leading-relaxed"
+              style={{ color: subtitleColor }}
+            >
+              {subtitle}
+            </p>
+          )}
 
-          <div style={{ width: 48, height: 2, backgroundColor: COLORS.terracotta, marginTop: 28 }} />
+          <div className="mt-7 h-0.5 w-12 bg-primary" />
         </div>
 
-        {/* Photo — shown on mobile too but smaller */}
-        <div style={{ position: 'relative', borderRadius: isMobile ? 16 : 24, overflow: 'hidden', height: isMobile ? 220 : 420, backgroundColor: COLORS.placeholder }}>
+        <div className="relative h-[220px] overflow-hidden rounded-2xl bg-[#D8CFC4] lg:h-[420px] lg:rounded-3xl">
           {image ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={image} alt={titleLine1} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={image}
+              alt={titleLine1}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           ) : (
-            <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 120, height: 120, opacity: 0.2 }} viewBox="0 0 120 120" fill="none">
-              <path d="M60 10L10 50V110H110V50L60 10Z" stroke={COLORS.sage} strokeWidth="1.5"/>
-              <rect x="48" y="70" width="24" height="40" stroke={COLORS.sage} strokeWidth="1.5"/>
+            <svg
+              className="absolute left-1/2 top-1/2 h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 opacity-20"
+              viewBox="0 0 120 120"
+              fill="none"
+            >
+              <path d="M60 10L10 50V110H110V50L60 10Z" stroke={COLORS.sage} strokeWidth="1.5" />
+              <rect x="48" y="70" width="24" height="40" stroke={COLORS.sage} strokeWidth="1.5" />
             </svg>
           )}
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(43,33,24,0.82) 0%, rgba(43,33,24,0.35) 45%, rgba(43,33,24,0.05) 75%, transparent 100%)', zIndex: 1 }} />
-          <div style={{ position: 'absolute', bottom: isMobile ? 16 : 32, left: isMobile ? 16 : 32, zIndex: 2 }}>
-            <span style={{ display: 'inline-block', fontFamily: FONTS.sans, fontSize: 10, color: COLORS.white, textTransform: 'uppercase', letterSpacing: '0.15em', backgroundColor: COLORS.terracotta, padding: '4px 12px', borderRadius: 9999 }}>{eyebrow}</span>
+          <div className="absolute inset-0 z-[1] bg-gradient-to-t from-espresso/80 via-espresso/35 to-transparent" />
+          <div className="absolute bottom-4 left-4 z-[2] lg:bottom-8 lg:left-8">
+            <Badge>{eyebrow}</Badge>
           </div>
         </div>
       </div>

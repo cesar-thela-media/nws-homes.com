@@ -1,6 +1,6 @@
 import type { GalleryItem } from '@/lib/types';
 
-const NWS = 'https://www.nws-homes.com/wp-content/uploads/2023/01';
+const NWS = '/nws';
 
 export const galleryItems: GalleryItem[] = [
   { id:'g1',  category:'kitchen',       title:'Marble Island Kitchen',       area:'Cinco Ranch, TX',  aspectRatio:'4/3', image:`${NWS}/kitchen-gallery-1.jpeg` },
