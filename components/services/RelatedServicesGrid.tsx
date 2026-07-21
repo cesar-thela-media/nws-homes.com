@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import type { Service } from "@/lib/types";
@@ -25,9 +25,9 @@ function RelatedCard({ r }: { r: Service }) {
         <p className="mb-1.5 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
           {r.navLabel.split(" ")[0].toUpperCase()}
         </p>
-        <h3 className="mb-2.5 font-serif text-[21px] leading-tight text-white">{r.navLabel}</h3>
+        <h3 className="mb-2.5 font-sans text-[21px] leading-tight text-white">{r.navLabel}</h3>
         <span className="inline-flex items-center gap-1 font-sans text-xs font-semibold text-primary transition-transform group-hover:translate-x-1">
-          Explore →
+          Explore â†’
         </span>
       </div>
     </Link>

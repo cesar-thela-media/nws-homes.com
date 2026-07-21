@@ -64,18 +64,18 @@ export default function HeroSection() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-plaster/90">
           <div className="text-center">
-            <div className="font-sans text-sm font-semibold text-white">4.9 / 5</div>
-            <div className="font-sans text-[11px] text-plaster/70">Google reviews</div>
-          </div>
-          <div className="h-8 w-px bg-white/25" aria-hidden />
-          <div className="text-center">
             <div className="font-sans text-sm font-semibold text-white">Since 2007</div>
             <div className="font-sans text-[11px] text-plaster/70">Local builder</div>
           </div>
           <div className="h-8 w-px bg-white/25" aria-hidden />
           <div className="text-center">
-            <div className="font-sans text-sm font-semibold text-white">One crew</div>
-            <div className="font-sans text-[11px] text-plaster/70">Start to finish</div>
+            <div className="font-sans text-sm font-semibold text-white">Richmond, TX</div>
+            <div className="font-sans text-[11px] text-plaster/70">Fort Bend &amp; west Houston</div>
+          </div>
+          <div className="h-8 w-px bg-white/25" aria-hidden />
+          <div className="text-center">
+            <div className="font-sans text-sm font-semibold text-white">Free consult</div>
+            <div className="font-sans text-[11px] text-plaster/70">Call to get started</div>
           </div>
         </div>
       </div>

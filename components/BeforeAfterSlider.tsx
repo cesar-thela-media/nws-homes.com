@@ -39,6 +39,8 @@ export default function BeforeAfterSlider({ beforeSrc = DEFAULT_BEFORE, afterSrc
         slot="first"
         src={beforeSrc}
         alt="Before remodel"
+        loading="lazy"
+        decoding="async"
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -46,6 +48,8 @@ export default function BeforeAfterSlider({ beforeSrc = DEFAULT_BEFORE, afterSrc
         slot="second"
         src={afterSrc}
         alt="After remodel"
+        loading="lazy"
+        decoding="async"
         style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
       <div slot="handle" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>

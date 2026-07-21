@@ -1,31 +1,25 @@
 import type { Metadata } from "next";
 import AreasStrip from "@/components/v2/sections/AreasStrip";
 import ContactLead from "@/components/v2/sections/ContactLead";
-import { t } from "@/components/v2/lib/typography";
-import { cn } from "@/lib/utils";
+import PageHero from "@/components/v2/sections/PageHero";
+import { getMetaForRoute } from "@/data/seoCutover";
+
+const meta = getMetaForRoute("/areas")!;
 
 export const metadata: Metadata = {
-  title: "Areas We Serve",
-  description:
-    "NWS serves Richmond, Sugar Land, Katy, Fulshear, Cinco Ranch, Rosenberg, Weston Lakes, Park Row, and West Houston.",
+  title: { absolute: meta.title },
+  description: meta.description,
 };
 
 export default function AreasPage() {
   return (
     <div>
-      <div className="border-b border-border/60 bg-accent/40">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 lg:py-16">
-          <p className={cn(t.eyebrow, "mb-3")}>Areas we serve</p>
-          <h1 className={cn(t.h1, "max-w-2xl")}>
-            Richmond, Katy, Sugar Land &amp; more
-          </h1>
-          <p className={cn(t.lead, "mt-4 max-w-2xl")}>
-            Home base in Richmond since 2007. If you&apos;re in Greater Houston
-            and not on this list, call us — we likely serve you.
-          </p>
-        </div>
-      </div>
-      <AreasStrip compact={false} title="Neighborhoods we know well" />
+      <PageHero
+        eyebrow="Areas we serve"
+        title="Areas we serve"
+        lead="We complete every project promptly, carefully, and with attention to detail. Home base in Richmond, TX since 2007, with work across Fort Bend County and the West Side of Houston."
+      />
+      <AreasStrip compact={false} title="Communities we know well" />
       <ContactLead />
     </div>
   );

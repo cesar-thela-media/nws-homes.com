@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { FAQ } from "@/lib/types";
 import {
@@ -22,7 +22,7 @@ export function FAQItem({ faq }: { faq: FAQ }) {
         <div className="h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-data-[state=open]/item:scale-x-100" />
         <AccordionTrigger
           className={cn(
-            "px-6 py-6 text-left font-serif text-lg font-normal text-espresso hover:no-underline md:px-8",
+            "px-6 py-6 text-left font-sans text-lg font-normal text-espresso hover:no-underline md:px-8",
             "[&[data-state=open]]:text-espresso [&[data-state=open]>svg]:text-primary"
           )}
         >
@@ -49,7 +49,7 @@ export function FAQAccordionList({ faqs }: { faqs: FAQ[] }) {
           )}
         >
           <div className="h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-data-[state=open]/item:scale-x-100" />
-          <AccordionTrigger className="px-6 py-6 text-left font-serif text-lg font-normal text-espresso hover:no-underline md:px-8">
+          <AccordionTrigger className="px-6 py-6 text-left font-sans text-lg font-normal text-espresso hover:no-underline md:px-8">
             {faq.question}
           </AccordionTrigger>
           <AccordionContent className="px-6 pb-6 font-sans text-[15px] leading-relaxed text-sage md:px-8">

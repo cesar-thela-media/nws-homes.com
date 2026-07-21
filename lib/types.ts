@@ -1,5 +1,7 @@
 export interface Service {
   slug: string;
+  /** Path on live client site for content reference */
+  livePath?: string;
   navLabel: string;
   title: string;
   titleAccent: string;
@@ -17,6 +19,9 @@ export interface Service {
   galleryImages?: string[];
   byTheNumbers: { value: string; label: string }[];
   beforeAfter?: { before: string; after: string };
+  /** Optional cost bands only when published on live client page */
+  costBands?: { label: string; range: string; notes?: string }[];
+  faqs?: { question: string; answer: string }[];
 }
 
 export interface Testimonial {

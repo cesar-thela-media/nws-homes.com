@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -35,7 +35,7 @@ export default function ValueCards() {
           <div className="absolute left-9 right-9 top-0 h-0.5 bg-primary opacity-70 transition-opacity group-hover:opacity-100" />
           <CardContent className="p-9 pt-10">
             <p className="mb-4 font-sans text-[11px] tracking-[0.2em] text-primary">{v.num}</p>
-            <p className="mb-7 font-serif text-[clamp(44px,4vw,64px)] italic leading-none text-white/90 transition-colors group-hover:text-white">
+            <p className="mb-7 font-sans text-[clamp(44px,4vw,64px)] italic leading-none text-white/90 transition-colors group-hover:text-white">
               {v.word}
             </p>
             <p className="m-0 font-sans text-sm leading-relaxed text-sage">{v.body}</p>

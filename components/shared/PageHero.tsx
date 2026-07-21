@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { COLORS } from "@/lib/constants";
@@ -61,7 +61,7 @@ export default function PageHero({
           <p className="mb-5 font-sans text-xs uppercase tracking-[0.18em] text-primary lg:text-sm">
             {eyebrow}
           </p>
-          <h1 className="mb-5 font-serif text-[44px] leading-[1.05] tracking-[-0.02em] text-white lg:text-[clamp(56px,6vw,96px)]">
+          <h1 className="mb-5 font-sans text-[44px] leading-[1.05] tracking-[-0.02em] text-white lg:text-[clamp(56px,6vw,96px)]">
             {titleLine1}{" "}
             <span className="italic text-primary">{titleAccent}</span>
           </h1>
@@ -128,7 +128,7 @@ export default function PageHero({
           </p>
 
           <h1
-            className="m-0 font-serif text-[42px] leading-[1.02] tracking-[-0.02em] lg:text-[clamp(48px,4.5vw,80px)]"
+            className="m-0 font-sans text-[42px] leading-[1.02] tracking-[-0.02em] lg:text-[clamp(48px,4.5vw,80px)]"
             style={{ color: headingColor }}
           >
             <span className="block">{titleLine1}</span>

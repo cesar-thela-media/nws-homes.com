@@ -1,35 +1,34 @@
 import type { Metadata } from "next";
 import ServicesGrid from "@/components/v2/sections/ServicesGrid";
 import CTA from "@/components/v2/sections/CTA";
-import { t } from "@/components/v2/lib/typography";
-import { cn } from "@/lib/utils";
+import PageHero from "@/components/v2/sections/PageHero";
+import { getMetaForRoute } from "@/data/seoCutover";
+
+const meta = getMetaForRoute("/services")!;
 
 export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Custom home building, kitchen & bath remodeling, room additions, and whole-home renovations across Fort Bend County.",
+  title: { absolute: meta.title },
+  description: meta.description,
 };
 
 export default function ServicesPage() {
   return (
     <div>
-      <div className="border-b border-border/60 bg-accent/40">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 lg:py-16">
-          <p className={cn(t.eyebrow, "mb-3")}>Services</p>
-          <h1 className={cn(t.h1, "max-w-2xl")}>What we build</h1>
-          <p className={cn(t.lead, "mt-4 max-w-2xl")}>
-            From custom homes on your lot to kitchen remodels and whole-home
-            transformations — one crew handles every trade in-house.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Services"
+        title="Our quality services"
+        lead="Our wide range of services means we can build you a custom home from square one or remodel an existing one. We help with lot planning, dream-home layouts, and turning the structure you already have into the home you want."
+      />
       <ServicesGrid
         all
-        title="Full-service construction & remodeling"
-        subtitle="Every project starts with a free consultation and a fixed-price quote."
+        title="What we build and remodel"
+        subtitle="Contact our experts for a free consultation, then explore the service that fits your project."
         showCta={false}
       />
-      <CTA />
+      <CTA
+        title="Not sure where to start?"
+        description="Call our team or send a message. We will help you match your goals to the right service."
+      />
     </div>
   );
 }

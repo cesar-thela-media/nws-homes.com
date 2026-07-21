@@ -1,10 +1,11 @@
 import { COLORS, FONTS } from '@/lib/constants';
 
+/** Claim-safe only — no invented project counts or star ratings. */
 const stats = [
-  { value: '500+', label: 'Projects Completed' },
-  { value: '19',   label: 'Years in Business' },
-  { value: '9',    label: 'Cities Served' },
-  { value: '4.9★', label: 'Google Average' },
+  { value: '2007', label: 'Serving since' },
+  { value: 'Local', label: 'Richmond, TX' },
+  { value: 'Full', label: 'Service remodel' },
+  { value: 'Free', label: 'Consultation' },
 ];
 
 export default function StatsBanner() {

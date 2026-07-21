@@ -1,7 +1,13 @@
 "use client";
 
+/**
+ * NWS site chrome — Space navbar-08 patterns:
+ * sticky scroll elevation, NavigationMenu mega, Sheet + Collapsible mobile.
+ * @see components/shadcn-space/blocks/navbar-08/navbar.tsx
+ */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import {
   ChevronDown,
   Home,
@@ -11,6 +17,7 @@ import {
   Building2,
   Phone,
   TextAlignJustify,
+  Mail,
 } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 import { services } from "@/data/services";
@@ -51,6 +58,18 @@ const serviceIcons = [Home, Hammer, ChefHat, Bath, Building2, Hammer];
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const [sticky, setSticky] = useState(false);
+
+  // Space navbar-08 sticky elevation
+  const handleScroll = useCallback(() => {
+    setSticky(window.scrollY >= 40);
+  }, []);
+
+  useEffect(() => {
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const isActive = (href: string) =>
     href === "/"
@@ -58,27 +77,63 @@ export default function SiteHeader() {
       : pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/95 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b bg-background/90 backdrop-blur-xl transition-[box-shadow,background-color,border-color] duration-300",
+        sticky
+          ? "border-border/70 bg-background/95 shadow-md shadow-espresso/5"
+          : "border-border/40 shadow-none"
+      )}
+    >
+      {/* Space-style utility strip (desktop) */}
+      <div
+        className={cn(
+          "hidden border-b border-border/40 bg-secondary/80 transition-all duration-300 sm:block",
+          sticky ? "max-h-0 overflow-hidden border-0 py-0 opacity-0" : "opacity-100"
+        )}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+            >
+              <Mail className="h-3.5 w-3.5 text-primary" />
+              <span className="hidden md:inline">{CONTACT.email}</span>
+            </a>
+            <a
+              href={CONTACT.phoneHref}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+            >
+              <Phone className="h-3.5 w-3.5 text-primary" />
+              {CONTACT.phone}
+            </a>
+          </div>
+          <p className="font-v2-sans text-[11px] text-muted-foreground">
+            {CONTACT.address} · Since 2007
+          </p>
+        </div>
+      </div>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center no-underline">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/nws-logo.png"
             alt="NWS Custom Homes"
-            className="block h-9 w-auto object-contain lg:h-10"
+            className="block h-8 w-auto object-contain sm:h-9 lg:h-10"
           />
         </Link>
 
         {/* Desktop — Space navbar-08 style NavigationMenu */}
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList className="gap-1">
+          <NavigationMenuList className="gap-0.5">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
                   href="/"
                   className={cn(
-                    "rounded-md px-3 py-2 font-v2-sans text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname === "/" ? "text-primary" : "text-foreground/80"
+                    "rounded-full px-3.5 py-2 font-v2-sans text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                    pathname === "/" ? "bg-accent/80 text-primary" : "text-foreground/80"
                   )}
                 >
                   Home
@@ -89,31 +144,33 @@ export default function SiteHeader() {
             <NavigationMenuItem>
               <NavigationMenuTrigger
                 className={cn(
-                  "bg-transparent font-v2-sans text-sm font-medium",
-                  pathname.startsWith("/services") && "text-primary"
+                  "rounded-full bg-transparent font-v2-sans text-sm font-medium",
+                  pathname.startsWith("/services") && "bg-accent/80 text-primary"
                 )}
               >
                 Services
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="grid w-[480px] gap-1 p-3 sm:grid-cols-2">
+                <div className="grid w-[520px] gap-1 p-3 sm:grid-cols-2">
                   <NavigationMenuLink asChild>
                     <Link
                       href="/services"
-                      className="col-span-full mb-1 rounded-lg bg-primary/5 px-3 py-2.5 text-sm font-semibold text-primary no-underline hover:bg-primary/10"
+                      className="col-span-full mb-1 rounded-xl bg-primary/8 px-3.5 py-3 text-sm font-semibold text-primary no-underline hover:bg-primary/12"
                     >
                       View all services →
                     </Link>
                   </NavigationMenuLink>
-                  {services.slice(0, 8).map((s, i) => {
+                  {services.slice(0, 10).map((s, i) => {
                     const Icon = serviceIcons[i % serviceIcons.length];
                     return (
                       <NavigationMenuLink asChild key={s.slug}>
                         <Link
                           href={`/services/${s.slug}`}
-                          className="flex items-start gap-3 rounded-lg p-3 no-underline transition-colors hover:bg-accent"
+                          className="flex items-start gap-3 rounded-xl p-3 no-underline transition-colors hover:bg-accent"
                         >
-                          <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                            <Icon className="h-4 w-4 text-primary" />
+                          </span>
                           <span>
                             <span className="block text-sm font-medium text-foreground">
                               {s.navLabel}
@@ -136,8 +193,10 @@ export default function SiteHeader() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "rounded-md px-3 py-2 font-v2-sans text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                      isActive(link.href) ? "text-primary" : "text-foreground/80"
+                      "rounded-full px-3.5 py-2 font-v2-sans text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                      isActive(link.href)
+                        ? "bg-accent/80 text-primary"
+                        : "text-foreground/80"
                     )}
                   >
                     {link.title}
@@ -151,7 +210,7 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={CONTACT.phoneHref}
-            className="hidden items-center gap-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary md:inline-flex"
+            className="hidden items-center gap-2 rounded-full px-2 py-1.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-primary md:inline-flex"
           >
             <Phone className="h-4 w-4 text-primary" />
             {CONTACT.phone}
@@ -159,7 +218,7 @@ export default function SiteHeader() {
           <Button
             asChild
             size="sm"
-            className="hidden rounded-full font-v2-sans text-sm font-semibold sm:inline-flex"
+            className="hidden h-10 rounded-full px-5 font-v2-sans text-sm font-semibold shadow-sm sm:inline-flex"
           >
             <Link href="/contact">Get a Quote</Link>
           </Button>
@@ -234,12 +293,20 @@ export default function SiteHeader() {
                   <Separator className="my-3" />
 
                   <SheetClose asChild>
-                    <Button asChild className="w-full rounded-full">
+                    <Button asChild className="h-12 w-full rounded-full">
                       <Link href="/contact">Get a Quote</Link>
                     </Button>
                   </SheetClose>
-                  <Button asChild variant="outline" className="w-full rounded-full">
+                  <Button asChild variant="outline" className="h-12 w-full rounded-full">
                     <a href={CONTACT.phoneHref}>Call {CONTACT.phone}</a>
+                  </Button>
+                  <Button asChild variant="outline" className="h-12 w-full rounded-full">
+                    <a href={CONTACT.phoneMobileHref}>
+                      Mobile {CONTACT.phoneMobile}
+                    </a>
+                  </Button>
+                  <Button asChild variant="ghost" className="h-11 w-full rounded-full">
+                    <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
                   </Button>
                 </div>
               </ScrollArea>

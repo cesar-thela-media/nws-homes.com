@@ -1,5 +1,6 @@
 /**
  * v2 type scale — Inter only for all roles.
+ * Phase 2b: slightly richer contrast roles for hero / dark surfaces.
  */
 export const t = {
   /** Page / hero title */
@@ -25,4 +26,9 @@ export const t = {
   ui: "font-v2-sans text-sm font-medium",
   /** Stat numbers */
   stat: "font-v2-sans text-4xl font-semibold tracking-tight md:text-5xl",
+  /** Hero / dark-surface lead (white hierarchy) */
+  heroLead:
+    "font-v2-sans text-base font-normal leading-relaxed text-white/80 md:text-lg",
+  /** Accent italic span inside titles */
+  accentItalic: "italic text-primary",
 } as const;

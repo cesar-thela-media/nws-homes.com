@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { areas } from "@/data/areas";
 
 export default function AreasStripHome() {
@@ -10,7 +10,7 @@ export default function AreasStripHome() {
             <p className="mb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
               Areas we serve
             </p>
-            <h2 className="m-0 font-serif text-[32px] text-espresso sm:text-[40px]">
+            <h2 className="m-0 font-sans text-[32px] text-espresso sm:text-[40px]">
               Fort Bend &amp; west Houston
             </h2>
           </div>
@@ -18,7 +18,7 @@ export default function AreasStripHome() {
             href="/areas"
             className="font-sans text-sm font-semibold text-primary no-underline hover:underline"
           >
-            View all areas →
+            View all areas â†’
           </Link>
         </div>
         <div className="flex flex-wrap gap-2.5">

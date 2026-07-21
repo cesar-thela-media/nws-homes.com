@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * Contact lead — Space contact-01 two-column shell (info + form).
+ * @see components/shadcn-space/blocks/contact-01/index.tsx
+ */
 import React, { useState } from "react";
 import { Check, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +22,7 @@ import { Separator } from "@/components/ui/separator";
 import { CONTACT } from "@/lib/constants";
 import { services } from "@/data/services";
 import { t } from "@/components/v2/lib/typography";
+import SocialLinks from "@/components/v2/lib/SocialLinks";
 import { cn } from "@/lib/utils";
 
 interface FormState {
@@ -46,14 +51,14 @@ function ContactInfoPanel() {
       <div className="flex animate-in flex-col gap-6 fade-in slide-in-from-left-10 fill-mode-both duration-1000 ease-in-out">
         <div className="flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-primary" />
-          <p className={t.label}>Free consultation</p>
+          <p className={t.label}>Start your project</p>
         </div>
         <h2 className={cn(t.h2, "max-w-xl")}>
-          Let&apos;s talk about your project and take it to the next level.
+          We&apos;re looking forward to working with you.
         </h2>
         <p className={cn(t.lead, "max-w-md")}>
-          Tell us what you&apos;re dreaming of. We&apos;ll respond within one
-          business day — real people, no automated runaround.
+          Reach out to our contractors. Our friendly team is here to help with
+          custom homes and remodeling across Richmond, TX and nearby communities.
         </p>
       </div>
 
@@ -108,6 +113,13 @@ function ContactInfoPanel() {
           <li className="text-muted-foreground">{CONTACT.hours.sunday}</li>
         </ul>
       </div>
+
+      <div className="flex animate-in flex-col gap-3 fade-in slide-in-from-bottom-10 fill-mode-both duration-1000 delay-150 ease-in-out">
+        <p className="font-v2-sans text-sm font-medium text-muted-foreground">
+          Follow along
+        </p>
+        <SocialLinks variant="dark" showLabel />
+      </div>
     </div>
   );
 }
@@ -158,7 +170,7 @@ function ContactFormPanel() {
 
   if (submitted) {
     return (
-      <Card className="rounded-2xl border p-8 ring-0">
+      <Card className="rounded-2xl border p-8 ring-0" data-testid="lead-success">
         <CardContent className="flex flex-col items-center gap-4 p-6 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary bg-primary/10">
             <Check className="h-6 w-6 text-primary" strokeWidth={2.5} />
@@ -171,7 +183,11 @@ function ContactFormPanel() {
             <p className="text-xs text-muted-foreground" data-testid="lead-offline-note">
               Preview mode: webhook not configured (NEXT_PUBLIC_N8N_WEBHOOK_URL).
             </p>
-          ) : null}
+          ) : (
+            <p className="sr-only" data-testid="lead-webhook-success">
+              Lead delivered via webhook.
+            </p>
+          )}
         </CardContent>
       </Card>
     );
@@ -179,18 +195,21 @@ function ContactFormPanel() {
 
   return (
     <div className="w-full">
-      <Card className="animate-in gap-6 rounded-2xl border p-8 ring-0 fade-in slide-in-from-right-10 fill-mode-both duration-1000 delay-100 ease-in-out md:gap-8">
+      <Card className="animate-in gap-6 rounded-3xl border border-border/80 p-6 shadow-sm ring-0 fade-in slide-in-from-right-10 fill-mode-both duration-1000 delay-100 ease-in-out sm:p-8 md:gap-8">
         <CardHeader className="p-0">
-          <CardTitle className={cn(t.h3, "text-primary")}>
-            Start your project
+          <CardTitle className={cn(t.h3, "text-foreground")}>
+            Get in touch
           </CardTitle>
+          <p className={cn(t.bodySm, "mt-1")}>
+            Tell us about your project. We respond within one business day.
+          </p>
         </CardHeader>
         <CardContent className="p-0">
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 gap-4 sm:gap-4 lg:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div>
-                  <Label htmlFor="firstName" className="sr-only">
+                  <Label htmlFor="firstName" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                     First name
                   </Label>
                   <Input
@@ -199,12 +218,12 @@ function ContactFormPanel() {
                     placeholder="First name"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="h-9 shadow-xs dark:bg-background"
+                    className="h-11 rounded-xl shadow-none"
                     required
                   />
                 </div>
                 <div>
-                  <Label htmlFor="lastName" className="sr-only">
+                  <Label htmlFor="lastName" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                     Last name
                   </Label>
                   <Input
@@ -213,14 +232,14 @@ function ContactFormPanel() {
                     placeholder="Last name"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="h-9 shadow-xs dark:bg-background"
+                    className="h-11 rounded-xl shadow-none"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="email" className="sr-only">
+                <Label htmlFor="email" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                   Email
                 </Label>
                 <Input
@@ -230,14 +249,14 @@ function ContactFormPanel() {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="h-9 shadow-xs dark:bg-background"
+                  className="h-11 rounded-xl shadow-none"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div>
-                  <Label htmlFor="phone" className="sr-only">
+                  <Label htmlFor="phone" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                     Phone
                   </Label>
                   <Input
@@ -247,12 +266,12 @@ function ContactFormPanel() {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="h-9 shadow-xs dark:bg-background"
+                    className="h-11 rounded-xl shadow-none"
                     required
                   />
                 </div>
                 <div>
-                  <Label htmlFor="zip" className="sr-only">
+                  <Label htmlFor="zip" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                     ZIP code
                   </Label>
                   <Input
@@ -261,14 +280,14 @@ function ContactFormPanel() {
                     placeholder="ZIP code"
                     value={formData.zip}
                     onChange={handleChange}
-                    className="h-9 shadow-xs dark:bg-background"
+                    className="h-11 rounded-xl shadow-none"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="service" className="sr-only">
+                <Label htmlFor="service" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                   Service
                 </Label>
                 <Select
@@ -282,7 +301,7 @@ function ContactFormPanel() {
                 >
                   <SelectTrigger
                     id="service"
-                    className="h-9! w-full shadow-xs dark:bg-background"
+                    className="h-11! w-full rounded-xl shadow-none"
                   >
                     <SelectValue placeholder="What are you interested in?" />
                   </SelectTrigger>
@@ -298,7 +317,7 @@ function ContactFormPanel() {
               </div>
 
               <div>
-                <Label htmlFor="message" className="sr-only">
+                <Label htmlFor="message" className="mb-1.5 font-v2-sans text-xs font-medium text-muted-foreground">
                   Message
                 </Label>
                 <Textarea
@@ -307,13 +326,17 @@ function ContactFormPanel() {
                   placeholder="Tell us about your project"
                   value={formData.message}
                   onChange={handleChange}
-                  className="h-24 resize-none shadow-xs dark:bg-background"
+                  className="min-h-28 resize-none rounded-xl shadow-none"
                   required
                 />
               </div>
 
               {error && (
-                <p className="rounded-lg bg-destructive/10 px-4 py-3 font-v2-sans text-sm text-destructive">
+                <p
+                  role="alert"
+                  data-testid="lead-error"
+                  className="rounded-xl bg-destructive/10 px-4 py-3 font-v2-sans text-sm text-destructive"
+                >
                   {error}
                 </p>
               )}
@@ -321,12 +344,26 @@ function ContactFormPanel() {
                 type="submit"
                 size="lg"
                 disabled={loading}
-                className="h-10 cursor-pointer rounded-xl disabled:opacity-60"
+                data-testid="lead-submit"
+                className="h-12 min-h-12 w-full cursor-pointer rounded-full font-v2-sans text-sm font-semibold disabled:opacity-60"
               >
                 {loading ? "Sending…" : "Submit inquiry"}
               </Button>
               <p className="text-center font-v2-sans text-xs text-muted-foreground">
-                Free consultation + 5% off — mention the website when you call.
+                Prefer to call?{" "}
+                <a
+                  href={CONTACT.phoneHref}
+                  className="font-semibold text-primary underline-offset-2 hover:underline"
+                >
+                  Office {CONTACT.phone}
+                </a>
+                {" · "}
+                <a
+                  href={CONTACT.phoneMobileHref}
+                  className="font-semibold text-primary underline-offset-2 hover:underline"
+                >
+                  Mobile {CONTACT.phoneMobile}
+                </a>
               </p>
             </div>
           </form>
@@ -337,14 +374,15 @@ function ContactFormPanel() {
 }
 
 export default function ContactLead() {
+  // Space contact-01: 12-col grid, info | gutter | form
   return (
-    <section className="py-10 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8 xl:px-16">
-        <div className="grid grid-cols-12 content-center justify-between gap-6 sm:gap-8 md:gap-0">
+    <section className="section-pad">
+      <div className="section-shell">
+        <div className="grid grid-cols-12 content-center justify-between gap-6 sm:gap-8">
           <div className="col-span-12 w-full md:col-span-6">
             <ContactInfoPanel />
           </div>
-          <div className="col-span-1 hidden md:block" />
+          <div className="col-span-1 hidden md:block" aria-hidden />
           <div className="col-span-12 w-full md:col-span-5">
             <ContactFormPanel />
           </div>

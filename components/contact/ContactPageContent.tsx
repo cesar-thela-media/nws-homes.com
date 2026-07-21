@@ -65,7 +65,7 @@ export default function ContactPageContent() {
             <h2 style={{ fontFamily: FONTS.serif, fontSize: 22, color: COLORS.espresso, margin: '0 0 28px 0' }}>Send Us a Message</h2>
             <ContactForm />
             <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: COLORS.sage, marginTop: 16, lineHeight: 1.5 }}>
-              Mention this website and get <strong style={{ color: COLORS.terracotta }}>5% off</strong> your project.
+              Free consultation. Call or send a message to start your project.
             </p>
           </div>
         </div>

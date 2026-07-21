@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * Optional mid-band CTA. Not mounted on home (avoids unproven stat claims).
+ * Copy kept claim-safe: since 2007 + service lines only.
+ */
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -7,19 +11,11 @@ import { Marquee } from "@/components/shadcn-space/animations/marquee";
 import { t } from "@/components/v2/lib/typography";
 import { cn } from "@/lib/utils";
 
-const STATS = [
-  { value: "500+", label: "Projects Completed" },
-  { value: "19 yrs", label: "In Business" },
-  { value: "9", label: "Cities Served" },
-  { value: "4.9 / 5", label: "Google Rating" },
-];
-
 const marqueeItems = [
   "Custom home building · Richmond, TX",
   "Kitchen & bathroom remodels",
   "Whole-home renovations",
   "Room additions & open concept",
-  "Fixed-price quotes · One crew",
   "Free on-site consultation",
 ];
 
@@ -34,7 +30,8 @@ export default function VideoCTA() {
               "linear-gradient(135deg, #2B2118 0%, #3d2e22 40%, #4a3728 70%, #2B2118 100%)",
           }}
         >
-          <div className="pointer-events-none absolute inset-0 opacity-20"
+          <div
+            className="pointer-events-none absolute inset-0 opacity-20"
             style={{
               backgroundImage: "url('/nws/kitchen-gallery-7.jpeg')",
               backgroundSize: "cover",
@@ -49,17 +46,8 @@ export default function VideoCTA() {
                 Trusted by Fort Bend families since 2007.
               </h2>
               <p className="mx-auto max-w-lg font-v2-sans text-base font-normal leading-relaxed text-white/70">
-                One crew, every trade, fixed price — from first sketch to final walkthrough.
+                Local team from first conversation to final walkthrough.
               </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-10">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="flex flex-col items-center gap-1 text-center">
-                  <p className={cn(t.stat, "text-primary")}>{stat.value}</p>
-                  <p className="font-v2-sans text-sm font-medium text-white/70">{stat.label}</p>
-                </div>
-              ))}
             </div>
 
             <Button

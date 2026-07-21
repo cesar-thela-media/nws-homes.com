@@ -168,7 +168,7 @@ export default function TestimonialsSection() {
                 marginBottom: "32px", position: "relative", zIndex: 1,
               }}
             >
-              Free on-site consultation, and 5% off when you mention the website.
+              Free on-site consultation. Call or get in touch to start your project.
             </p>
 
             <form action="/contact" method="GET" className="relative z-[1]">

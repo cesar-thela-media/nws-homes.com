@@ -74,4 +74,37 @@ describe("submitLead (shipped path)", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.error.toLowerCase()).toContain("could not send");
   });
+
+  test("returns error when fetch throws (network)", async () => {
+    process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL = "https://hooks.example.test/n8n";
+    // @ts-expect-error mock fetch
+    globalThis.fetch = mock(async () => {
+      throw new Error("network down");
+    });
+    const result = await submitLead({
+      source: "nws-contact",
+      email: "t@example.com",
+      phone: "1",
+      message: "x",
+      submittedAt: new Date().toISOString(),
+    });
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.toLowerCase()).toContain("went wrong");
+    }
+  });
+
+  test("whitespace-only webhook URL is treated as offline", async () => {
+    process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL = "   ";
+    expect(getLeadWebhookUrl()).toBeUndefined();
+    const result = await submitLead({
+      source: "test",
+      email: "a@b.com",
+      phone: "1",
+      message: "hi",
+      submittedAt: new Date().toISOString(),
+    });
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.mode).toBe("offline");
+  });
 });

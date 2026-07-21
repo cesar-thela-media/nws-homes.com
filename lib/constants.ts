@@ -12,6 +12,14 @@ export const CONTACT = {
   },
 };
 
+/** Live client social profiles (nws-homes.com) */
+export const SOCIAL = {
+  facebook: 'https://www.facebook.com/NWSHomes/',
+  instagram: 'https://www.instagram.com/nwshomes/',
+  houzz:
+    'https://www.houzz.com/professionals/home-builders/nws-custom-homes-and-remodeling-pfvwus-pf~849721310',
+} as const;
+
 export const COLORS = {
   plaster:    '#F7F4EF',
   espresso:   '#2B2118',

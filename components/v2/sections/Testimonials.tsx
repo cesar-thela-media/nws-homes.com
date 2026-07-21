@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Testimonials bento — Space testimonial-01 grid motion + card framing.
+ * Quotes from data/testimonials (Phase 1 freeze).
+ * @see components/shadcn-space/blocks/testimonial-01/testimonial.tsx
+ */
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { Badge } from "@/components/ui/badge";
@@ -19,23 +24,23 @@ export default function Testimonials() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
-    <section ref={sectionRef} className="py-10">
-      <div className="mx-auto max-w-7xl px-4 xl:px-16">
+    <section ref={sectionRef} className="section-pad surface-soft">
+      <div className="section-shell">
         <div className="flex flex-col items-center gap-12 self-stretch">
           <motion.div
             initial={{ opacity: 0, y: -32 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -32 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="flex flex-col items-center justify-center gap-2 sm:gap-4"
+            className="flex flex-col items-center justify-center gap-3 sm:gap-4"
           >
             <Badge
               variant="outline"
-              className="h-7 px-3 py-1 font-v2-sans text-xs font-semibold uppercase tracking-[0.14em]"
+              className="h-auto px-3 py-1 font-v2-sans text-xs font-semibold uppercase tracking-[0.14em]"
             >
-              Testimonials
+              Don&apos;t take our word for it
             </Badge>
             <h2 className={cn(t.h2, "mx-auto max-w-xs text-center sm:max-w-2xl")}>
-              What Fort Bend homeowners say about NWS
+              Check what our clients are saying
             </h2>
           </motion.div>
 
@@ -58,7 +63,7 @@ export default function Testimonials() {
                     Customer stories
                   </p>
                   <div className="flex flex-col gap-6">
-                    <p className="font-v2-sans text-xl font-medium leading-snug text-white lg:text-2xl">
+                    <p className="line-clamp-6 font-v2-sans text-xl font-medium leading-snug text-white lg:text-2xl">
                       &ldquo;{featured.quote}&rdquo;
                     </p>
                     <div>
@@ -84,23 +89,23 @@ export default function Testimonials() {
               <Card className="h-full w-full rounded-2xl border border-border bg-primary p-8 md:min-h-96">
                 <CardContent className="flex h-full flex-col items-start justify-between gap-24 p-0">
                   <p className="font-v2-sans text-sm font-medium uppercase tracking-[0.12em] text-white/70">
-                    Facts &amp; numbers
+                    Local trust
                   </p>
                   <div className="flex flex-col items-start gap-6">
                     <div>
-                      <p className={cn(t.stat, "text-white")}>500+</p>
+                      <p className={cn(t.stat, "text-white")}>2007</p>
                       <p className="mt-1 font-v2-sans text-base font-medium text-white/90">
-                        projects completed
+                        serving Richmond &amp; Fort Bend
                       </p>
                     </div>
                     <div className="flex gap-8">
                       <div>
-                        <p className="font-v2-display text-2xl font-medium text-white">4.9★</p>
-                        <p className="font-v2-sans text-sm text-white/70">client rating</p>
+                        <p className="font-v2-display text-2xl font-medium text-white">35+</p>
+                        <p className="font-v2-sans text-sm text-white/70">years combined exp.</p>
                       </div>
                       <div>
-                        <p className="font-v2-display text-2xl font-medium text-white">19 yrs</p>
-                        <p className="font-v2-sans text-sm text-white/70">since 2007</p>
+                        <p className="font-v2-display text-2xl font-medium text-white">Google</p>
+                        <p className="font-v2-sans text-sm text-white/70">&amp; Angi reviews</p>
                       </div>
                     </div>
                   </div>
@@ -121,7 +126,7 @@ export default function Testimonials() {
                     <p className="font-v2-sans text-sm font-medium uppercase tracking-[0.12em] text-white/70">
                       Customer stories
                     </p>
-                    <p className="font-v2-sans text-xl font-medium leading-snug text-white lg:text-2xl">
+                    <p className="line-clamp-5 font-v2-sans text-xl font-medium leading-snug text-white lg:text-2xl">
                       &ldquo;{secondary.quote}&rdquo;
                     </p>
                     <div className="mt-2">
@@ -135,6 +140,8 @@ export default function Testimonials() {
                   <img
                     src={`${NWS}/custom-homes-4.jpeg`}
                     alt="Custom home project"
+                    loading="lazy"
+                    decoding="async"
                     className="h-[140px] w-full rounded-xl object-cover"
                   />
                 </CardContent>

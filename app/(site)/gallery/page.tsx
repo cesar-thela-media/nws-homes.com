@@ -1,36 +1,47 @@
 import type { Metadata } from "next";
 import GalleryGrid from "@/components/v2/sections/GalleryGrid";
 import CTA from "@/components/v2/sections/CTA";
-import { t } from "@/components/v2/lib/typography";
-import { cn } from "@/lib/utils";
+import PageHero from "@/components/v2/sections/PageHero";
+import { getMetaForRoute } from "@/data/seoCutover";
+
+const meta = getMetaForRoute("/gallery")!;
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description:
-    "Browse NWS custom homes, kitchen remodels, bathrooms, and whole-home renovations across Fort Bend County.",
+  title: { absolute: meta.title },
+  description: meta.description,
 };
 
-export default function GalleryPage() {
+const ALLOWED = new Set([
+  "all",
+  "kitchen",
+  "bathroom",
+  "custom-homes",
+  "remodeling",
+]);
+
+export default function GalleryPage({
+  searchParams,
+}: {
+  searchParams?: { category?: string };
+}) {
+  const raw = searchParams?.category ?? "all";
+  const initialCategory = ALLOWED.has(raw) ? raw : "all";
+
   return (
     <div>
-      <div className="border-b border-border/60 bg-accent/40">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 lg:py-16">
-          <p className={cn(t.eyebrow, "mb-3")}>Gallery</p>
-          <h1 className={cn(t.h1, "max-w-2xl")}>Our work</h1>
-          <p className={cn(t.lead, "mt-4 max-w-2xl")}>
-            Kitchens, baths, custom builds, and full renovations — real projects
-            across Richmond, Katy, Sugar Land, and beyond.
-          </p>
-        </div>
-      </div>
-      <section className="py-12 md:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <GalleryGrid />
+      <PageHero
+        eyebrow="Gallery"
+        title="See our work"
+        lead="Real project photography from custom homes, kitchen remodels, bathrooms, and whole-home renovations. Filter by category to explore the kind of work you are planning."
+      />
+      <section className="section-pad">
+        <div className="section-shell">
+          <GalleryGrid initialCategory={initialCategory} />
         </div>
       </section>
       <CTA
         title="Like what you see?"
-        description="Tell us about your project — free consultation, fixed-price quote, no pressure."
+        description="Tell us about your project. Call or request a free consultation and we will take the next step with you."
       />
     </div>
   );

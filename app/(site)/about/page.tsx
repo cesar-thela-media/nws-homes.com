@@ -1,126 +1,113 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import CTA from "@/components/v2/sections/CTA";
+import FadeIn from "@/components/v2/lib/FadeIn";
 import { t } from "@/components/v2/lib/typography";
 import { cn } from "@/lib/utils";
+import { CONTACT } from "@/lib/constants";
+import { getMetaForRoute } from "@/data/seoCutover";
 
 const NWS = "/nws";
 
 const values = [
   {
-    title: "One crew, every trade",
-    body: "The same team that breaks ground finishes your home. No subcontractor roulette, no lost accountability.",
+    title: "Full-service remodeling & custom homes",
+    body: "From kitchen and bathroom renovations to complete additions and custom builds, we cover the projects Fort Bend families need most.",
   },
   {
-    title: "Fixed-price quotes",
-    body: "You know the number before work starts. Scope changes only happen with a written change order you approve.",
+    title: "Projects that run smoothly",
+    body: "Our team works together from start to finish so each job stays organized, with clear communication along the way.",
   },
   {
     title: "Local since 2007",
-    body: "Richmond-based and family-run. We know Fort Bend permit offices, HOAs, and neighborhoods inside-out.",
+    body: "Richmond-based, building our reputation for excellence and expanding services as homeowners need more from a single trusted partner.",
   },
 ];
 
-const stats = [
-  { value: "19+", label: "Years building" },
-  { value: "500+", label: "Projects delivered" },
-  { value: "4.9★", label: "Client rating" },
-  { value: "1", label: "Accountable crew" },
-];
+const aboutMeta = getMetaForRoute("/about")!;
 
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "NWS Custom Homes has been building and remodeling across Richmond, Katy & Sugar Land since 2007.",
+  title: { absolute: aboutMeta.title },
+  description: aboutMeta.description,
 };
 
 export default function AboutPage() {
   return (
     <div>
-      <section className="border-b border-border/60 bg-accent/40">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 lg:py-20">
-          <Badge
-            variant="outline"
-            className="mb-4 font-v2-sans text-xs font-semibold uppercase tracking-[0.14em]"
-          >
-            About NWS
-          </Badge>
-          <h1 className={cn(t.h1, "max-w-3xl")}>
-            Building Fort Bend County since 2007
-          </h1>
-          <p className={cn(t.lead, "mt-6 max-w-2xl")}>
-            NWS Custom Homes is a locally owned builder and remodeler based in
-            Richmond, TX. We design and construct custom homes, kitchens, baths,
-            and whole-home renovations — with one crew that owns every phase of
-            your project.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-8 lg:grid-cols-2 lg:gap-16">
-          <div className="overflow-hidden rounded-3xl border border-border">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`${NWS}/custom-homes-7.jpeg`}
-              alt="NWS custom home project"
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </div>
-          <div className="flex flex-col gap-6">
-            <h2 className={t.h2}>Crafted for the way you live</h2>
-            <p className={t.body}>
-              Building a home — or transforming the one you have — is the biggest
-              investment most families make. We treat it that way: every decision
-              is yours, every detail is deliberate, and every phase is
-              communicated clearly before it begins.
-            </p>
-            <p className={t.body}>
-              Architecture coordination, permitting, material sourcing, and full
-              construction live under one roof. You get a single project manager,
-              weekly updates, and a final walkthrough where every punch-list item
-              is resolved before close-out.
-            </p>
-            <div>
-              <Button asChild className="rounded-full">
-                <Link href="/contact">Start your project</Link>
-              </Button>
-            </div>
+      <section className="page-hero-band">
+        <div className="section-shell py-12 md:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <FadeIn className="flex flex-col gap-6" y={24}>
+              <p className={cn(t.eyebrow, "mb-0")}>About NWS</p>
+              <h1 className={cn(t.h1, "max-w-xl")}>Your go-to home builders</h1>
+              <p className={t.body}>
+                Discover the true meaning of custom homes with NWS Custom Homes
+                and Remodeling. We are a full-service construction company
+                specializing in remodeling and custom homes.
+              </p>
+              <p className={t.body}>
+                We have been building our reputation for excellence since 2007
+                and continue to expand the work we take on, from kitchen and
+                bathroom renovations to complete additions. We do it all with the
+                same local team homeowners can reach by phone.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild className="rounded-full">
+                  <Link href="/contact">Get in touch</Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full">
+                  <a href={CONTACT.phoneHref}>Speak to our experts</a>
+                </Button>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.12} y={32}>
+              <div className="overflow-hidden rounded-3xl border border-border shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${NWS}/custom-homes-7.jpeg`}
+                  alt="NWS custom home project"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      <section className="bg-accent/30 py-12 md:py-16">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:px-8 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <p className={cn(t.stat, "text-primary")}>{s.value}</p>
-              <p className={cn(t.bodySm, "mt-1")}>{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <h2 className={cn(t.h2, "mb-8 text-center")}>How we work</h2>
+      {/* Space feature-03 style value cards */}
+      <section className="surface-soft section-pad">
+        <div className="section-shell">
+          <FadeIn className="mb-10 text-center" y={20}>
+            <h2 className={cn(t.h2, "mb-4")}>
+              We&apos;re looking forward to working with you
+            </h2>
+            <p className={cn(t.lead, "mx-auto max-w-2xl")}>
+              Highly skilled professionals who work together so each project goes
+              smoothly from start to finish.
+            </p>
+          </FadeIn>
           <div className="grid gap-6 md:grid-cols-3">
-            {values.map((v) => (
-              <Card key={v.title} className="rounded-2xl">
-                <CardContent className="flex flex-col gap-3 p-6">
-                  <h3 className={t.h4}>{v.title}</h3>
-                  <p className={t.bodySm}>{v.body}</p>
-                </CardContent>
-              </Card>
+            {values.map((v, i) => (
+              <FadeIn key={v.title} delay={0.08 * (i + 1)} y={24}>
+                <Card className="h-full rounded-2xl border-border/80 shadow-sm transition-shadow hover:shadow-md">
+                  <CardContent className="flex flex-col gap-3 p-6">
+                    <div className="mb-1 h-1 w-10 rounded-full bg-primary" />
+                    <h3 className={t.h4}>{v.title}</h3>
+                    <p className={t.bodySm}>{v.body}</p>
+                  </CardContent>
+                </Card>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      <CTA />
+      <CTA
+        title="Ready to talk about your home?"
+        description="Call our office or mobile, or send a message from the contact page. We are looking forward to working with you."
+      />
     </div>
   );
 }

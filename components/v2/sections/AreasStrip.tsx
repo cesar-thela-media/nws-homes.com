@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { areas } from "@/data/areas";
 import { t } from "@/components/v2/lib/typography";
+import FadeIn from "@/components/v2/lib/FadeIn";
 import { cn } from "@/lib/utils";
 
 type AreasStripProps = {
@@ -17,9 +18,9 @@ export default function AreasStrip({
   title = "Areas we serve",
 }: AreasStripProps) {
   return (
-    <section className="py-10 md:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <div className="mb-8 flex flex-col items-center gap-3 text-center md:mb-12">
+    <section className="section-pad border-t border-border/60">
+      <div className="section-shell">
+        <FadeIn className="mb-10 flex flex-col items-center gap-3 text-center md:mb-12">
           <Badge
             variant="outline"
             className="h-auto px-3 py-1 font-v2-sans text-xs font-semibold uppercase tracking-[0.14em]"
@@ -28,10 +29,11 @@ export default function AreasStrip({
           </Badge>
           <h2 className={cn(t.h2, "text-center")}>{title}</h2>
           <p className={cn(t.lead, "max-w-xl text-center")}>
-            Based in Richmond, TX — serving Fort Bend County and the West Side
-            of Houston since 2007.
+            We complete every project promptly, carefully, and with attention to
+            detail across Richmond, Fort Bend County, and the West Side of
+            Houston.
           </p>
-        </div>
+        </FadeIn>
 
         <div
           className={
@@ -43,24 +45,30 @@ export default function AreasStrip({
           {areas.map((area) => (
             <Link key={area.slug} href="/areas" className="group block">
               {compact ? (
-                <Card className="h-full transition-all duration-200 hover:border-primary/40 hover:shadow-md">
-                  <CardContent className="flex items-center gap-2 p-4">
-                    <MapPin className="h-4 w-4 shrink-0 text-primary" />
+                <Card className="h-full rounded-2xl border-border/70 transition-all duration-200 hover:border-primary/40 hover:shadow-md">
+                  <CardContent className="flex items-center gap-2.5 p-4">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                      <MapPin className="h-3.5 w-3.5 text-primary" />
+                    </span>
                     <div className="min-w-0">
                       <p className="truncate font-v2-sans text-sm font-semibold text-foreground group-hover:text-primary">
                         {area.label}
                       </p>
-                      <p className="font-v2-sans text-xs text-muted-foreground">{area.state}</p>
+                      <p className="font-v2-sans text-xs text-muted-foreground">
+                        {area.state}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
               ) : (
-                <Card className="h-full overflow-hidden transition-all duration-200 hover:border-primary/40 hover:shadow-lg">
+                <Card className="h-full overflow-hidden rounded-2xl border-border/70 transition-all duration-200 hover:border-primary/40 hover:shadow-lg">
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={area.image}
                       alt={`${area.label}, ${area.state}`}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>

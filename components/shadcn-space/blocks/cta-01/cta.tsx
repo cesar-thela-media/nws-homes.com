@@ -1,59 +1,93 @@
 "use client";
+
 import { useRef } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type CTAProps = {
+export type SpaceCtaProps = {
   className?: string;
+  title?: string;
+  description?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
 };
 
-// className reserved for API compatibility with Space block consumers
-const CTA = ({}: CTAProps) => {
+/**
+ * Shadcn Space cta-01 — prop-driven so NWS can pass frozen Phase-1 copy.
+ */
+export default function SpaceCta({
+  className,
+  title = "Innovative solutions for bold brands",
+  description = "Looking to elevate your brand? We craft immersive experiences that captivate, engage, and make your business unforgettable in every interaction.",
+  primaryLabel = "Let's craft together",
+  primaryHref = "/contact",
+  secondaryLabel,
+  secondaryHref,
+}: SpaceCtaProps) {
   const ref = useRef(null);
 
   const bottomAnimation = {
     initial: { y: "5%", opacity: 0 },
     animate: { y: 0, opacity: 1 },
-    transition: { duration: 1, delay: 0.8 },
+    transition: { duration: 1, delay: 0.3 },
   };
 
   return (
-    <section>
-      <div className="sm:py-20 py-8">
-        <div className="max-w-7xl mx-auto sm:px-16 px-4">
-          <div
-            ref={ref}
-            className="relative overflow-hidden min-h-96 flex items-center justify-center px-6 border border-border rounded-3xl before:absolute before:w-full before:h-4/5 before:bg-linear-to-r before:from-sky-100 before:from-15% before:via-white before:via-55% before:to-amber-100 before:to-90% before:rounded-full before:top-24 before:blur-3xl before:-z-10 dark:before:from-sky-400/10 dark:before:from-40% dark:before:via-black dark:before:via-55% dark:before:to-amber-300/10 dark:before:to-60% dark:before:rounded-full dark:before:-z-10"
+    <section className={cn("section-pad", className)}>
+      <div className="section-shell">
+        <div
+          ref={ref}
+          className="relative flex min-h-96 items-center justify-center overflow-hidden rounded-3xl border border-border px-6 py-14 before:absolute before:-z-10 before:top-24 before:h-4/5 before:w-full before:rounded-full before:bg-gradient-to-r before:from-primary/15 before:from-15% before:via-white before:via-55% before:to-amber-100 before:to-90% before:blur-3xl"
+        >
+          <motion.div
+            {...bottomAnimation}
+            className="mx-auto flex flex-col items-center gap-6"
           >
-            <motion.div
-              {...bottomAnimation}
-              className="flex flex-col gap-6 items-center mx-auto"
-            >
-              <div className="flex flex-col gap-3 items-center text-center">
-                <h2 className="text-3xl md:text-5xl font-medium">
-                  Innovative solutions for bold brands
-                </h2>
-                <p className="max-w-2xl mx-auto">
-                  Looking to elevate your brand? We craft immersive experiences
-                  that captivate, engage, and make your business unforgettable
-                  in every interaction.
-                </p>
-              </div>
-              <Button className="relative text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden hover:bg-primary/80 cursor-pointer">
-                <span className="relative z-10 transition-all duration-500">
-                  Let&apos;s craft together
-                </span>
-                <div className="absolute right-1 w-10 h-10 bg-background text-foreground rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45">
-                  <ArrowUpRight size={16} />
-                </div>
+            <div className="flex flex-col items-center gap-3 text-center">
+              <h2 className="max-w-2xl font-v2-sans text-3xl font-semibold tracking-tight md:text-5xl">
+                {title}
+              </h2>
+              <p className="mx-auto max-w-2xl font-v2-sans text-base text-muted-foreground md:text-lg">
+                {description}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button
+                asChild
+                className="group relative h-12 w-fit cursor-pointer overflow-hidden rounded-full p-1 pe-14 ps-6 text-sm font-semibold transition-all duration-500 hover:bg-primary/90 hover:pe-6 hover:ps-14"
+              >
+                <Link href={primaryHref}>
+                  <span className="relative z-10 transition-all duration-500">
+                    {primaryLabel}
+                  </span>
+                  <div className="absolute right-1 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45">
+                    <ArrowUpRight size={16} />
+                  </div>
+                </Link>
               </Button>
-            </motion.div>
-          </div>
+              {secondaryLabel && secondaryHref ? (
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-12 rounded-full px-6 text-sm font-semibold"
+                >
+                  <a href={secondaryHref}>
+                    {secondaryHref.startsWith("tel:") ? (
+                      <Phone className="h-4 w-4" />
+                    ) : null}
+                    {secondaryLabel}
+                  </a>
+                </Button>
+              ) : null}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
-};
-
-export default CTA;
+}
